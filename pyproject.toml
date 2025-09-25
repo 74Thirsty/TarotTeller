@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=67", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tarotteller"
+version = "0.1.0"
+description = "A feature-rich tarot reading toolkit with CLI utilities and spread helpers."
+readme = "README.md"
+authors = [{name = "Tarot Teller Maintainers"}]
+license = {text = "MIT"}
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+tarotteller = "tarotteller.cli:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+addopts = "-ra"
