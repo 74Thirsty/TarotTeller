@@ -19,5 +19,6 @@ def test_full_reading_contains_sections():
     assert "Medicine Wheel Guidance" in rendered
     assert "Chaldean Numerology" in rendered
     assert "Three-Card Tarot Spread" in rendered
-    assert "Integrated Message" in rendered
+    assert "Integrated Summary" in rendered
+    assert "TarotTeller Insight for" in rendered
     assert user.name in rendered
