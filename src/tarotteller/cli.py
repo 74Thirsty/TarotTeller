@@ -1,0 +1,150 @@
+"""Command line interface for TarotTeller."""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from typing import Iterable, List, Optional
+
+from .deck import TarotCard, TarotDeck, format_card
+from .spreads import SPREADS, SpreadReading, draw_spread
+
+
+def _print_cards(cards: Iterable[TarotCard]) -> None:
+    for card in cards:
+        suit = f" ({card.suit})" if card.suit else ""
+        print(f"- {card.name}{suit}")
+
+
+def cmd_list(deck: TarotDeck, args: argparse.Namespace) -> int:
+    """List cards matching the provided filters."""
+
+    cards = deck.list_cards(arcana=args.arcana, suit=args.suit)
+    filtered = list(cards)
+    if not filtered:
+        target = args.suit or args.arcana or "deck"
+        print(f"No cards found for {target}.")
+        return 0
+    print(f"Cards in deck ({len(filtered)} results):")
+    _print_cards(filtered[: args.limit] if args.limit else filtered)
+    return 0
+
+
+def cmd_info(deck: TarotDeck, args: argparse.Namespace) -> int:
+    card = deck.get_card(args.name)
+    if card is None:
+        print(f"Unknown card: {args.name}", file=sys.stderr)
+        return 1
+    print(format_card(card))
+    return 0
+
+
+def _format_simple_draw(reading: SpreadReading) -> str:
+    lines: List[str] = []
+    for placement in reading.placements:
+        card = placement.card
+        lines.append(
+            f"{placement.position.index}. {card.card.name} ({card.orientation})\n"
+            f"   {placement.position.prompt}\n"
+            f"   {card.meaning}"
+        )
+    return "\n".join(lines)
+
+
+def cmd_draw(deck: TarotDeck, args: argparse.Namespace) -> int:
+    if args.seed is not None:
+        deck.seed(args.seed)
+        deck.reset(shuffle=True)
+
+    if args.cards:
+        try:
+            drawn = deck.draw(args.cards, allow_reversed=not args.no_reversed)
+        except ValueError as exc:
+            print(str(exc), file=sys.stderr)
+            return 1
+        lines = [
+            f"Card {index + 1}: {card.card.name} ({card.orientation})\n   {card.meaning}"
+            for index, card in enumerate(drawn)
+        ]
+        print("\n".join(lines))
+        return 0
+
+    spread_key = args.spread or "single"
+    if spread_key not in SPREADS:
+        print(
+            f"Unknown spread '{spread_key}'. Available spreads: {', '.join(SPREADS)}",
+            file=sys.stderr,
+        )
+        return 1
+
+    try:
+        reading = draw_spread(
+            deck,
+            spread_key,
+            allow_reversed=not args.no_reversed,
+            rng=args.orientation_seed,
+        )
+    except ValueError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    print(reading.as_text() if args.detailed else _format_simple_draw(reading))
+    return 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="tarotteller", description="Explore tarot cards and spreads."
+    )
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    list_parser = sub.add_parser("list", help="List cards in the deck")
+    list_parser.add_argument("--arcana", choices=["major", "minor"], help="Filter by arcana")
+    list_parser.add_argument(
+        "--suit",
+        choices=["Wands", "Cups", "Swords", "Pentacles"],
+        help="Filter minor arcana by suit",
+    )
+    list_parser.add_argument(
+        "--limit", type=int, default=0, help="Limit the number of cards shown"
+    )
+    list_parser.set_defaults(func=cmd_list)
+
+    info_parser = sub.add_parser("info", help="Display detailed information about a card")
+    info_parser.add_argument("name", help="Name of the card to display")
+    info_parser.set_defaults(func=cmd_info)
+
+    draw_parser = sub.add_parser("draw", help="Draw cards or full spreads")
+    draw_parser.add_argument(
+        "--spread",
+        choices=list(SPREADS.keys()),
+        help="Name of the spread to draw",
+    )
+    draw_parser.add_argument(
+        "--cards", type=int, help="Draw a specific number of cards instead of a spread"
+    )
+    draw_parser.add_argument(
+        "--seed", type=int, help="Seed the deck shuffling for reproducible draws"
+    )
+    draw_parser.add_argument(
+        "--orientation-seed", type=int, help="Seed orientation randomisation"
+    )
+    draw_parser.add_argument(
+        "--no-reversed", action="store_true", help="Disable reversed cards"
+    )
+    draw_parser.add_argument(
+        "--detailed", action="store_true", help="Show the full spread text"
+    )
+    draw_parser.set_defaults(func=cmd_draw)
+
+    return parser
+
+
+def main(argv: Optional[List[str]] = None) -> int:
+    deck = TarotDeck()
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    return args.func(deck, args)
+
+
+if __name__ == "__main__":  # pragma: no cover - CLI entry point
+    raise SystemExit(main())

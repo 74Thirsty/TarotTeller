@@ -1,7 +1,3 @@
 __pycache__/
 *.py[cod]
-
-# Test and coverage artifacts
-.pytest_cache/
-htmlcov/
-.coverage*
+.venv/

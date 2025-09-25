@@ -1,59 +1,76 @@
 # TarotTeller
 
-TarotTeller is an immersive Python command-line companion that blends five divination traditions into a single, story-rich reading:
+TarotTeller is a feature-rich tarot reading toolkit.  It bundles a complete deck,
+meaningful spreads, and a friendly command line interface for exploring the
+cards.  The library is equally at home in scripts thanks to its expressive Python
+API.
 
-1. Western horoscope insights
-2. Chinese zodiac wisdom
-3. Native American medicine wheel guidance
-4. Chaldean numerology vibrations
-5. A three-card tarot spread
+## Features
 
-The experience is intentionally interactive. TarotTeller asks for your name, birthdate, favourite colour, and an optional intention so it can tailor every paragraph of the reading to you.
+- Complete 78 card deck with upright and reversed keywords and descriptions.
+- Programmatically generated minor arcana ensure consistent language across suits.
+- Built-in spreads, including a single card pull, three card story, and Celtic Cross.
+- Command line tools for listing cards, viewing rich card profiles, and drawing
+  readings with optional deterministic seeding.
+- Well-documented Python API suited for automation or experimentation.
 
-## Getting started
+## Installation
 
-TarotTeller relies only on Python's standard library. To explore the reading:
-
-```bash
-python -m tarot_teller
-```
-
-You can optionally make the tarot spread reproducible by passing a seed value:
-
-```bash
-python -m tarot_teller --seed 42
-```
-
-## Running the tests
-
-A lightweight pytest suite verifies zodiac boundaries, numerology reductions, tarot spreads, and overall reading composition.
+The project uses a modern `pyproject.toml` configuration.  Install it in editable
+mode to try it locally:
 
 ```bash
-python -m pytest
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
 ```
 
-## Project structure
+## Command line usage
 
 ```
-tarot_teller/
-├── __init__.py                # Package exports
-├── __main__.py                # CLI entry point
-├── astrology.py               # Western + Chinese zodiac logic
-├── native_american.py         # Medicine wheel totem insights
-├── numerology.py              # Chaldean numerology helpers
-├── reading.py                 # Orchestrates the full reading
-├── tarot.py                   # Tarot deck + spread utilities
-└── user.py                    # Interactive prompts and profile model
+usage: tarotteller [-h] {list,info,draw} ...
 ```
 
-The `tests/` directory contains unit tests to keep future enhancements grounded.
+Examples:
 
-## Extending TarotTeller
+- List the first few major arcana cards:
 
-TarotTeller was designed with modularity in mind. Each tradition lives in its own module, making it straightforward to:
+  ```bash
+  tarotteller list --arcana major --limit 5
+  ```
 
-- swap in alternative data sets (e.g., add more tarot spreads or numerology interpretations),
-- build a GUI around `craft_full_reading`, or
-- integrate additional cultural wisdom traditions.
+- Draw a quick three card reading without reversals:
 
-Pull requests and mystical ideas are always welcome. ✨
+  ```bash
+  tarotteller draw --spread three_card --no-reversed
+  ```
+
+- Pull two cards with deterministic order and orientation:
+
+  ```bash
+  tarotteller draw --cards 2 --seed 7 --orientation-seed 11
+  ```
+
+## Programmatic usage
+
+Use the Python API for more control over spreads and cards:
+
+```python
+from tarotteller import TarotDeck, draw_spread
+
+deck = TarotDeck()
+deck.seed(42)
+deck.reset(shuffle=True)
+reading = draw_spread(deck, "three_card", rng=99)
+
+for placement in reading.placements:
+    print(placement.position.title, placement.card.card.name, placement.card.orientation)
+```
+
+## Development
+
+Run the automated tests with `pytest`:
+
+```bash
+pytest
+```
