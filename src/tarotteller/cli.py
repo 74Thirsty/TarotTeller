@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+import textwrap
 from typing import Iterable, List, Optional
 
 from .deck import TarotCard, TarotDeck, format_card
@@ -14,6 +15,13 @@ def _print_cards(cards: Iterable[TarotCard]) -> None:
     for card in cards:
         suit = f" ({card.suit})" if card.suit else ""
         print(f"- {card.name}{suit}")
+
+
+def _wrap_prompt(text: str) -> str:
+    wrapper = textwrap.TextWrapper(
+        width=72, initial_indent="   ", subsequent_indent="   "
+    )
+    return wrapper.fill(text)
 
 
 def cmd_list(deck: TarotDeck, args: argparse.Namespace) -> int:
@@ -43,10 +51,12 @@ def _format_simple_draw(reading: SpreadReading) -> str:
     lines: List[str] = []
     for placement in reading.placements:
         card = placement.card
+        prompt = _wrap_prompt(placement.position.prompt)
+        meaning = textwrap.indent(card.meaning, "   ")
         lines.append(
             f"{placement.position.index}. {card.card.name} ({card.orientation})\n"
-            f"   {placement.position.prompt}\n"
-            f"   {card.meaning}"
+            f"{prompt}\n"
+            f"{meaning}"
         )
     return "\n".join(lines)
 

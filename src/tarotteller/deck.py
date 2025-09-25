@@ -4,9 +4,31 @@ from __future__ import annotations
 
 import random
 from dataclasses import dataclass
+import textwrap
 from typing import Iterable, Iterator, List, Optional, Sequence
 
 from . import data
+
+
+_MEANING_WRAP_WIDTH = 72
+
+
+def _natural_join(words: Sequence[str]) -> str:
+    """Return a human-friendly comma separated list."""
+
+    if not words:
+        return ""
+    if len(words) == 1:
+        return words[0]
+    if len(words) == 2:
+        return f"{words[0]} and {words[1]}"
+    return f"{', '.join(words[:-1])}, and {words[-1]}"
+
+
+def _wrap_paragraph(text: str) -> str:
+    """Wrap ``text`` to the standard meaning width."""
+
+    return textwrap.fill(" ".join(text.split()), width=_MEANING_WRAP_WIDTH)
 
 
 @dataclass(frozen=True)
@@ -66,14 +88,31 @@ class DrawnCard:
 
     @property
     def meaning(self) -> str:
+        keywords = self.keywords
+        theme = _natural_join(keywords)
+
         if self.is_reversed:
-            return (
-                f"Reversed, {self.card.name} highlights themes of "
-                f"{', '.join(self.card.reversed_keywords)}."
+            opening = (
+                f"Reversed, {self.card.name} throws down a gauntlet around {theme}, "
+                "exposing pressure points you've been skirting."
             )
-        return (
-            f"Upright, {self.card.name} focuses on {', '.join(self.card.keywords)}."
-        )
+            closing = (
+                "Channel that disruption into fierce self-honesty, break the stale "
+                "pattern, and rebuild on your own terms."
+            )
+        else:
+            opening = (
+                f"Upright, {self.card.name} ignites {theme}, lighting a trail "
+                "you can charge down with conviction."
+            )
+            closing = (
+                "Ride that tailwind and take a bold step that matches the scale "
+                "of your ambition."
+            )
+
+        paragraphs = [opening, self.card.description, closing]
+        wrapped = [_wrap_paragraph(text) for text in paragraphs if text]
+        return "\n\n".join(wrapped)
 
 
 class TarotDeck:

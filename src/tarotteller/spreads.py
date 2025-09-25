@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import random
 from dataclasses import dataclass
+import textwrap
 from typing import Dict, List, Optional
 
 from .deck import DrawnCard, TarotDeck
@@ -54,11 +55,15 @@ class SpreadReading:
             header = f"{placement.position.index}. {placement.position.title}"
             lines.append(header)
             lines.append("-" * len(header))
-            lines.append(placement.position.prompt)
-            lines.append(
-                f"Card: {placement.card.card.name} ({placement.card.orientation})"
+            prompt = textwrap.fill(placement.position.prompt, width=72)
+            card_line = textwrap.fill(
+                f"Card: {placement.card.card.name} ({placement.card.orientation})",
+                width=72,
             )
-            lines.append(placement.card.meaning)
+            meaning = textwrap.indent(placement.card.meaning, "  ")
+            lines.append(prompt)
+            lines.append(card_line)
+            lines.append(meaning)
             lines.append("")
         return "\n".join(lines).strip()
 
