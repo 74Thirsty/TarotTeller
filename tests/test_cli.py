@@ -34,3 +34,19 @@ def test_cli_draw_cards(capsys):
     assert exit_code == 0
     assert "Card 1:" in captured.out
     assert "(upright)" in captured.out
+
+
+def test_cli_draw_with_question(capsys):
+    exit_code = run_cli([
+        "draw",
+        "--seed",
+        "7",
+        "--spread",
+        "single",
+        "--question",
+        "What career move should I make soon?",
+    ])
+    captured = capsys.readouterr()
+    assert exit_code == 0
+    assert "Personalized Insight" in captured.out
+    assert "career" in captured.out.lower()

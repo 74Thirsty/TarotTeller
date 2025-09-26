@@ -7,7 +7,10 @@ import sys
 import textwrap
 from typing import Iterable, List, Optional
 
+from .context import analyze_question
 from .deck import TarotCard, TarotDeck, format_card
+from .engine import InterpretationEngine
+from .knowledge import TarotKnowledgeBase
 from .spreads import SPREADS, SpreadReading, draw_spread
 
 
@@ -62,6 +65,12 @@ def _format_simple_draw(reading: SpreadReading) -> str:
 
 
 def cmd_draw(deck: TarotDeck, args: argparse.Namespace) -> int:
+    profile = None
+    engine: InterpretationEngine | None = None
+    if args.question:
+        profile = analyze_question(args.question)
+        engine = InterpretationEngine(TarotKnowledgeBase(deck.all_cards))
+
     if args.seed is not None:
         deck.seed(args.seed)
         deck.reset(shuffle=True)
@@ -77,6 +86,10 @@ def cmd_draw(deck: TarotDeck, args: argparse.Namespace) -> int:
             for index, card in enumerate(drawn)
         ]
         print("\n".join(lines))
+        if engine and profile:
+            insights = [engine.build_card_insight(card, profile) for card in drawn]
+            print()
+            print(engine.render_for_cards(insights, profile))
         return 0
 
     spread_key = args.spread or "single"
@@ -97,7 +110,11 @@ def cmd_draw(deck: TarotDeck, args: argparse.Namespace) -> int:
     except ValueError as exc:
         print(str(exc), file=sys.stderr)
         return 1
-    print(reading.as_text() if args.detailed else _format_simple_draw(reading))
+    rendered = reading.as_text() if args.detailed else _format_simple_draw(reading)
+    print(rendered)
+    if engine and profile:
+        print()
+        print(engine.render_personalised_summary(reading, profile))
     return 0
 
 
@@ -143,6 +160,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     draw_parser.add_argument(
         "--detailed", action="store_true", help="Show the full spread text"
+    )
+    draw_parser.add_argument(
+        "--question",
+        help="Phrase the querent's question to unlock contextual insights",
     )
     draw_parser.set_defaults(func=cmd_draw)
 
