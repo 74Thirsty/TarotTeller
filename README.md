@@ -74,3 +74,50 @@ Run the automated tests with `pytest`:
 ```bash
 pytest
 ```
+
+## Enhancement roadmap
+
+The current release draws exclusively on the static tarot metadata defined in
+`src/tarotteller/data.py`.  To move toward the "stronger readings" vision for
+TarotTeller, plan work in the following stages:
+
+### Immediate technical fixes
+
+- Replace any future bespoke astronomy routines with an industrial-grade
+  ephemeris source such as NASA/JPL's SPICE data services to ensure accurate
+  planetary positions.
+- Introduce transfer learning with a pre-trained language model (e.g., BERT or
+  GPT) and wrap it with natural language understanding so the app can parse
+  nuanced user prompts before generating readings.
+
+### Knowledge and reasoning upgrades
+
+- Design a comprehensive knowledge graph that captures detailed card meanings,
+  astrological correspondences, symbolism, and historical patterns.
+- Explore graph neural networks (GNNs) to reason over that graph, enabling the
+  engine to connect disparate archetypes during an interpretation.
+
+### System architecture improvements
+
+- Structure the platform as a pipeline: context analyzer → knowledge base → ML
+  engine → quality assurance → feedback loop.  Ensure each component exposes
+  clear interfaces and confidence scores so downstream checks can gate output.
+
+### Implementation highlights
+
+- Upgrade the ML layer with deep neural networks for generating interpretations,
+  multimodal learning that links card imagery to meanings, and probabilistic
+  models for better nuance.
+- Personalize readings by tracking user interaction history, applying
+  collaborative filtering, and experimenting with reinforcement learning to
+  adapt responses to individual preferences.
+- Reinforce quality by instituting multi-stage verification, adding GAN-based
+  polish for natural language, and automating accuracy tests across canonical
+  readings.
+
+### Metrics to monitor
+
+- Reading quality: user satisfaction, completion rates, return visits, and time
+  spent per session.
+- System health: coherence scores, accuracy against known interpretations,
+  processing time, and error rate reductions over successive releases.
