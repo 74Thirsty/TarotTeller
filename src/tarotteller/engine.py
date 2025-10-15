@@ -28,6 +28,14 @@ class InterpretationEngine:
     def __init__(self, knowledge_base: TarotKnowledgeBase):
         self._knowledge_base = knowledge_base
 
+    def _format_focuses(self, focuses: Sequence[str]) -> str:
+        if not focuses:
+            return "your evolving path"
+        if len(focuses) == 1:
+            return focuses[0].replace("_", " ")
+        *rest, last = [focus.replace("_", " ") for focus in focuses]
+        return ", ".join(rest) + f" and {last}"
+
     def _select_focus(self, card_themes: Sequence[str], focuses: Sequence[str]) -> str:
         for focus in focuses:
             if focus in card_themes:
@@ -59,6 +67,39 @@ class InterpretationEngine:
     ) -> List[PersonalizedInsight]:
         return [self._build_insight(placement, profile) for placement in reading.placements]
 
+    def _compose_story_arc(
+        self, insights: Sequence[PersonalizedInsight], profile: ContextProfile
+    ) -> List[str]:
+        story_lines: List[str] = []
+        focus_text = self._format_focuses(profile.focuses)
+        timeframe = profile.timeframe.replace("_", " ")
+        mood = profile.sentiment
+        highlighted = ", ".join(sorted(profile.highlighted_terms)[:6])
+
+        opener = (
+            f"You arrive with a {mood} heart, asking '{profile.question}'. "
+            f"This reading frames a {timeframe} journey through {focus_text}."
+        )
+        if highlighted:
+            opener += f" Notable echoes from your question — {highlighted} — set the scene."
+        story_lines.append(opener)
+
+        for insight in insights:
+            orientation = insight.orientation.lower()
+            prompt = insight.prompt.rstrip(".")
+            chapter = (
+                f"In the chapter of {insight.title}, the {insight.card_name} appears {orientation}. "
+                f"It responds to the call to {prompt.lower()} and whispers: {insight.message}"
+            )
+            story_lines.append(chapter)
+
+        closer = (
+            "Together these moments sketch a living story — one you can revisit, annotate, "
+            "and reshape as you take your next steps."
+        )
+        story_lines.append(closer)
+        return story_lines
+
     def render_personalised_summary(
         self, reading: SpreadReading, profile: ContextProfile
     ) -> str:
@@ -86,6 +127,11 @@ class InterpretationEngine:
             lines.append(header)
             lines.append("   " + insight.prompt)
             lines.append("   " + insight.message)
+            lines.append("")
+        lines.append("Story Arc")
+        lines.append("---------")
+        for paragraph in self._compose_story_arc(insights, profile):
+            lines.append(paragraph)
             lines.append("")
         lines.append(
             "Let these highlights guide follow-up actions and keep logging feedback to "
