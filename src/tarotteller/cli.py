@@ -9,6 +9,7 @@ from typing import Iterable, List, Optional
 
 from .context import analyze_question
 from .deck import TarotCard, TarotDeck, format_card
+from .experiences import build_immersive_companion
 from .engine import InterpretationEngine
 from .knowledge import TarotKnowledgeBase
 from .spreads import SPREADS, SpreadReading, draw_spread
@@ -90,6 +91,15 @@ def cmd_draw(deck: TarotDeck, args: argparse.Namespace) -> int:
             insights = [engine.build_card_insight(card, profile) for card in drawn]
             print()
             print(engine.render_for_cards(insights, profile))
+        if args.immersive:
+            print()
+            print(
+                build_immersive_companion(
+                    drawn,
+                    tone=args.tone,
+                    profile=profile,
+                )
+            )
         return 0
 
     spread_key = args.spread or "single"
@@ -115,6 +125,15 @@ def cmd_draw(deck: TarotDeck, args: argparse.Namespace) -> int:
     if engine and profile:
         print()
         print(engine.render_personalised_summary(reading, profile))
+    if args.immersive:
+        print()
+        print(
+            build_immersive_companion(
+                [placement.card for placement in reading.placements],
+                tone=args.tone,
+                profile=profile,
+            )
+        )
     return 0
 
 
@@ -164,6 +183,17 @@ def build_parser() -> argparse.ArgumentParser:
     draw_parser.add_argument(
         "--question",
         help="Phrase the querent's question to unlock contextual insights",
+    )
+    draw_parser.add_argument(
+        "--immersive",
+        action="store_true",
+        help="Add journal prompts, rituals, and soundtrack cues to the reading",
+    )
+    draw_parser.add_argument(
+        "--tone",
+        choices=["radiant", "mystic", "grounded"],
+        default="radiant",
+        help="Stylistic tone for immersive guidance",
     )
     draw_parser.set_defaults(func=cmd_draw)
 

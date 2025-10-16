@@ -50,3 +50,24 @@ def test_cli_draw_with_question(capsys):
     assert exit_code == 0
     assert "Personalized Insight" in captured.out
     assert "career" in captured.out.lower()
+
+
+def test_cli_draw_with_immersive_extras(capsys):
+    exit_code = run_cli([
+        "draw",
+        "--cards",
+        "1",
+        "--seed",
+        "3",
+        "--no-reversed",
+        "--immersive",
+        "--tone",
+        "grounded",
+        "--question",
+        "How do I stay balanced in my creative work?",
+    ])
+    captured = capsys.readouterr()
+    assert exit_code == 0
+    assert "Immersive Companion" in captured.out
+    assert "Micro-Ritual" in captured.out
+    assert "Soundscape" in captured.out
