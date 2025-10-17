@@ -9,13 +9,43 @@ from typing import Iterable, List, Optional
 
 from .context import analyze_question
 from .deck import DrawnCard, TarotDeck
-from .engine import InterpretationEngine
+from .engine import InterpretationEngine, build_prompt_interpretation
 from .experiences import build_immersive_companion
 from .knowledge import TarotKnowledgeBase
 from .spreads import SPREADS, SpreadReading, draw_spread
 
 
 _TEXT_WRAP_WIDTH = 72
+
+HELP_TEXT = """
+TarotTeller Help
+================
+
+Getting Started
+---------------
+1. Choose a spread from the drop-down menu. Leave "Cards" blank to use the spread's default count or enter a number to override it.
+2. (Optional) Enter your question or intention in the "Question" field so TarotTeller can tailor interpretations.
+3. (Optional) Provide a shuffle seed if you want reproducible draws. Leave it blank for a fresh shuffle each time.
+4. Toggle options to allow reversed cards, show detailed spread layout, or add an immersive storytelling companion.
+5. Pick the tone for immersive guidance from the "Tone" selector.
+
+Drawing a Reading
+-----------------
+* Click **Draw Reading** to pull cards for the chosen spread.
+* Click **Reset Deck** to reshuffle using the current seed (if any).
+* The results panel shows each card with a short interpretation that blends the spread prompt with TarotTeller's knowledge base. When you provide a question, additional personalised insight appears below the reading.
+
+Immersive & Detailed Modes
+--------------------------
+* **Detailed spread view** presents the full positional layout text from the spread.
+* **Immersive companion** crafts a narrative reflection in the selected tone.
+
+Tips
+----
+* Use consistent seeds when you want to revisit the same draw for journaling.
+* Questions that include timeframe, mood, and focus keywords help TarotTeller respond more specifically.
+* Reset the deck between readings if you want a fresh shuffle.
+"""
 
 
 def _wrap_prompt(text: str) -> str:
@@ -25,11 +55,15 @@ def _wrap_prompt(text: str) -> str:
     return wrapper.fill(text)
 
 
-def _format_simple_reading(reading: SpreadReading) -> str:
+def _format_simple_reading(
+    reading: SpreadReading, knowledge_base: TarotKnowledgeBase
+) -> str:
     lines: List[str] = []
     for placement in reading.placements:
         card = placement.card
-        prompt = _wrap_prompt(placement.position.prompt)
+        prompt = _wrap_prompt(
+            build_prompt_interpretation(placement, knowledge_base)
+        )
         meaning = textwrap.indent(card.meaning, "   ")
         lines.append(
             f"{placement.position.index}. {card.card.name} ({card.orientation})\n"
@@ -56,6 +90,7 @@ class TarotTellerApp:
         self.root = tk.Tk()
         self.root.title("TarotTeller")
         self.deck = TarotDeck()
+        self._help_window: Optional[tk.Toplevel] = None
         self._build_layout()
 
     def _build_layout(self) -> None:
@@ -142,6 +177,9 @@ class TarotTellerApp:
         reset_button = ttk.Button(actions, text="Reset Deck", command=self.reset_deck)
         reset_button.pack(side=tk.LEFT, padx=(12, 0))
 
+        help_button = ttk.Button(actions, text="Help", command=self._show_help)
+        help_button.pack(side=tk.LEFT, padx=(12, 0))
+
         # Output area
         output_frame = ttk.Frame(container)
         output_frame.pack(fill=tk.BOTH, expand=True, pady=(12, 0))
@@ -183,6 +221,7 @@ class TarotTellerApp:
             return
 
         deck = TarotDeck()
+        knowledge_base = TarotKnowledgeBase(deck.all_cards)
         if seed_value is not None:
             deck.seed(seed_value)
         deck.reset(shuffle=True)
@@ -192,7 +231,7 @@ class TarotTellerApp:
         engine: Optional[InterpretationEngine] = None
         if question:
             profile = analyze_question(question)
-            engine = InterpretationEngine(TarotKnowledgeBase(deck.all_cards))
+            engine = InterpretationEngine(knowledge_base)
 
         allow_reversed = self.allow_reversed.get()
 
@@ -225,7 +264,9 @@ class TarotTellerApp:
             return
 
         rendered = (
-            reading.as_text() if self.detailed.get() else _format_simple_reading(reading)
+            reading.as_text()
+            if self.detailed.get()
+            else _format_simple_reading(reading, knowledge_base)
         )
         insights_text = ""
         if engine and profile:
@@ -245,6 +286,37 @@ class TarotTellerApp:
         self.output.delete("1.0", tk.END)
         self.output.insert(tk.END, text.strip())
         self.output.see("1.0")
+
+    def _show_help(self) -> None:
+        if self._help_window and self._help_window.winfo_exists():
+            self._help_window.lift()
+            self._help_window.focus_set()
+            return
+
+        window = tk.Toplevel(self.root)
+        window.title("TarotTeller Help")
+        window.geometry("560x480")
+        window.transient(self.root)
+
+        frame = ttk.Frame(window, padding=16)
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        text_widget = tk.Text(frame, wrap=tk.WORD, font=("TkDefaultFont", 11))
+        text_widget.insert(tk.END, HELP_TEXT.strip())
+        text_widget.configure(state=tk.DISABLED)
+        text_widget.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+        scrollbar = ttk.Scrollbar(frame, command=text_widget.yview)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        text_widget.configure(yscrollcommand=scrollbar.set)
+
+        window.protocol("WM_DELETE_WINDOW", self._close_help)
+        self._help_window = window
+
+    def _close_help(self) -> None:
+        if self._help_window and self._help_window.winfo_exists():
+            self._help_window.destroy()
+        self._help_window = None
 
     @staticmethod
     def _parse_optional_int(value: str) -> Optional[int]:

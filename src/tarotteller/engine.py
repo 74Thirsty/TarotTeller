@@ -10,6 +10,27 @@ from .knowledge import TarotKnowledgeBase
 from .spreads import SpreadPlacement, SpreadReading
 
 
+def build_prompt_interpretation(
+    placement: SpreadPlacement, knowledge_base: TarotKnowledgeBase
+) -> str:
+    """Return a narrative interpretation that pairs a prompt with card insight."""
+
+    drawn_card = placement.card
+    themes = knowledge_base.themes_for_card(drawn_card.card)
+    focus = themes[0] if themes else "spirituality"
+    message = knowledge_base.insight_for(drawn_card, focus)
+
+    prompt = placement.position.prompt.strip()
+    if prompt and not prompt.endswith((".", "!", "?")):
+        prompt += "."
+    prompt = f"{prompt} " if prompt else ""
+
+    return (
+        f"In the {placement.position.title} position, "
+        f"{prompt}{message}"
+    )
+
+
 @dataclass
 class PersonalizedInsight:
     """A contextual message generated for a drawn card."""
