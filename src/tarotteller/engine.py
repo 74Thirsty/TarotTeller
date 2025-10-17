@@ -122,11 +122,15 @@ class InterpretationEngine:
         return story_lines
 
     def render_personalised_summary(
-        self, reading: SpreadReading, profile: ContextProfile
+        self,
+        reading: SpreadReading,
+        profile: ContextProfile,
+        insights: Sequence[PersonalizedInsight] | None = None,
     ) -> str:
         """Return a multi-line personalised summary for ``reading``."""
 
-        insights = self.insights_for_reading(reading, profile)
+        if insights is None:
+            insights = self.insights_for_reading(reading, profile)
         lines: List[str] = []
         lines.append("Personalized Insight")
         lines.append("-------------------")
@@ -191,3 +195,67 @@ class InterpretationEngine:
             prompt="",
             message=message,
         )
+
+    def render_question_response(
+        self,
+        insights: Sequence[PersonalizedInsight],
+        profile: ContextProfile,
+        *,
+        spread_title: str | None = None,
+    ) -> str:
+        """Summarise how the reading answers the querent's question."""
+
+        if not insights:
+            return ""
+
+        primary = min(
+            insights,
+            key=lambda insight: (
+                insight.placement_index if insight.placement_index else 0,
+                insight.card_name,
+            ),
+        )
+        focus_text = self._format_focuses(profile.focuses)
+        timeframe_text = profile.timeframe.replace("_", " ")
+
+        response_lines: List[str] = []
+        response_lines.append("Question Response")
+        response_lines.append("-----------------")
+        response_lines.append(f"You asked: {profile.question}")
+        response_lines.append("")
+
+        if spread_title:
+            context_line = f"Drawing on the {spread_title} spread, "
+        else:
+            context_line = "Drawing from the cards, "
+
+        descriptor: List[str] = []
+        if primary.title:
+            descriptor.append(f"the {primary.title} position")
+        if primary.prompt:
+            descriptor.append(primary.prompt.lower().rstrip("."))
+        descriptor_text = " about ".join(descriptor) if descriptor else "the message"
+
+        orientation = primary.orientation.lower()
+        card_name = primary.card_name
+
+        message_sentence = (
+            f"{context_line}{descriptor_text} brings the {orientation} {card_name} forward as your clearest answer."
+        )
+
+        if primary.prompt:
+            prompt_text = primary.prompt.rstrip(".").lower()
+            follow_intro = f"It speaks to {prompt_text}. "
+        else:
+            follow_intro = ""
+
+        follow_up = primary.message
+        closing = (
+            f"Look for this to unfold over a {timeframe_text} horizon, especially within {focus_text}."
+        )
+
+        response_lines.append(
+            f"{message_sentence} {follow_intro}{follow_up} {closing}".strip()
+        )
+
+        return "\n".join(response_lines).strip()

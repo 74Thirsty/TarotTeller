@@ -239,16 +239,20 @@ class TarotTellerApp:
             if card_count:
                 drawn = deck.draw(card_count, allow_reversed=allow_reversed)
                 rendered = _format_direct_draw(drawn)
-                insights_text = ""
+                sections: List[str] = [rendered]
                 if engine and profile:
                     insights = [engine.build_card_insight(card, profile) for card in drawn]
-                    insights_text = "\n\n" + engine.render_for_cards(insights, profile)
-                immersive_text = ""
+                    response = engine.render_question_response(insights, profile)
+                    if response:
+                        sections.insert(0, response)
+                    sections.append(engine.render_for_cards(insights, profile))
                 if self.immersive.get():
-                    immersive_text = "\n\n" + build_immersive_companion(
-                        drawn, tone=self.tone.get(), profile=profile
+                    sections.append(
+                        build_immersive_companion(
+                            drawn, tone=self.tone.get(), profile=profile
+                        )
                     )
-                self._render_output(rendered + insights_text + immersive_text)
+                self._render_output("\n\n".join(section.strip() for section in sections if section))
                 return
 
             spread_key = self.spread_var.get() or "single"
@@ -268,19 +272,30 @@ class TarotTellerApp:
             if self.detailed.get()
             else _format_simple_reading(reading, knowledge_base)
         )
-        insights_text = ""
+        sections = [rendered]
         if engine and profile:
-            insights_text = "\n\n" + engine.render_personalised_summary(reading, profile)
-
-        immersive_text = ""
-        if self.immersive.get():
-            immersive_text = "\n\n" + build_immersive_companion(
-                [placement.card for placement in reading.placements],
-                tone=self.tone.get(),
-                profile=profile,
+            insights = engine.insights_for_reading(reading, profile)
+            response = engine.render_question_response(
+                insights, profile, spread_title=reading.spread.name
+            )
+            if response:
+                sections.insert(0, response)
+            sections.append(
+                engine.render_personalised_summary(
+                    reading, profile, insights=insights
+                )
             )
 
-        self._render_output(rendered + insights_text + immersive_text)
+        if self.immersive.get():
+            sections.append(
+                build_immersive_companion(
+                    [placement.card for placement in reading.placements],
+                    tone=self.tone.get(),
+                    profile=profile,
+                )
+            )
+
+        self._render_output("\n\n".join(section.strip() for section in sections if section))
 
     def _render_output(self, text: str) -> None:
         self.output.delete("1.0", tk.END)
