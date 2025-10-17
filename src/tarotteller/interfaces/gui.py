@@ -7,13 +7,13 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from typing import Iterable, List, Optional
 
-from .context import analyze_question
-from .correspondences import describe_card_correspondences
-from .deck import DrawnCard, TarotDeck
-from .engine import InterpretationEngine, build_prompt_interpretation
-from .experiences import build_immersive_companion
-from .knowledge import TarotKnowledgeBase
-from .spreads import SPREADS, SpreadReading, draw_spread
+from ..core.context import analyze_question
+from ..core.correspondences import describe_card_correspondences
+from ..core.deck import DrawnCard, TarotDeck
+from ..core.engine import InterpretationEngine, build_prompt_interpretation
+from ..core.knowledge import TarotKnowledgeBase
+from ..core.spreads import SPREADS, SpreadReading, draw_spread
+from ..narrative.immersive import build_immersive_companion
 
 
 _TEXT_WRAP_WIDTH = 72

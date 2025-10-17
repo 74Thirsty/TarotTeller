@@ -1,6 +1,9 @@
-from tarotteller.context import ContextProfile
-from tarotteller.deck import DrawnCard, TarotDeck
-from tarotteller.experiences import build_immersive_companion
+from tarotteller import (
+    ContextProfile,
+    DrawnCard,
+    TarotDeck,
+    build_immersive_companion,
+)
 
 
 def test_build_immersive_companion_includes_sections():

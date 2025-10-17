@@ -1,4 +1,4 @@
-from tarotteller.deck import DrawnCard, TarotDeck
+from tarotteller import DrawnCard, TarotDeck
 
 
 def test_deck_contains_full_set():

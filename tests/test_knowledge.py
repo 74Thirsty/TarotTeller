@@ -1,5 +1,4 @@
-from tarotteller.deck import DrawnCard, TarotDeck
-from tarotteller.knowledge import TarotKnowledgeBase
+from tarotteller import DrawnCard, TarotDeck, TarotKnowledgeBase
 
 
 def test_knowledge_identifies_themes_and_generates_insight():

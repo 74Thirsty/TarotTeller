@@ -7,13 +7,13 @@ import sys
 import textwrap
 from typing import Iterable, List, Optional
 
-from .context import analyze_question
-from .correspondences import describe_card_correspondences
-from .deck import TarotCard, TarotDeck, format_card
-from .experiences import build_immersive_companion
-from .engine import InterpretationEngine
-from .knowledge import TarotKnowledgeBase
-from .spreads import SPREADS, SpreadReading, draw_spread
+from ..core.context import analyze_question
+from ..core.correspondences import describe_card_correspondences
+from ..core.deck import TarotCard, TarotDeck, format_card
+from ..core.engine import InterpretationEngine
+from ..core.knowledge import TarotKnowledgeBase
+from ..core.spreads import SPREADS, SpreadReading, draw_spread
+from ..narrative.immersive import build_immersive_companion
 
 
 def _print_cards(cards: Iterable[TarotCard]) -> None:
