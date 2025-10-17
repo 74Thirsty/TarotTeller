@@ -90,24 +90,23 @@ class DrawnCard:
     def meaning(self) -> str:
         keywords = self.keywords
         theme = _natural_join(keywords)
+        focus = f"themes of {theme}" if theme else "its central lesson"
 
         if self.is_reversed:
             opening = (
-                f"Reversed, {self.card.name} throws down a gauntlet around {theme}, "
-                "exposing pressure points you've been skirting."
+                f"Reversed, {self.card.name} signals blocks around {focus}."
             )
             closing = (
-                "Channel that disruption into fierce self-honesty, break the stale "
-                "pattern, and rebuild on your own terms."
+                "Notice where the energy feels stalled, take stock with honesty, "
+                "and restore balance through steady, realistic adjustments."
             )
         else:
             opening = (
-                f"Upright, {self.card.name} ignites {theme}, lighting a trail "
-                "you can charge down with conviction."
+                f"Upright, {self.card.name} highlights {focus}."
             )
             closing = (
-                "Ride that tailwind and take a bold step that matches the scale "
-                "of your ambition."
+                "Integrate the lesson with grounded action and keep checking that "
+                "your choices align with what matters most."
             )
 
         paragraphs = [opening, self.card.description, closing]
