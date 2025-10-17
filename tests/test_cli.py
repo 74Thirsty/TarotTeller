@@ -1,8 +1,8 @@
-from tarotteller import cli
+from tarotteller.interfaces.cli import main as cli_main
 
 
 def run_cli(args):
-    return cli.main(args)
+    return cli_main(args)
 
 
 def test_cli_list_major(capsys):

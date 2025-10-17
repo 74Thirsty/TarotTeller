@@ -1,140 +1,113 @@
 # TarotTeller
 
-TarotTeller is a feature-rich tarot reading toolkit.  It bundles a complete deck,
-meaningful spreads, and both a graphical desktop experience and friendly command
-line utilities for exploring the cards.  The library is equally at home in
-scripts thanks to its expressive Python API.
+TarotTeller is a modern Python toolkit for exploring tarot cards through scripted workflows, a friendly command line interface, and an optional desktop experience. It ships with a complete 78-card deck, positional spreads, contextual storytelling, and immersive journaling prompts so that every reading feels intentional and repeatable.
 
-## Features
-
-- Complete 78 card deck with upright and reversed keywords and descriptions.
-- Programmatically generated minor arcana ensure consistent language across suits.
-- Built-in spreads, including a single card pull, three card story, and Celtic Cross.
-- Desktop GUI with spread selection, contextual question analysis, and immersive
-  companion copy for journal work.
-- Layered card correspondences blending Chaldean numerology, Western astrology,
-  Chinese zodiac wisdom, and Native medicine allies for richer storytelling.
-- Command line tools for listing cards, viewing rich card profiles, and drawing
-  readings with optional deterministic seeding.
-- Well-documented Python API suited for automation or experimentation.
+## Key capabilities
+- **Rich tarot data model** – Generate a shuffled 78-card deck with upright and reversed interpretations, orientation-aware text, elemental correspondences, and numerology insights.
+- **Spread orchestration** – Work with bundled layouts such as a single-card draw, three-card story, and the ten-card Celtic Cross or specify an ad-hoc card count for quick pulls.
+- **Context-aware insights** – Analyse a querent question to identify themes, timeframe, and sentiment, then blend that profile with spread prompts to surface personalised guidance.
+- **Immersive companions** – Layer rituals, soundtrack suggestions, and journaling prompts over readings in radiant, mystic, or grounded tones.
+- **Multiple interfaces** – Use the `tarotteller` CLI for scripted draws, launch the Tkinter GUI for live sessions, or import the Python API for automation and experimentation.
 
 ## Installation
-
-The project uses a modern `pyproject.toml` configuration.  Install it in editable
-mode to try it locally:
+TarotTeller uses a `pyproject.toml`-driven build powered by setuptools and the `src/` layout.
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
+pip install --upgrade pip
 pip install -e .
 ```
 
-## Graphical interface
+Once installed, the `tarotteller` and `tarotteller-gui` console scripts become available.
 
-Launch the desktop experience after installation:
+## Command line quick start
+List cards, inspect a profile, or draw readings directly from your shell:
+
+```bash
+# Show the first five major arcana cards
+$ tarotteller list --arcana major --limit 5
+
+# Print detailed information about The Magician
+$ tarotteller info "The Magician"
+
+# Pull a three-card spread with deterministic shuffle and orientation
+$ tarotteller draw --spread three_card --seed 11 --orientation-seed 21
+
+# Draw two upright-only cards with immersive storytelling in a grounded tone
+$ tarotteller draw --cards 2 --no-reversed --immersive --tone grounded
+```
+
+Provide `--question` text to unlock contextual analysis and personalised insight for each draw. Seeds can be supplied to reproduce both card order and orientation.
+
+## Graphical interface
+Launch the Tkinter-powered desktop client after installation:
 
 ```bash
 tarotteller-gui
 ```
 
-The GUI lets you choose a spread or draw a custom number of cards, analyse a
-querent question for personalised insights, and optionally generate the
-immersive companion script. Use the **Reset Deck** button to reshuffle with an
-optional seed for reproducible sessions.
+The GUI lets you pick a spread (or override the card count), capture the querent's question, toggle reversed cards, and decide whether to show positional prompts or immersive extras. Results combine spread prompts, card meanings, correspondence layers, and optional personalised summaries generated from the question profile. A dedicated help dialog summarises controls and reading tips.
 
-## Command line usage
-
-```
-usage: tarotteller [-h] {list,info,draw} ...
-```
-
-Examples:
-
-- List the first few major arcana cards:
-
-  ```bash
-  tarotteller list --arcana major --limit 5
-  ```
-
-- Draw a quick three card reading without reversals:
-
-  ```bash
-  tarotteller draw --spread three_card --no-reversed
-  ```
-
-- Pull two cards with deterministic order and orientation:
-
-  ```bash
-  tarotteller draw --cards 2 --seed 7 --orientation-seed 11
-  ```
-
-## Programmatic usage
-
-Use the Python API for more control over spreads and cards:
+## Python API
+Interact with the deck and spreads from your own scripts:
 
 ```python
-from tarotteller import TarotDeck, draw_spread
+from tarotteller import (
+    TarotDeck,
+    draw_spread,
+    build_immersive_companion,
+    analyze_question,
+    InterpretationEngine,
+    TarotKnowledgeBase,
+)
 
+# Prepare the deck and spread
 deck = TarotDeck()
 deck.seed(42)
 deck.reset(shuffle=True)
-reading = draw_spread(deck, "three_card", rng=99)
+reading = draw_spread(deck, "three_card", rng=13)
 
-for placement in reading.placements:
-    print(placement.position.title, placement.card.card.name, placement.card.orientation)
+# Build contextual insights
+profile = analyze_question("What career move should I pursue next quarter?")
+engine = InterpretationEngine(TarotKnowledgeBase(deck.all_cards))
+insights = engine.insights_for_reading(reading, profile)
+
+for placement, insight in zip(reading.placements, insights):
+    print(f"{placement.position.title}: {insight.card_name} ({insight.orientation})")
+    print(f"   {insight.message}")
+
+# Optional immersive companion text
+print()
+print(build_immersive_companion([p.card for p in reading.placements], tone="mystic", profile=profile))
 ```
 
-## Development
+## Project structure
+TarotTeller follows the canonical packaging layout so it can be published to PyPI without adjustments:
 
-Run the automated tests with `pytest`:
-
-```bash
-pytest
+```
+src/tarotteller/
+├── __init__.py              # Public package surface and version metadata
+├── core/                    # Deck, spread, context analysis, and knowledge base logic
+├── interfaces/              # CLI and GUI entry points with console script bindings
+└── narrative/               # Immersive storytelling helpers
 ```
 
-## Enhancement roadmap
+Tests live under `tests/` and target the public API, CLI, and GUI helpers.
 
-The current release draws exclusively on the static tarot metadata defined in
-`src/tarotteller/data.py`.  To move toward the "stronger readings" vision for
-TarotTeller, plan work in the following stages:
+## Development workflow
+1. Create and activate a virtual environment (see Installation above).
+2. Install development dependencies if needed (for example `pip install -e .[dev]` when extra requirements are added).
+3. Run the automated test suite:
+   ```bash
+   pytest
+   ```
+4. Use `python -m tarotteller.interfaces.cli ...` or `python -m tarotteller.interfaces.gui` for module-based debugging.
 
-### Immediate technical fixes
+## Version history
+| Version | Date       | Highlights |
+|---------|------------|------------|
+| 0.2.0   | Unreleased | Reorganised the package into `core`, `interfaces`, and `narrative` modules, introduced consolidated public exports, and refreshed documentation for distribution readiness. |
+| 0.1.0   | 2024-03    | Initial release with deck generation, spreads, CLI, GUI, contextual insights, and immersive companion stories. |
 
-- Replace any future bespoke astronomy routines with an industrial-grade
-  ephemeris source such as NASA/JPL's SPICE data services to ensure accurate
-  planetary positions.
-- Introduce transfer learning with a pre-trained language model (e.g., BERT or
-  GPT) and wrap it with natural language understanding so the app can parse
-  nuanced user prompts before generating readings.
-
-### Knowledge and reasoning upgrades
-
-- Design a comprehensive knowledge graph that captures detailed card meanings,
-  astrological correspondences, symbolism, and historical patterns.
-- Explore graph neural networks (GNNs) to reason over that graph, enabling the
-  engine to connect disparate archetypes during an interpretation.
-
-### System architecture improvements
-
-- Structure the platform as a pipeline: context analyzer → knowledge base → ML
-  engine → quality assurance → feedback loop.  Ensure each component exposes
-  clear interfaces and confidence scores so downstream checks can gate output.
-
-### Implementation highlights
-
-- Upgrade the ML layer with deep neural networks for generating interpretations,
-  multimodal learning that links card imagery to meanings, and probabilistic
-  models for better nuance.
-- Personalize readings by tracking user interaction history, applying
-  collaborative filtering, and experimenting with reinforcement learning to
-  adapt responses to individual preferences.
-- Reinforce quality by instituting multi-stage verification, adding GAN-based
-  polish for natural language, and automating accuracy tests across canonical
-  readings.
-
-### Metrics to monitor
-
-- Reading quality: user satisfaction, completion rates, return visits, and time
-  spent per session.
-- System health: coherence scores, accuracy against known interpretations,
-  processing time, and error rate reductions over successive releases.
+Dates will be finalised when publishing tagged releases. Follow semantic versioning as future features land.

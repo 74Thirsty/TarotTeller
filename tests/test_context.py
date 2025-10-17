@@ -1,4 +1,4 @@
-from tarotteller.context import analyze_question
+from tarotteller.core.context import analyze_question
 
 
 def test_analyze_question_detects_focus_and_timeframe():

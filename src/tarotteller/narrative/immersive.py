@@ -6,8 +6,8 @@ import textwrap
 from collections import Counter
 from typing import Iterable, Mapping, Sequence
 
-from .context import ContextProfile
-from .deck import DrawnCard, TarotCard
+from ..core.context import ContextProfile
+from ..core.deck import DrawnCard, TarotCard
 
 _WRAP_WIDTH = 72
 

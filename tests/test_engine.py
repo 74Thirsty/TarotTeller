@@ -1,11 +1,11 @@
-from tarotteller.context import analyze_question
-from tarotteller.deck import TarotDeck
-from tarotteller.engine import (
+from tarotteller import (
     InterpretationEngine,
+    TarotDeck,
+    TarotKnowledgeBase,
+    analyze_question,
     build_prompt_interpretation,
+    draw_spread,
 )
-from tarotteller.knowledge import TarotKnowledgeBase
-from tarotteller.spreads import draw_spread
 
 
 def test_render_personalised_summary_creates_story_arc():

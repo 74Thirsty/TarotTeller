@@ -1,5 +1,4 @@
-from tarotteller.deck import TarotDeck
-from tarotteller.spreads import SPREADS, draw_spread
+from tarotteller import SPREADS, TarotDeck, draw_spread
 
 
 def test_spread_definitions_have_expected_sizes():
