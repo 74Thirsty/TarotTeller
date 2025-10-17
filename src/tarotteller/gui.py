@@ -8,6 +8,7 @@ from tkinter import messagebox, ttk
 from typing import Iterable, List, Optional
 
 from .context import analyze_question
+from .correspondences import describe_card_correspondences
 from .deck import DrawnCard, TarotDeck
 from .engine import InterpretationEngine, build_prompt_interpretation
 from .experiences import build_immersive_companion
@@ -29,16 +30,28 @@ Getting Started
 4. Toggle options to allow reversed cards, show detailed spread layout, or add an immersive storytelling companion.
 5. Pick the tone for immersive guidance from the "Tone" selector.
 
+Settings Glossary
+-----------------
+* **Cards override** lets you pull a quick custom number of cards without using a spread.
+* **Shuffle seed** repeats the same draw sequence—great for study or journaling.
+* **Allow reversed** flips cards upside down to surface shadow lessons and integration work.
+* **Detailed spread view** prints every positional prompt for note-taking.
+* **Immersive companion** unlocks numerology, Western astrology, Chinese zodiac, and Native medicine storytelling in the tone you choose.
+
 Drawing a Reading
 -----------------
 * Click **Draw Reading** to pull cards for the chosen spread.
 * Click **Reset Deck** to reshuffle using the current seed (if any).
 * The results panel shows each card with a short interpretation that blends the spread prompt with TarotTeller's knowledge base. When you provide a question, additional personalised insight appears below the reading.
 
-Immersive & Detailed Modes
---------------------------
-* **Detailed spread view** presents the full positional layout text from the spread.
-* **Immersive companion** crafts a narrative reflection in the selected tone.
+Correspondence Layers
+---------------------
+Every card now includes:
+* **Chaldean numerology** to describe the card's energetic vibration.
+* **Western astrology links** that highlight planetary or elemental allies.
+* **Chinese zodiac echoes** for yearly archetypes to meditate on.
+* **Native medicine allies** offering grounded, nature-based guidance.
+These appear under each card's meaning and inside immersive companions.
 
 Tips
 ----
@@ -65,10 +78,16 @@ def _format_simple_reading(
             build_prompt_interpretation(placement, knowledge_base)
         )
         meaning = textwrap.indent(card.meaning, "   ")
+        correspondences = textwrap.indent(
+            describe_card_correspondences(card), "   "
+        )
+        sections = [prompt, meaning, correspondences]
+        formatted_sections = "\n\n".join(
+            section for section in sections if section
+        )
         lines.append(
             f"{placement.position.index}. {card.card.name} ({card.orientation})\n"
-            f"{prompt}\n"
-            f"{meaning}"
+            f"{formatted_sections}"
         )
     return "\n\n".join(lines)
 
@@ -77,8 +96,16 @@ def _format_direct_draw(cards: Iterable[DrawnCard]) -> str:
     formatted: List[str] = []
     for index, card in enumerate(cards, start=1):
         meaning = textwrap.indent(card.meaning, "   ")
+        correspondences = textwrap.indent(
+            describe_card_correspondences(card), "   "
+        )
+        segments = "\n\n".join(
+            segment
+            for segment in (meaning, correspondences)
+            if segment
+        )
         formatted.append(
-            f"Card {index}: {card.card.name} ({card.orientation})\n{meaning}"
+            f"Card {index}: {card.card.name} ({card.orientation})\n{segments}"
         )
     return "\n\n".join(formatted)
 
@@ -96,6 +123,9 @@ class TarotTellerApp:
     def _build_layout(self) -> None:
         self.root.geometry("880x640")
         self.root.minsize(720, 520)
+
+        style = ttk.Style(self.root)
+        style.configure("Hint.TLabel", foreground="#444444")
 
         container = ttk.Frame(self.root, padding=16)
         container.pack(fill=tk.BOTH, expand=True)
@@ -132,15 +162,23 @@ class TarotTellerApp:
         self.question = tk.Text(controls, height=3, width=60)
         self.question.grid(row=1, column=1, columnspan=4, sticky=tk.W, pady=(12, 0))
 
+        ttk.Label(
+            controls,
+            text="Tip: Share who or what you're reading for, any timeframe (for example 'next month'), and how you feel so TarotTeller can tailor the insights.",
+            style="Hint.TLabel",
+            wraplength=520,
+            justify=tk.LEFT,
+        ).grid(row=2, column=1, columnspan=4, sticky=tk.W, pady=(4, 0))
+
         # Seed entry
-        ttk.Label(controls, text="Shuffle Seed:").grid(row=2, column=0, sticky=tk.W)
+        ttk.Label(controls, text="Shuffle Seed:").grid(row=3, column=0, sticky=tk.W)
         self.seed_var = tk.StringVar(value="")
         self.seed_entry = ttk.Entry(controls, textvariable=self.seed_var, width=10)
-        self.seed_entry.grid(row=2, column=1, sticky=tk.W, padx=(4, 16))
+        self.seed_entry.grid(row=3, column=1, sticky=tk.W, padx=(4, 16))
 
         # Options row
         options = ttk.Frame(controls)
-        options.grid(row=2, column=2, columnspan=3, sticky=tk.W)
+        options.grid(row=3, column=2, columnspan=3, sticky=tk.W)
 
         self.allow_reversed = tk.BooleanVar(value=True)
         ttk.Checkbutton(options, text="Allow reversed", variable=self.allow_reversed).pack(
@@ -167,6 +205,19 @@ class TarotTellerApp:
             width=10,
         )
         tone_menu.pack(side=tk.LEFT)
+
+        ttk.Label(
+            controls,
+            text=(
+                "Settings guide: 'Allow reversed' invites upside-down cards for shadow work. "
+                "'Detailed spread view' prints every positional prompt. "
+                "'Immersive companion' adds numerology, Western astrology, Chinese zodiac, and Native medicine layers in the voice you pick. "
+                "Use 'Shuffle Seed' for repeatable draws and the 'Cards' override when you want a quick custom pull."
+            ),
+            style="Hint.TLabel",
+            wraplength=760,
+            justify=tk.LEFT,
+        ).grid(row=4, column=0, columnspan=5, sticky=tk.W, pady=(12, 0))
 
         # Action buttons
         actions = ttk.Frame(container)

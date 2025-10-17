@@ -8,6 +8,7 @@ import textwrap
 from typing import Iterable, List, Optional
 
 from .context import analyze_question
+from .correspondences import describe_card_correspondences
 from .deck import TarotCard, TarotDeck, format_card
 from .experiences import build_immersive_companion
 from .engine import InterpretationEngine
@@ -57,12 +58,16 @@ def _format_simple_draw(reading: SpreadReading) -> str:
         card = placement.card
         prompt = _wrap_prompt(placement.position.prompt)
         meaning = textwrap.indent(card.meaning, "   ")
+        correspondences = textwrap.indent(
+            describe_card_correspondences(card), "   "
+        )
+        sections = [prompt, meaning, correspondences]
+        formatted = "\n\n".join(section for section in sections if section)
         lines.append(
             f"{placement.position.index}. {card.card.name} ({card.orientation})\n"
-            f"{prompt}\n"
-            f"{meaning}"
+            f"{formatted}"
         )
-    return "\n".join(lines)
+    return "\n\n".join(lines)
 
 
 def cmd_draw(deck: TarotDeck, args: argparse.Namespace) -> int:
@@ -82,11 +87,19 @@ def cmd_draw(deck: TarotDeck, args: argparse.Namespace) -> int:
         except ValueError as exc:
             print(str(exc), file=sys.stderr)
             return 1
-        lines = [
-            f"Card {index + 1}: {card.card.name} ({card.orientation})\n   {card.meaning}"
-            for index, card in enumerate(drawn)
-        ]
-        print("\n".join(lines))
+        lines = []
+        for index, card in enumerate(drawn, start=1):
+            meaning = textwrap.indent(card.meaning, "   ")
+            correspondences = textwrap.indent(
+                describe_card_correspondences(card), "   "
+            )
+            block = "\n\n".join(
+                segment for segment in (meaning, correspondences) if segment
+            )
+            lines.append(
+                f"Card {index}: {card.card.name} ({card.orientation})\n{block}"
+            )
+        print("\n\n".join(lines))
         if engine and profile:
             insights = [engine.build_card_insight(card, profile) for card in drawn]
             print()

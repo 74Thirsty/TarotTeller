@@ -12,6 +12,8 @@ scripts thanks to its expressive Python API.
 - Built-in spreads, including a single card pull, three card story, and Celtic Cross.
 - Desktop GUI with spread selection, contextual question analysis, and immersive
   companion copy for journal work.
+- Layered card correspondences blending Chaldean numerology, Western astrology,
+  Chinese zodiac wisdom, and Native medicine allies for richer storytelling.
 - Command line tools for listing cards, viewing rich card profiles, and drawing
   readings with optional deterministic seeding.
 - Well-documented Python API suited for automation or experimentation.
