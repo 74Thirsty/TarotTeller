@@ -1,15 +1,17 @@
 # TarotTeller
 
 TarotTeller is a feature-rich tarot reading toolkit.  It bundles a complete deck,
-meaningful spreads, and a friendly command line interface for exploring the
-cards.  The library is equally at home in scripts thanks to its expressive Python
-API.
+meaningful spreads, and both a graphical desktop experience and friendly command
+line utilities for exploring the cards.  The library is equally at home in
+scripts thanks to its expressive Python API.
 
 ## Features
 
 - Complete 78 card deck with upright and reversed keywords and descriptions.
 - Programmatically generated minor arcana ensure consistent language across suits.
 - Built-in spreads, including a single card pull, three card story, and Celtic Cross.
+- Desktop GUI with spread selection, contextual question analysis, and immersive
+  companion copy for journal work.
 - Command line tools for listing cards, viewing rich card profiles, and drawing
   readings with optional deterministic seeding.
 - Well-documented Python API suited for automation or experimentation.
@@ -24,6 +26,19 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -e .
 ```
+
+## Graphical interface
+
+Launch the desktop experience after installation:
+
+```bash
+tarotteller-gui
+```
+
+The GUI lets you choose a spread or draw a custom number of cards, analyse a
+querent question for personalised insights, and optionally generate the
+immersive companion script. Use the **Reset Deck** button to reshuffle with an
+optional seed for reproducible sessions.
 
 ## Command line usage
 

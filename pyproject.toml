@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tarotteller"
 version = "0.1.0"
-description = "A feature-rich tarot reading toolkit with CLI utilities and spread helpers."
+description = "A feature-rich tarot reading toolkit with graphical and CLI interfaces."
 readme = "README.md"
 authors = [{name = "Tarot Teller Maintainers"}]
 license = {text = "MIT"}
@@ -14,6 +14,7 @@ dependencies = []
 
 [project.scripts]
 tarotteller = "tarotteller.cli:main"
+tarotteller-gui = "tarotteller.gui:launch"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
