@@ -1,4 +1,7 @@
 # TarotTeller
+![Sheen Banner](https://raw.githubusercontent.com/74Thirsty/74Thirsty/main/assets/tarot.svg)
+
+
 
 TarotTeller is a modern Python toolkit for exploring tarot cards through scripted workflows, a friendly command line interface, and an optional desktop experience. It ships with a complete 78-card deck, positional spreads, contextual storytelling, and immersive journaling prompts so that every reading feels intentional and repeatable.
 
