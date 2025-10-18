@@ -114,3 +114,9 @@ Tests live under `tests/` and target the public API, CLI, and GUI helpers.
 | 0.1.0   | 2024-03    | Initial release with deck generation, spreads, CLI, GUI, contextual insights, and immersive companion stories. |
 
 Dates will be finalised when publishing tagged releases. Follow semantic versioning as future features land.
+
+## 🧾 License
+This project is released under a **Private License**.  
+You’re free to use and explore it for now, but it remains the sole property of the author — you can’t sell, redistribute, or rebrand it.
+
+See the full [LICENSE](./LICENSE) file for details.
