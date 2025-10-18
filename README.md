@@ -43,6 +43,15 @@ $ tarotteller draw --cards 2 --no-reversed --immersive --tone grounded
 
 Provide `--question` text to unlock contextual analysis and personalised insight for each draw. Seeds can be supplied to reproduce both card order and orientation.
 
+### 🔮 AI-Assisted Readings
+Enable Codex integration for contextual interpretations:
+
+```bash
+tarotteller draw --spread three_card --ai --question "What career move should I pursue next?"
+```
+
+When `--ai` is supplied the CLI will contact the configured language model (via `AIEngine`) and blend the question profile with the spread layout to produce a narrative summary plus per-card guidance. Outputs remain deterministic for a given seed and model configuration, and an audit trail is appended to `tarotteller-ai.log` with the model name, question hash, card order, and response identifier.
+
 ## Graphical interface
 Launch the Tkinter-powered desktop client after installation:
 

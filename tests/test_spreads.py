@@ -21,3 +21,20 @@ def test_draw_spread_produces_reading():
     text = reading.as_text()
     assert "Three Card Story" in text
     assert "Past" in text and "Future" in text
+
+
+def test_spread_reading_to_dict_structure():
+    deck = TarotDeck()
+    deck.seed(5)
+    deck.reset(shuffle=True)
+    reading = draw_spread(deck, "single", rng=8)
+    payload = reading.to_dict()
+
+    assert payload["spread"]["name"] == "Single Card Insight"
+    assert payload["spread"]["description"]
+    assert len(payload["placements"]) == 1
+    placement = payload["placements"][0]
+    assert placement["position"] == "Message"
+    assert placement["card_name"]
+    assert placement["orientation"] in {"upright", "reversed"}
+    assert isinstance(placement["keywords"], list)
