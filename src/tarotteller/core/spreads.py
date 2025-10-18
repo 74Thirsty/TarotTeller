@@ -5,7 +5,7 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass
 import textwrap
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from .deck import DrawnCard, TarotDeck
 
@@ -46,6 +46,35 @@ class SpreadReading:
 
     spread: Spread
     placements: List[SpreadPlacement]
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Serialise the spread reading for downstream integrations."""
+
+        placements: List[Dict[str, Any]] = []
+        for placement in self.placements:
+            card = placement.card
+            tarot_card = card.card
+            placements.append(
+                {
+                    "index": placement.position.index,
+                    "position": placement.position.title,
+                    "prompt": placement.position.prompt,
+                    "card_name": tarot_card.name,
+                    "orientation": card.orientation,
+                    "arcana": tarot_card.arcana,
+                    "suit": tarot_card.suit,
+                    "rank": tarot_card.rank,
+                    "keywords": list(card.keywords),
+                }
+            )
+
+        return {
+            "spread": {
+                "name": self.spread.name,
+                "description": self.spread.description,
+            },
+            "placements": placements,
+        }
 
     def as_text(self) -> str:
         """Render the spread in a human-readable block of text."""

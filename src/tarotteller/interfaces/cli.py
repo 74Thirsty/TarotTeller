@@ -7,6 +7,7 @@ import sys
 import textwrap
 from typing import Iterable, List, Optional
 
+from ..core.ai_engine import AIEngine
 from ..core.context import analyze_question
 from ..core.correspondences import describe_card_correspondences
 from ..core.deck import TarotCard, TarotDeck, format_card
@@ -76,10 +77,24 @@ def cmd_draw(deck: TarotDeck, args: argparse.Namespace) -> int:
     if args.question:
         profile = analyze_question(args.question)
         engine = InterpretationEngine(TarotKnowledgeBase(deck.all_cards))
+        if args.ai:
+            engine.configure_ai_engine(
+                AIEngine(
+                    model=args.ai_model,
+                    temperature=args.ai_temperature,
+                )
+            )
+    elif args.ai:
+        print("AI-assisted readings require --question to establish context.", file=sys.stderr)
+        return 1
 
     if args.seed is not None:
         deck.seed(args.seed)
         deck.reset(shuffle=True)
+
+    if args.ai and args.cards:
+        print("AI-assisted readings are only available for named spreads.", file=sys.stderr)
+        return 1
 
     if args.cards:
         try:
@@ -138,6 +153,15 @@ def cmd_draw(deck: TarotDeck, args: argparse.Namespace) -> int:
     if engine and profile:
         print()
         print(engine.render_personalised_summary(reading, profile))
+        if args.ai:
+            try:
+                ai_reading = engine.generate_ai_reading(reading, profile, question=args.question)
+            except (RuntimeError, ValueError) as exc:
+                print()
+                print(f"[AI] Unable to generate AI-assisted reading: {exc}")
+            else:
+                print()
+                print(engine.render_ai_reading(ai_reading, profile))
     if args.immersive:
         print()
         print(
@@ -207,6 +231,22 @@ def build_parser() -> argparse.ArgumentParser:
         choices=["radiant", "mystic", "grounded"],
         default="radiant",
         help="Stylistic tone for immersive guidance",
+    )
+    draw_parser.add_argument(
+        "--ai",
+        action="store_true",
+        help="Augment the reading with AI-generated narrative insights",
+    )
+    draw_parser.add_argument(
+        "--ai-model",
+        default="gpt-5",
+        help="Model identifier for the AI engine",
+    )
+    draw_parser.add_argument(
+        "--ai-temperature",
+        type=float,
+        default=0.7,
+        help="Sampling temperature to use when calling the AI engine",
     )
     draw_parser.set_defaults(func=cmd_draw)
 

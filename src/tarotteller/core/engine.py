@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Iterable, List, Sequence
+from typing import Any, Dict, Iterable, List, Mapping, Sequence
 
+from .ai_engine import AIEngine
 from .context import ContextProfile
 from .knowledge import TarotKnowledgeBase
 from .spreads import SpreadPlacement, SpreadReading
@@ -43,11 +44,38 @@ class PersonalizedInsight:
     message: str
 
 
+@dataclass
+class AIReading:
+    """Structured result returned from an AI-assisted interpretation."""
+
+    summary: str
+    tone: str
+    card_insights: List[Dict[str, Any]]
+    model: str
+    response_id: str | None = None
+    metadata: Dict[str, Any] | None = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        payload: Dict[str, Any] = {
+            "summary": self.summary,
+            "tone": self.tone,
+            "card_insights": [dict(insight) for insight in self.card_insights],
+            "model": self.model,
+        }
+        if self.response_id is not None:
+            payload["response_id"] = self.response_id
+        if self.metadata is not None:
+            payload["metadata"] = dict(self.metadata)
+        return payload
+
+
 class InterpretationEngine:
     """Produce contextual readings that blend spreads with question intent."""
 
     def __init__(self, knowledge_base: TarotKnowledgeBase):
         self._knowledge_base = knowledge_base
+        self._ai_engine: AIEngine | None = None
+        self._last_ai_result: AIReading | None = None
 
     def _format_focuses(self, focuses: Sequence[str]) -> str:
         if not focuses:
@@ -83,10 +111,98 @@ class InterpretationEngine:
             message=message,
         )
 
+    def configure_ai_engine(self, ai_engine: AIEngine | None) -> None:
+        """Set a default AI engine to use for assisted readings."""
+
+        self._ai_engine = ai_engine
+
+    def generate_ai_reading(
+        self,
+        reading: SpreadReading,
+        profile: ContextProfile,
+        *,
+        ai_engine: AIEngine | None = None,
+        question: str | None = None,
+    ) -> AIReading:
+        """Invoke the AI engine for a contextual interpretation."""
+
+        engine = ai_engine or self._ai_engine or AIEngine()
+        question_text = question or profile.question
+        if not question_text:
+            raise ValueError("AI-assisted readings require a question for context")
+        payload = engine.generate_reading(question_text, reading.to_dict())
+        metadata = payload.get("metadata")
+        metadata_dict: Dict[str, Any] | None
+        if isinstance(metadata, Mapping):
+            metadata_dict = dict(metadata)
+        else:
+            metadata_dict = None
+
+        ai_reading = AIReading(
+            summary=str(payload["summary"]),
+            tone=str(payload.get("tone", "balanced")),
+            card_insights=[dict(entry) for entry in payload["card_insights"]],
+            model=str(payload.get("model", engine.model)),
+            response_id=payload.get("response_id"),
+            metadata=metadata_dict,
+        )
+        self._last_ai_result = ai_reading
+        return ai_reading
+
     def insights_for_reading(
-        self, reading: SpreadReading, profile: ContextProfile
-    ) -> List[PersonalizedInsight]:
+        self,
+        reading: SpreadReading,
+        profile: ContextProfile,
+        *,
+        use_ai: bool = False,
+        question: str | None = None,
+        ai_engine: AIEngine | None = None,
+    ) -> List[PersonalizedInsight] | List[Dict[str, Any]]:
+        if use_ai:
+            ai_reading = self.generate_ai_reading(
+                reading, profile, ai_engine=ai_engine, question=question
+            )
+            return ai_reading.card_insights
         return [self._build_insight(placement, profile) for placement in reading.placements]
+
+    def render_ai_reading(
+        self, ai_reading: AIReading, profile: ContextProfile | None = None
+    ) -> str:
+        """Render a textual block summarising an AI-assisted reading."""
+
+        lines: List[str] = []
+        lines.append("AI-Assisted Reading")
+        lines.append("-------------------")
+        if profile:
+            lines.append(f"Question : {profile.question}")
+            if profile.focuses:
+                lines.append(f"Focus    : {', '.join(profile.focuses)}")
+            lines.append(f"Timeframe: {profile.timeframe.replace('_', ' ')}")
+            lines.append(f"Mood     : {profile.sentiment}")
+            lines.append("")
+        lines.append(f"Tone     : {ai_reading.tone}")
+        lines.append(f"Model    : {ai_reading.model}")
+        if ai_reading.response_id:
+            lines.append(f"Response : {ai_reading.response_id}")
+        lines.append("")
+        lines.append(ai_reading.summary.strip())
+        lines.append("")
+        for index, insight in enumerate(ai_reading.card_insights, start=1):
+            card = insight.get("card", "Unknown Card")
+            position = insight.get("position", f"Card {index}")
+            orientation = insight.get("orientation", "upright")
+            message = insight.get("message", "")
+            lines.append(f"{index}. {position} — {card} ({orientation})")
+            lines.append("   " + message)
+            focus = insight.get("focus")
+            if focus:
+                lines.append(f"   Focus: {focus}")
+            lines.append("")
+        return "\n".join(lines).strip()
+
+    @property
+    def last_ai_reading(self) -> AIReading | None:
+        return self._last_ai_result
 
     def _compose_story_arc(
         self, insights: Sequence[PersonalizedInsight], profile: ContextProfile
