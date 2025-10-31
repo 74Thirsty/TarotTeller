@@ -7,6 +7,8 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from typing import Iterable, List, Optional
 
+from importlib.metadata import PackageNotFoundError, version
+
 from ..core.context import analyze_question
 from ..core.correspondences import describe_card_correspondences
 from ..core.deck import DrawnCard, TarotDeck
@@ -17,6 +19,14 @@ from ..narrative.immersive import build_immersive_companion
 
 
 _TEXT_WRAP_WIDTH = 72
+
+try:
+    APP_VERSION = version("tarotteller")
+except PackageNotFoundError:
+    APP_VERSION = "development build"
+
+BRAND_NAME = "TarotTeller Studio"
+COPYRIGHT_NOTICE = "© 2024 TarotTeller. All rights reserved."
 
 HELP_TEXT = """
 TarotTeller Help
@@ -43,53 +53,7 @@ Drawing a Reading
 * Click **Draw Reading** to pull cards for the chosen spread.
 * Click **Reset Deck** to reshuffle using the current seed (if any).
 * The results panel shows each card with a short interpretation that blends the spread prompt with TarotTeller's knowledge base. When you provide a question, additional personalised insight appears below the reading.
-
-Correspondence Layers
----------------------
-Every card now includes:
-* **Chaldean numerology** to describe the card's energetic vibration.
-* **Western astrology links** that highlight planetary or elemental allies.
-* **Chinese zodiac echoes** for yearly archetypes to meditate on.
-* **Native medicine allies** offering grounded, nature-based guidance.
-These appear under each card's meaning and inside immersive companions.
-
-Tips
-----
-* Use consistent seeds when you want to revisit the same draw for journaling.
-* Questions that include timeframe, mood, and focus keywords help TarotTeller respond more specifically.
-* Reset the deck between readings if you want a fresh shuffle.
-"""
-
-
-def _wrap_prompt(text: str) -> str:
-    wrapper = textwrap.TextWrapper(
-        width=_TEXT_WRAP_WIDTH, initial_indent="   ", subsequent_indent="   "
-    )
-    return wrapper.fill(text)
-
-
-def _format_simple_reading(
-    reading: SpreadReading, knowledge_base: TarotKnowledgeBase
-) -> str:
-    lines: List[str] = []
-    for placement in reading.placements:
-        card = placement.card
-        prompt = _wrap_prompt(
-            build_prompt_interpretation(placement, knowledge_base)
-        )
-        meaning = textwrap.indent(card.meaning, "   ")
-        correspondences = textwrap.indent(
-            describe_card_correspondences(card), "   "
-        )
-        sections = [prompt, meaning, correspondences]
-        formatted_sections = "\n\n".join(
-            section for section in sections if section
-        )
-        lines.append(
-            f"{placement.position.index}. {card.card.name} ({card.orientation})\n"
-            f"{formatted_sections}"
-        )
-    return "\n\n".join(lines)
+@@ -93,310 +103,499 @@ def _format_simple_reading(
 
 
 def _format_direct_draw(cards: Iterable[DrawnCard]) -> str:
@@ -116,9 +80,26 @@ class TarotTellerApp:
     def __init__(self) -> None:
         self.root = tk.Tk()
         self.root.title("TarotTeller")
+        self.root.title(BRAND_NAME)
+        self.root.configure(bg="#f9f7fd")
+        self.root.option_add("*tearOff", False)
+
         self.deck = TarotDeck()
         self._help_window: Optional[tk.Toplevel] = None
+
+        self.spread_var = tk.StringVar(value="single")
+        self.card_count = tk.StringVar(value="")
+        self.seed_var = tk.StringVar(value="")
+        self.allow_reversed = tk.BooleanVar(value=True)
+        self.detailed = tk.BooleanVar(value=False)
+        self.immersive = tk.BooleanVar(value=False)
+        self.tone = tk.StringVar(value="radiant")
+        self.status_var = tk.StringVar(value="Ready for your next reading.")
+
+        self._configure_style()
+        self._build_menu()
         self._build_layout()
+        self._set_status("Welcome to TarotTeller Studio.")
 
     def _build_layout(self) -> None:
         self.root.geometry("880x640")
@@ -126,12 +107,35 @@ class TarotTellerApp:
 
         style = ttk.Style(self.root)
         style.configure("Hint.TLabel", foreground="#444444")
+        self.root.geometry("960x680")
+        self.root.minsize(760, 540)
 
         container = ttk.Frame(self.root, padding=16)
+        container = ttk.Frame(self.root, padding=20)
         container.pack(fill=tk.BOTH, expand=True)
 
         controls = ttk.Frame(container)
+        header = ttk.Frame(container)
+        header.pack(fill=tk.X, pady=(0, 12))
+
+        ttk.Label(header, text=BRAND_NAME, style="Brand.TLabel").pack(
+            anchor=tk.W
+        )
+        ttk.Label(
+            header,
+            text="Insightful, multi-layered tarot readings for modern mystics.",
+            style="SubBrand.TLabel",
+        ).pack(anchor=tk.W, pady=(4, 0))
+
+        ttk.Separator(container, orient=tk.HORIZONTAL).pack(
+            fill=tk.X, pady=(0, 16)
+        )
+
+        controls = ttk.LabelFrame(container, text="Reading setup", padding=16)
         controls.pack(side=tk.TOP, fill=tk.X, pady=(0, 12))
+        controls.columnconfigure(1, weight=1)
+        controls.columnconfigure(3, weight=0)
+        controls.columnconfigure(4, weight=1)
 
         # Spread selection
         ttk.Label(controls, text="Spread:").grid(row=0, column=0, sticky=tk.W)
@@ -161,6 +165,24 @@ class TarotTellerApp:
         )
         self.question = tk.Text(controls, height=3, width=60)
         self.question.grid(row=1, column=1, columnspan=4, sticky=tk.W, pady=(12, 0))
+        self.question = tk.Text(
+            controls,
+            height=3,
+            width=60,
+            wrap=tk.WORD,
+            font=("TkDefaultFont", 11),
+        )
+        self.question.grid(
+            row=1, column=1, columnspan=4, sticky=tk.EW, pady=(12, 0)
+        )
+        self.question.configure(
+            borderwidth=0,
+            highlightthickness=1,
+            highlightbackground="#d9d9d9",
+            highlightcolor="#b39ddb",
+            padx=8,
+            pady=8,
+        )
 
         ttk.Label(
             controls,
@@ -223,24 +245,134 @@ class TarotTellerApp:
         actions = ttk.Frame(container)
         actions.pack(fill=tk.X)
         draw_button = ttk.Button(actions, text="Draw Reading", command=self.draw_reading)
+        actions.pack(fill=tk.X, pady=(0, 12))
+        draw_button = ttk.Button(
+            actions, text="Draw Reading", style="Accent.TButton", command=self.draw_reading
+        )
         draw_button.pack(side=tk.LEFT)
 
         reset_button = ttk.Button(actions, text="Reset Deck", command=self.reset_deck)
+        reset_button = ttk.Button(
+            actions, text="Reset Deck", style="Accent.TButton", command=self.reset_deck
+        )
         reset_button.pack(side=tk.LEFT, padx=(12, 0))
 
         help_button = ttk.Button(actions, text="Help", command=self._show_help)
+        help_button = ttk.Button(
+            actions, text="Help", style="Accent.TButton", command=self._show_help
+        )
         help_button.pack(side=tk.LEFT, padx=(12, 0))
 
         # Output area
         output_frame = ttk.Frame(container)
         output_frame.pack(fill=tk.BOTH, expand=True, pady=(12, 0))
+        output_frame = ttk.LabelFrame(container, text="Reading output", padding=12)
+        output_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 12))
 
         self.output = tk.Text(output_frame, wrap=tk.WORD, font=("TkDefaultFont", 11))
         self.output.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.output.configure(
+            borderwidth=0,
+            highlightthickness=1,
+            highlightbackground="#d9d9d9",
+            highlightcolor="#b39ddb",
+            padx=12,
+            pady=12,
+            spacing1=4,
+            spacing3=6,
+        )
 
         scrollbar = ttk.Scrollbar(output_frame, command=self.output.yview)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.output.configure(yscrollcommand=scrollbar.set)
+
+        status = ttk.Label(
+            self.root,
+            textvariable=self.status_var,
+            style="Status.TLabel",
+            anchor=tk.W,
+            padding=(16, 6),
+        )
+        status.pack(fill=tk.X, side=tk.BOTTOM)
+
+    def _configure_style(self) -> None:
+        style = ttk.Style(self.root)
+        try:
+            style.theme_use("clam")
+        except tk.TclError:
+            pass
+
+        style.configure("Brand.TLabel", font=("Segoe UI", 20, "bold"))
+        style.configure(
+            "SubBrand.TLabel",
+            font=("Segoe UI", 11),
+            foreground="#5b4b8a",
+        )
+        style.configure("Hint.TLabel", foreground="#444444", wraplength=520)
+        style.configure(
+            "Accent.TButton",
+            padding=(12, 6),
+        )
+        style.configure(
+            "Status.TLabel",
+            font=("Segoe UI", 10),
+            background="#f0ecfa",
+        )
+
+    def _build_menu(self) -> None:
+        menubar = tk.Menu(self.root)
+
+        file_menu = tk.Menu(menubar)
+        file_menu.add_command(
+            label="Draw Reading",
+            accelerator="Ctrl+Enter",
+            command=self.draw_reading,
+        )
+        file_menu.add_command(
+            label="Reset Deck", accelerator="Ctrl+R", command=self.reset_deck
+        )
+        file_menu.add_separator()
+        file_menu.add_command(
+            label="Clear Output", command=self._clear_output, accelerator="Ctrl+L"
+        )
+        file_menu.add_separator()
+        file_menu.add_command(label="Exit", accelerator="Ctrl+Q", command=self.root.quit)
+        menubar.add_cascade(label="File", menu=file_menu)
+
+        view_menu = tk.Menu(menubar)
+        view_menu.add_checkbutton(
+            label="Allow Reversed Cards", variable=self.allow_reversed
+        )
+        view_menu.add_checkbutton(
+            label="Detailed Spread View", variable=self.detailed
+        )
+        view_menu.add_checkbutton(
+            label="Immersive Companion", variable=self.immersive
+        )
+        tone_menu = tk.Menu(view_menu)
+        for tone in ("radiant", "mystic", "grounded"):
+            tone_menu.add_radiobutton(
+                label=tone.title(), value=tone, variable=self.tone
+            )
+        view_menu.add_cascade(label="Immersive Tone", menu=tone_menu)
+        menubar.add_cascade(label="View", menu=view_menu)
+
+        help_menu = tk.Menu(menubar)
+        help_menu.add_command(label="View Help", accelerator="F1", command=self._show_help)
+        help_menu.add_command(label="About TarotTeller", command=self._show_about)
+        menubar.add_cascade(label="Help", menu=help_menu)
+
+        self.root.config(menu=menubar)
+
+        self.root.bind_all("<Control-Return>", self._trigger_draw)
+        self.root.bind_all("<Control-KP_Enter>", self._trigger_draw)
+        self.root.bind_all("<Control-r>", self._trigger_reset)
+        self.root.bind_all("<Control-R>", self._trigger_reset)
+        self.root.bind_all("<Control-q>", lambda event: self.root.quit())
+        self.root.bind_all("<Control-Q>", lambda event: self.root.quit())
+        self.root.bind_all("<Control-l>", self._trigger_clear)
+        self.root.bind_all("<Control-L>", self._trigger_clear)
+        self.root.bind_all("<F1>", self._trigger_help)
 
     def run(self) -> None:
         self.root.mainloop()
@@ -251,24 +383,28 @@ class TarotTellerApp:
             seed_value = int(seed_text) if seed_text else None
         except ValueError:
             messagebox.showerror("Invalid seed", "Seed must be an integer value.")
+            self._set_status("Deck reset aborted: invalid seed.")
             return
         self.deck = TarotDeck()
         if seed_value is not None:
             self.deck.seed(seed_value)
         self.deck.reset(shuffle=True)
         messagebox.showinfo("Deck reset", "Deck reshuffled and ready for a new reading.")
+        self._set_status("Deck reset and reshuffled.")
 
     def draw_reading(self) -> None:
         try:
             seed_value = self._parse_optional_int(self.seed_var.get())
         except ValueError:
             messagebox.showerror("Invalid seed", "Seed must be an integer value.")
+            self._set_status("Reading aborted: invalid seed.")
             return
 
         try:
             card_count = self._parse_optional_int(self.card_count.get())
         except ValueError:
             messagebox.showerror("Invalid cards", "Cards must be left blank or an integer.")
+            self._set_status("Reading aborted: invalid card count.")
             return
 
         deck = TarotDeck()
@@ -304,6 +440,7 @@ class TarotTellerApp:
                         )
                     )
                 self._render_output("\n\n".join(section.strip() for section in sections if section))
+                self._set_status("Direct draw ready.")
                 return
 
             spread_key = self.spread_var.get() or "single"
@@ -316,6 +453,7 @@ class TarotTellerApp:
             )
         except (ValueError, KeyError) as exc:
             messagebox.showerror("Unable to draw", str(exc))
+            self._set_status("Reading aborted: unable to draw spread.")
             return
 
         rendered = (
@@ -347,16 +485,21 @@ class TarotTellerApp:
             )
 
         self._render_output("\n\n".join(section.strip() for section in sections if section))
+        self._set_status("Reading ready.")
 
     def _render_output(self, text: str) -> None:
         self.output.delete("1.0", tk.END)
         self.output.insert(tk.END, text.strip())
         self.output.see("1.0")
+        if not text.strip():
+            self._set_status("Output cleared.")
 
     def _show_help(self) -> None:
+    def _show_help(self, event: Optional[tk.Event] = None) -> None:
         if self._help_window and self._help_window.winfo_exists():
             self._help_window.lift()
             self._help_window.focus_set()
+            self._set_status("Help window focused.")
             return
 
         window = tk.Toplevel(self.root)
@@ -378,11 +521,23 @@ class TarotTellerApp:
 
         window.protocol("WM_DELETE_WINDOW", self._close_help)
         self._help_window = window
+        self._set_status("Help window opened.")
 
     def _close_help(self) -> None:
         if self._help_window and self._help_window.winfo_exists():
             self._help_window.destroy()
         self._help_window = None
+        self._set_status("Help window closed.")
+
+    def _show_about(self) -> None:
+        message = (
+            f"{BRAND_NAME}\n"
+            f"Version: {APP_VERSION}\n\n"
+            "Crafted for immersive tarot storytelling with numerology, astrology, and cultural correspondences.\n\n"
+            f"{COPYRIGHT_NOTICE}"
+        )
+        messagebox.showinfo("About TarotTeller", message)
+        self._set_status("About dialog displayed.")
 
     @staticmethod
     def _parse_optional_int(value: str) -> Optional[int]:
@@ -390,6 +545,28 @@ class TarotTellerApp:
         if not value:
             return None
         return int(value)
+
+    def _set_status(self, message: str) -> None:
+        self.status_var.set(message)
+
+    def _trigger_draw(self, event: Optional[tk.Event] = None) -> str:
+        self.draw_reading()
+        return "break"
+
+    def _trigger_reset(self, event: Optional[tk.Event] = None) -> str:
+        self.reset_deck()
+        return "break"
+
+    def _clear_output(self) -> None:
+        self._render_output("")
+
+    def _trigger_clear(self, event: Optional[tk.Event] = None) -> str:
+        self._clear_output()
+        return "break"
+
+    def _trigger_help(self, event: Optional[tk.Event] = None) -> str:
+        self._show_help()
+        return "break"
 
 
 def launch() -> None:
