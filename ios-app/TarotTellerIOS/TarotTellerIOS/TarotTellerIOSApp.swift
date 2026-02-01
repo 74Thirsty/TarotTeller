@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct TarotTellerIOSApp: App {
+struct TarotTelleriOSApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
