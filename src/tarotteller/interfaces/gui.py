@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import textwrap
 import tkinter as tk
-from tkinter import messagebox, ttk
+from datetime import datetime
+from tkinter import filedialog, messagebox, ttk
 from typing import Iterable, List, Optional
 
 from importlib.metadata import PackageNotFoundError, version
@@ -79,9 +80,8 @@ class TarotTellerApp:
 
     def __init__(self) -> None:
         self.root = tk.Tk()
-        self.root.title("TarotTeller")
         self.root.title(BRAND_NAME)
-        self.root.configure(bg="#f9f7fd")
+        self.root.configure(bg="#f6f4fb")
         self.root.option_add("*tearOff", False)
 
         self.deck = TarotDeck()
@@ -102,44 +102,49 @@ class TarotTellerApp:
         self._set_status("Welcome to TarotTeller Studio.")
 
     def _build_layout(self) -> None:
-        self.root.geometry("880x640")
-        self.root.minsize(720, 520)
+        self.root.geometry("980x720")
+        self.root.minsize(820, 600)
 
-        style = ttk.Style(self.root)
-        style.configure("Hint.TLabel", foreground="#444444")
-        self.root.geometry("960x680")
-        self.root.minsize(760, 540)
-
-        container = ttk.Frame(self.root, padding=16)
-        container = ttk.Frame(self.root, padding=20)
+        container = ttk.Frame(self.root, style="App.TFrame", padding=24)
         container.pack(fill=tk.BOTH, expand=True)
 
-        controls = ttk.Frame(container)
-        header = ttk.Frame(container)
-        header.pack(fill=tk.X, pady=(0, 12))
+        header = ttk.Frame(container, style="App.TFrame")
+        header.pack(fill=tk.X)
 
-        ttk.Label(header, text=BRAND_NAME, style="Brand.TLabel").pack(
+        header_text = ttk.Frame(header, style="App.TFrame")
+        header_text.pack(side=tk.LEFT, fill=tk.X, expand=True)
+
+        ttk.Label(header_text, text=BRAND_NAME, style="Brand.TLabel").pack(
             anchor=tk.W
         )
         ttk.Label(
-            header,
+            header_text,
             text="Insightful, multi-layered tarot readings for modern mystics.",
             style="SubBrand.TLabel",
         ).pack(anchor=tk.W, pady=(4, 0))
 
+        ttk.Label(
+            header,
+            text=f"v{APP_VERSION}",
+            style="Badge.TLabel",
+        ).pack(side=tk.RIGHT, padx=(12, 0))
+
         ttk.Separator(container, orient=tk.HORIZONTAL).pack(
-            fill=tk.X, pady=(0, 16)
+            fill=tk.X, pady=(16, 18)
         )
 
-        controls = ttk.LabelFrame(container, text="Reading setup", padding=16)
-        controls.pack(side=tk.TOP, fill=tk.X, pady=(0, 12))
+        controls = ttk.LabelFrame(
+            container, text="Reading setup", style="Card.TLabelframe", padding=16
+        )
+        controls.pack(side=tk.TOP, fill=tk.X, pady=(0, 16))
         controls.columnconfigure(1, weight=1)
         controls.columnconfigure(3, weight=0)
         controls.columnconfigure(4, weight=1)
 
         # Spread selection
-        ttk.Label(controls, text="Spread:").grid(row=0, column=0, sticky=tk.W)
-        self.spread_var = tk.StringVar(value="single")
+        ttk.Label(controls, text="Spread:", style="Card.TLabel").grid(
+            row=0, column=0, sticky=tk.W
+        )
         spread_choices = sorted(SPREADS.keys())
         self.spread_box = ttk.Combobox(
             controls,
@@ -151,20 +156,19 @@ class TarotTellerApp:
         self.spread_box.grid(row=0, column=1, sticky=tk.W, padx=(4, 16))
 
         # Card count override
-        ttk.Label(controls, text="Cards:").grid(row=0, column=2, sticky=tk.W)
-        self.card_count = tk.StringVar(value="")
+        ttk.Label(controls, text="Cards:", style="Card.TLabel").grid(
+            row=0, column=2, sticky=tk.W
+        )
         self.card_entry = ttk.Entry(controls, textvariable=self.card_count, width=6)
         self.card_entry.grid(row=0, column=3, sticky=tk.W, padx=(4, 16))
-        ttk.Label(controls, text="(leave blank to use spread)").grid(
-            row=0, column=4, sticky=tk.W
-        )
+        ttk.Label(
+            controls, text="(leave blank to use spread)", style="Card.TLabel"
+        ).grid(row=0, column=4, sticky=tk.W)
 
         # Question input
-        ttk.Label(controls, text="Question:").grid(
+        ttk.Label(controls, text="Question:", style="Card.TLabel").grid(
             row=1, column=0, sticky=tk.NW, pady=(12, 0)
         )
-        self.question = tk.Text(controls, height=3, width=60)
-        self.question.grid(row=1, column=1, columnspan=4, sticky=tk.W, pady=(12, 0))
         self.question = tk.Text(
             controls,
             height=3,
@@ -179,27 +183,32 @@ class TarotTellerApp:
             borderwidth=0,
             highlightthickness=1,
             highlightbackground="#d9d9d9",
-            highlightcolor="#b39ddb",
+            highlightcolor="#7b61d1",
             padx=8,
             pady=8,
+            background="#ffffff",
+            foreground="#2e1f4f",
+            insertbackground="#2e1f4f",
         )
 
         ttk.Label(
             controls,
             text="Tip: Share who or what you're reading for, any timeframe (for example 'next month'), and how you feel so TarotTeller can tailor the insights.",
-            style="Hint.TLabel",
+            style="CardHint.TLabel",
             wraplength=520,
             justify=tk.LEFT,
         ).grid(row=2, column=1, columnspan=4, sticky=tk.W, pady=(4, 0))
 
         # Seed entry
-        ttk.Label(controls, text="Shuffle Seed:").grid(row=3, column=0, sticky=tk.W)
+        ttk.Label(controls, text="Shuffle Seed:", style="Card.TLabel").grid(
+            row=3, column=0, sticky=tk.W
+        )
         self.seed_var = tk.StringVar(value="")
         self.seed_entry = ttk.Entry(controls, textvariable=self.seed_var, width=10)
         self.seed_entry.grid(row=3, column=1, sticky=tk.W, padx=(4, 16))
 
         # Options row
-        options = ttk.Frame(controls)
+        options = ttk.Frame(controls, style="Card.TFrame")
         options.grid(row=3, column=2, columnspan=3, sticky=tk.W)
 
         self.allow_reversed = tk.BooleanVar(value=True)
@@ -217,7 +226,9 @@ class TarotTellerApp:
             side=tk.LEFT, padx=(12, 0)
         )
 
-        ttk.Label(options, text="Tone:").pack(side=tk.LEFT, padx=(16, 4))
+        ttk.Label(options, text="Tone:", style="Card.TLabel").pack(
+            side=tk.LEFT, padx=(16, 4)
+        )
         self.tone = tk.StringVar(value="radiant")
         tone_menu = ttk.Combobox(
             options,
@@ -236,38 +247,34 @@ class TarotTellerApp:
                 "'Immersive companion' adds numerology, Western astrology, Chinese zodiac, and Native medicine layers in the voice you pick. "
                 "Use 'Shuffle Seed' for repeatable draws and the 'Cards' override when you want a quick custom pull."
             ),
-            style="Hint.TLabel",
+            style="CardHint.TLabel",
             wraplength=760,
             justify=tk.LEFT,
         ).grid(row=4, column=0, columnspan=5, sticky=tk.W, pady=(12, 0))
 
         # Action buttons
-        actions = ttk.Frame(container)
-        actions.pack(fill=tk.X)
-        draw_button = ttk.Button(actions, text="Draw Reading", command=self.draw_reading)
-        actions.pack(fill=tk.X, pady=(0, 12))
+        actions = ttk.Frame(container, style="App.TFrame")
+        actions.pack(fill=tk.X, pady=(0, 16))
         draw_button = ttk.Button(
             actions, text="Draw Reading", style="Accent.TButton", command=self.draw_reading
         )
         draw_button.pack(side=tk.LEFT)
 
-        reset_button = ttk.Button(actions, text="Reset Deck", command=self.reset_deck)
         reset_button = ttk.Button(
-            actions, text="Reset Deck", style="Accent.TButton", command=self.reset_deck
+            actions, text="Reset Deck", style="Secondary.TButton", command=self.reset_deck
         )
         reset_button.pack(side=tk.LEFT, padx=(12, 0))
 
-        help_button = ttk.Button(actions, text="Help", command=self._show_help)
         help_button = ttk.Button(
-            actions, text="Help", style="Accent.TButton", command=self._show_help
+            actions, text="Help", style="Secondary.TButton", command=self._show_help
         )
         help_button.pack(side=tk.LEFT, padx=(12, 0))
 
         # Output area
-        output_frame = ttk.Frame(container)
-        output_frame.pack(fill=tk.BOTH, expand=True, pady=(12, 0))
-        output_frame = ttk.LabelFrame(container, text="Reading output", padding=12)
-        output_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 12))
+        output_frame = ttk.LabelFrame(
+            container, text="Reading output", style="Card.TLabelframe", padding=12
+        )
+        output_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 16))
 
         self.output = tk.Text(output_frame, wrap=tk.WORD, font=("TkDefaultFont", 11))
         self.output.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -275,11 +282,14 @@ class TarotTellerApp:
             borderwidth=0,
             highlightthickness=1,
             highlightbackground="#d9d9d9",
-            highlightcolor="#b39ddb",
+            highlightcolor="#7b61d1",
             padx=12,
             pady=12,
             spacing1=4,
             spacing3=6,
+            background="#ffffff",
+            foreground="#2e1f4f",
+            insertbackground="#2e1f4f",
         )
 
         scrollbar = ttk.Scrollbar(output_frame, command=self.output.yview)
@@ -302,42 +312,137 @@ class TarotTellerApp:
         except tk.TclError:
             pass
 
-        style.configure("Brand.TLabel", font=("Segoe UI", 20, "bold"))
+        self.root.option_add("*Font", "Segoe UI 10")
+
+        style.configure("TFrame", background="#f6f4fb")
+        style.configure("TLabel", background="#f6f4fb", foreground="#2e1f4f")
+        style.configure("TSeparator", background="#e4ddf3")
+        style.configure("App.TFrame", background="#f6f4fb")
+        style.configure(
+            "Brand.TLabel",
+            font=("Segoe UI", 22, "bold"),
+            foreground="#2e1f4f",
+        )
         style.configure(
             "SubBrand.TLabel",
             font=("Segoe UI", 11),
             foreground="#5b4b8a",
         )
-        style.configure("Hint.TLabel", foreground="#444444", wraplength=520)
+        style.configure(
+            "Hint.TLabel",
+            foreground="#4b3c70",
+            background="#f6f4fb",
+            wraplength=520,
+        )
+        style.configure("Card.TFrame", background="#ffffff")
+        style.configure(
+            "Card.TLabel",
+            background="#ffffff",
+            foreground="#2e1f4f",
+        )
+        style.configure(
+            "CardHint.TLabel",
+            foreground="#4b3c70",
+            background="#ffffff",
+            wraplength=520,
+        )
+        style.configure(
+            "Badge.TLabel",
+            background="#ece8f6",
+            foreground="#5b4b8a",
+            padding=(10, 4),
+            font=("Segoe UI", 9, "bold"),
+        )
+        style.configure(
+            "Card.TLabelframe",
+            background="#ffffff",
+            foreground="#2e1f4f",
+            borderwidth=1,
+            relief="solid",
+        )
+        style.configure(
+            "Card.TLabelframe.Label",
+            background="#ffffff",
+            foreground="#2e1f4f",
+            font=("Segoe UI", 10, "bold"),
+        )
         style.configure(
             "Accent.TButton",
-            padding=(12, 6),
+            padding=(14, 8),
+            background="#6d4dd2",
+            foreground="#ffffff",
+            font=("Segoe UI", 10, "bold"),
+        )
+        style.map(
+            "Accent.TButton",
+            background=[("active", "#5c3ec2"), ("pressed", "#5c3ec2")],
+        )
+        style.configure(
+            "Secondary.TButton",
+            padding=(12, 8),
+            background="#e9e2fb",
+            foreground="#3a2d5f",
+        )
+        style.map(
+            "Secondary.TButton",
+            background=[("active", "#dbd1f6"), ("pressed", "#dbd1f6")],
         )
         style.configure(
             "Status.TLabel",
             font=("Segoe UI", 10),
-            background="#f0ecfa",
+            background="#ece8f6",
+            foreground="#4b3c70",
         )
+        style.configure("TCombobox", padding=6)
 
     def _build_menu(self) -> None:
         menubar = tk.Menu(self.root)
 
         file_menu = tk.Menu(menubar)
         file_menu.add_command(
-            label="Draw Reading",
-            accelerator="Ctrl+Enter",
-            command=self.draw_reading,
-        )
-        file_menu.add_command(
-            label="Reset Deck", accelerator="Ctrl+R", command=self.reset_deck
-        )
-        file_menu.add_separator()
-        file_menu.add_command(
-            label="Clear Output", command=self._clear_output, accelerator="Ctrl+L"
+            label="Export Reading...",
+            accelerator="Ctrl+S",
+            command=self._export_reading,
         )
         file_menu.add_separator()
         file_menu.add_command(label="Exit", accelerator="Ctrl+Q", command=self.root.quit)
         menubar.add_cascade(label="File", menu=file_menu)
+
+        reading_menu = tk.Menu(menubar)
+        reading_menu.add_command(
+            label="Draw Reading",
+            accelerator="Ctrl+Enter",
+            command=self.draw_reading,
+        )
+        reading_menu.add_command(
+            label="Reset Deck", accelerator="Ctrl+R", command=self.reset_deck
+        )
+        reading_menu.add_separator()
+        reading_menu.add_command(
+            label="Clear Output",
+            command=self._clear_output,
+            accelerator="Ctrl+L",
+        )
+        menubar.add_cascade(label="Reading", menu=reading_menu)
+
+        edit_menu = tk.Menu(menubar)
+        edit_menu.add_command(
+            label="Copy Reading",
+            accelerator="Ctrl+Shift+C",
+            command=self._copy_output,
+        )
+        edit_menu.add_command(
+            label="Copy Question",
+            accelerator="Ctrl+Shift+Q",
+            command=self._copy_question,
+        )
+        edit_menu.add_separator()
+        edit_menu.add_command(
+            label="Clear Question",
+            accelerator="Ctrl+Shift+L",
+            command=self._clear_question,
+        )
+        menubar.add_cascade(label="Edit", menu=edit_menu)
 
         view_menu = tk.Menu(menubar)
         view_menu.add_checkbutton(
@@ -373,6 +478,11 @@ class TarotTellerApp:
         self.root.bind_all("<Control-l>", self._trigger_clear)
         self.root.bind_all("<Control-L>", self._trigger_clear)
         self.root.bind_all("<F1>", self._trigger_help)
+        self.root.bind_all("<Control-s>", self._trigger_export)
+        self.root.bind_all("<Control-S>", self._trigger_export)
+        self.root.bind_all("<Control-Shift-C>", self._trigger_copy_output)
+        self.root.bind_all("<Control-Shift-Q>", self._trigger_copy_question)
+        self.root.bind_all("<Control-Shift-L>", self._trigger_clear_question)
 
     def run(self) -> None:
         self.root.mainloop()
@@ -494,7 +604,6 @@ class TarotTellerApp:
         if not text.strip():
             self._set_status("Output cleared.")
 
-    def _show_help(self) -> None:
     def _show_help(self, event: Optional[tk.Event] = None) -> None:
         if self._help_window and self._help_window.winfo_exists():
             self._help_window.lift()
@@ -562,6 +671,74 @@ class TarotTellerApp:
 
     def _trigger_clear(self, event: Optional[tk.Event] = None) -> str:
         self._clear_output()
+        return "break"
+
+    def _export_reading(self) -> None:
+        content = self.output.get("1.0", tk.END).strip()
+        if not content:
+            messagebox.showinfo(
+                "Nothing to export", "Draw a reading before exporting."
+            )
+            self._set_status("Export canceled: no reading available.")
+            return
+
+        default_name = f"tarot-reading-{datetime.now().strftime('%Y%m%d-%H%M')}.txt"
+        file_path = filedialog.asksaveasfilename(
+            title="Export reading",
+            defaultextension=".txt",
+            initialfile=default_name,
+            filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
+        )
+        if not file_path:
+            self._set_status("Export canceled.")
+            return
+
+        try:
+            with open(file_path, "w", encoding="utf-8") as handle:
+                handle.write(content)
+        except OSError as exc:
+            messagebox.showerror("Export failed", str(exc))
+            self._set_status("Export failed.")
+            return
+
+        self._set_status(f"Reading exported to {file_path}.")
+
+    def _copy_output(self) -> None:
+        content = self.output.get("1.0", tk.END).strip()
+        if not content:
+            self._set_status("Nothing to copy from the reading output.")
+            return
+        self.root.clipboard_clear()
+        self.root.clipboard_append(content)
+        self._set_status("Reading copied to clipboard.")
+
+    def _copy_question(self) -> None:
+        content = self.question.get("1.0", tk.END).strip()
+        if not content:
+            self._set_status("Nothing to copy from the question field.")
+            return
+        self.root.clipboard_clear()
+        self.root.clipboard_append(content)
+        self._set_status("Question copied to clipboard.")
+
+    def _clear_question(self) -> None:
+        self.question.delete("1.0", tk.END)
+        self._set_status("Question cleared.")
+
+    def _trigger_export(self, event: Optional[tk.Event] = None) -> str:
+        self._export_reading()
+        return "break"
+
+    def _trigger_copy_output(self, event: Optional[tk.Event] = None) -> str:
+        self._copy_output()
+        return "break"
+
+    def _trigger_copy_question(self, event: Optional[tk.Event] = None) -> str:
+        self._copy_question()
+        return "break"
+
+    def _trigger_clear_question(self, event: Optional[tk.Event] = None) -> str:
+        self._clear_question()
         return "break"
 
     def _trigger_help(self, event: Optional[tk.Event] = None) -> str:
