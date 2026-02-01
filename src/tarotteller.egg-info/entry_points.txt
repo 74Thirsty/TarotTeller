@@ -1,0 +1,3 @@
+[console_scripts]
+tarotteller = tarotteller.cli:main
+tarotteller-gui = tarotteller.gui:launch

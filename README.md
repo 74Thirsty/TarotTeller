@@ -1,9 +1,16 @@
-# TarotTeller
-![Sheen Banner](https://raw.githubusercontent.com/74Thirsty/74Thirsty/main/assets/tarot.svg)
+# TarotTeller iOS App
 
+This folder contains a standalone SwiftUI iOS application scaffold for TarotTeller. Open the Xcode project and run on a simulator or device.
 
+## Getting started
+1. Open `TarotTellerIOS.xcodeproj` in Xcode 15+.
+2. Choose a simulator or connected device.
+3. Press **Run** to launch the app.
 
-TarotTeller is a modern Python toolkit for exploring tarot cards through scripted workflows, a friendly command line interface, and an optional desktop experience. It ships with a complete 78-card deck, positional spreads, contextual storytelling, and immersive journaling prompts so that every reading feels intentional and repeatable.
+## Notes
+- The sample view provides a lightweight daily draw experience with a small starter deck.
+- Replace the `TarotCard` data in `ContentView.swift` with the full dataset or hook it up to a backend when ready.
+- Add AppIcon assets in `TarotTellerIOS/Assets.xcassets/AppIcon.appiconset` for production builds.
 
 ## Key capabilities
 - **Rich tarot data model** – Generate a shuffled 78-card deck with upright and reversed interpretations, orientation-aware text, elemental correspondences, and numerology insights.

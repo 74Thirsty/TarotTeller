@@ -1,0 +1,303 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9F1A0B8D2B4F2B2C00A1A1A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1A0B8C2B4F2B2C00A1A1A1 /* ContentView.swift */; };
+		9F1A0B8F2B4F2B2C00A1A1A1 /* TarotTellerIOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1A0B8E2B4F2B2C00A1A1A1 /* TarotTellerIOSApp.swift */; };
+		9F1A0B912B4F2B2C00A1A1A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F1A0B902B4F2B2C00A1A1A1 /* Assets.xcassets */; };
+		9F1A0B952B4F2B2C00A1A1A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F1A0B942B4F2B2C00A1A1A1 /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9F1A0B892B4F2B2C00A1A1A1 /* TarotTellerIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TarotTellerIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F1A0B8C2B4F2B2C00A1A1A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9F1A0B8E2B4F2B2C00A1A1A1 /* TarotTellerIOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TarotTellerIOSApp.swift; sourceTree = "<group>"; };
+		9F1A0B902B4F2B2C00A1A1A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9F1A0B922B4F2B2C00A1A1A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F1A0B942B4F2B2C00A1A1A1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Content/Preview Assets.xcassets"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		9F1A0B802B4F2B2C00A1A1A1 = {
+			isa = PBXGroup;
+			children = (
+				9F1A0B8B2B4F2B2C00A1A1A1 /* TarotTellerIOS */,
+				9F1A0B8A2B4F2B2C00A1A1A1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9F1A0B8A2B4F2B2C00A1A1A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9F1A0B892B4F2B2C00A1A1A1 /* TarotTellerIOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9F1A0B8B2B4F2B2C00A1A1A1 /* TarotTellerIOS */ = {
+			isa = PBXGroup;
+			children = (
+				9F1A0B8E2B4F2B2C00A1A1A1 /* TarotTellerIOSApp.swift */,
+				9F1A0B8C2B4F2B2C00A1A1A1 /* ContentView.swift */,
+				9F1A0B902B4F2B2C00A1A1A1 /* Assets.xcassets */,
+				9F1A0B942B4F2B2C00A1A1A1 /* Preview Assets.xcassets */,
+				9F1A0B922B4F2B2C00A1A1A1 /* Info.plist */,
+			);
+			path = TarotTellerIOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9F1A0B882B4F2B2C00A1A1A1 /* TarotTellerIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F1A0B982B4F2B2C00A1A1A1 /* Build configuration list for PBXNativeTarget "TarotTellerIOS" */;
+			buildPhases = (
+				9F1A0B852B4F2B2C00A1A1A1 /* Sources */,
+				9F1A0B862B4F2B2C00A1A1A1 /* Frameworks */,
+				9F1A0B872B4F2B2C00A1A1A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TarotTellerIOS;
+			productName = TarotTellerIOS;
+			productReference = 9F1A0B892B4F2B2C00A1A1A1 /* TarotTellerIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9F1A0B812B4F2B2C00A1A1A1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					9F1A0B882B4F2B2C00A1A1A1 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 9F1A0B842B4F2B2C00A1A1A1 /* Build configuration list for PBXProject "TarotTellerIOS" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9F1A0B802B4F2B2C00A1A1A1;
+			productRefGroup = 9F1A0B8A2B4F2B2C00A1A1A1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9F1A0B882B4F2B2C00A1A1A1 /* TarotTellerIOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9F1A0B872B4F2B2C00A1A1A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F1A0B912B4F2B2C00A1A1A1 /* Assets.xcassets in Resources */,
+				9F1A0B952B4F2B2C00A1A1A1 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9F1A0B852B4F2B2C00A1A1A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F1A0B8F2B4F2B2C00A1A1A1 /* TarotTellerIOSApp.swift in Sources */,
+				9F1A0B8D2B4F2B2C00A1A1A1 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9F1A0B862B4F2B2C00A1A1A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9F1A0B962B4F2B2C00A1A1A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TarotTellerIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tarotteller.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		9F1A0B972B4F2B2C00A1A1A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TarotTellerIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tarotteller.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		9F1A0B992B4F2B2C00A1A1A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = TarotTellerIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tarotteller.ios;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		9F1A0B9A2B4F2B2C00A1A1A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = TarotTellerIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tarotteller.ios;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9F1A0B842B4F2B2C00A1A1A1 /* Build configuration list for PBXProject "TarotTellerIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F1A0B992B4F2B2C00A1A1A1 /* Debug */,
+				9F1A0B9A2B4F2B2C00A1A1A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F1A0B982B4F2B2C00A1A1A1 /* Build configuration list for PBXNativeTarget "TarotTellerIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F1A0B962B4F2B2C00A1A1A1 /* Debug */,
+				9F1A0B972B4F2B2C00A1A1A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9F1A0B812B4F2B2C00A1A1A1 /* Project object */;
+}
