@@ -31,48 +31,30 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 24) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("TarotTeller")
-                        .font(.largeTitle.bold())
-                    Text("A gentle daily draw inspired by the Python toolkit.")
-                        .font(.title3)
-                        .foregroundStyle(.secondary)
-                }
+            VStack(spacing: 24) {
 
                 if let selectedCard {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(selectedCard.name)
-                            .font(.title2.bold())
-                        Text(isReversed ? "Reversed" : "Upright")
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(.secondary)
-                        Text(isReversed ? selectedCard.reversed : selectedCard.upright)
-                            .font(.body)
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color(.systemIndigo).opacity(0.1))
-                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    Text(selectedCard.name)
+                        .font(.title.bold())
+
+                    Text(isReversed ? selectedCard.reversed : selectedCard.upright)
+                        .font(.body)
                 } else {
                     Text("Tap below to draw your first card.")
-                        .foregroundStyle(.secondary)
-                }
-
-                Button(action: drawCard) {
-                    Label("Draw a Card", systemImage: "sparkles")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color(.systemIndigo))
-                        .foregroundStyle(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                 }
 
                 Spacer()
+
+                Button("Draw a Card", action: drawCard)
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
             }
             .padding()
-            .navigationTitle("Daily Reading")
+            .navigationTitle("TarotTeller")
         }
     }
 
@@ -80,8 +62,4 @@ struct ContentView: View {
         selectedCard = deck.randomElement()
         isReversed = Bool.random()
     }
-}
-
-#Preview {
-    ContentView()
 }
