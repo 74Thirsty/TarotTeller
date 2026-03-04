@@ -1,0 +1,163 @@
+#:import dp kivy.metrics.dp
+
+RootManager:
+    HomeScreen:
+        name: "home"
+    SpreadScreen:
+        name: "spread"
+    ResultScreen:
+        name: "result"
+    HistoryScreen:
+        name: "history"
+    SettingsScreen:
+        name: "settings"
+
+<HomeScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(16)
+        spacing: dp(12)
+        Label:
+            text: "Tarot Teller"
+            font_size: "28sp"
+            size_hint_y: None
+            height: dp(56)
+        Button:
+            text: "Daily Draw"
+            on_release: app.new_reading("daily")
+        Button:
+            text: "3-Card Reading"
+            on_release: app.new_reading("three_card")
+        Button:
+            text: "Yes/No"
+            on_release: app.new_reading("yes_no")
+        Button:
+            text: "Celtic Cross"
+            on_release: app.new_reading("celtic_cross")
+        Button:
+            text: "History"
+            on_release: app.load_history_screen("")
+        Button:
+            text: "Settings"
+            on_release: app.root.current = "settings"
+
+<SpreadScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(16)
+        spacing: dp(10)
+        Label:
+            text: "Configure: " + root.spread
+            size_hint_y: None
+            height: dp(40)
+        TextInput:
+            id: question
+            hint_text: "Optional question"
+            multiline: False
+            size_hint_y: None
+            height: dp(42)
+        TextInput:
+            id: seed
+            hint_text: "Optional seed"
+            multiline: False
+            size_hint_y: None
+            height: dp(42)
+        BoxLayout:
+            size_hint_y: None
+            height: dp(42)
+            Label:
+                text: "Include reversals"
+            Switch:
+                id: rev_switch
+                active: app.settings.get("reversals_default", True)
+        Button:
+            text: "Shuffle + Draw"
+            on_release: app.run_reading(root.spread, question.text, rev_switch.active, seed.text)
+        Button:
+            text: "Back"
+            on_release: app.root.current = "home"
+
+<ResultScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(16)
+        spacing: dp(8)
+        ScrollView:
+            Label:
+                text: root.result_text
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+        Button:
+            text: "Save to History"
+            size_hint_y: None
+            height: dp(42)
+            on_release: app.save_current_to_history()
+        Button:
+            text: "Share text"
+            size_hint_y: None
+            height: dp(42)
+            on_release: app.share_current_text()
+        Button:
+            text: "Home"
+            size_hint_y: None
+            height: dp(42)
+            on_release: app.root.current = "home"
+
+<HistoryScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(16)
+        spacing: dp(8)
+        TextInput:
+            id: history_search
+            hint_text: "Search history"
+            multiline: False
+            size_hint_y: None
+            height: dp(42)
+            on_text_validate: app.load_history_screen(self.text)
+        ScrollView:
+            GridLayout:
+                cols: 1
+                spacing: dp(6)
+                size_hint_y: None
+                height: self.minimum_height
+                Label:
+                    text: "\n\n".join([str(item) for item in root.history_items])
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+        Button:
+            text: "Back"
+            size_hint_y: None
+            height: dp(42)
+            on_release: app.root.current = "home"
+
+<SettingsScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(16)
+        spacing: dp(8)
+        Label:
+            text: "Settings"
+            size_hint_y: None
+            height: dp(40)
+        BoxLayout:
+            size_hint_y: None
+            height: dp(42)
+            Label:
+                text: "Default reversals"
+            Switch:
+                id: setting_reversals
+                active: app.settings.get("reversals_default", True)
+        Button:
+            text: "Save"
+            on_release: app.save_settings(setting_reversals.active)
+        Button:
+            text: "Clear history"
+            on_release: app.storage.save_history([])
+        Label:
+            text: "About: offline app, local history only."
+        Button:
+            text: "Back"
+            on_release: app.root.current = "home"

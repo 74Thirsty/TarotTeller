@@ -1,3 +1,9 @@
 __pycache__/
 *.py[cod]
 .venv/
+
+# Android build artifacts and signing
+.tarot_teller_android_build/
+tarot_teller_android/.buildozer/
+tarot_teller_android/bin/
+tarot_teller_android/keystore/

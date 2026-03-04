@@ -1,5 +1,3 @@
-"""Graphical interface for TarotTeller using Tkinter."""
-
 from __future__ import annotations
 
 import textwrap
@@ -54,7 +52,7 @@ Drawing a Reading
 * Click **Draw Reading** to pull cards for the chosen spread.
 * Click **Reset Deck** to reshuffle using the current seed (if any).
 * The results panel shows each card with a short interpretation that blends the spread prompt with TarotTeller's knowledge base. When you provide a question, additional personalised insight appears below the reading.
-@@ -93,310 +103,499 @@ def _format_simple_reading(
+"""
 
 
 def _format_direct_draw(cards: Iterable[DrawnCard]) -> str:
@@ -76,13 +74,11 @@ def _format_direct_draw(cards: Iterable[DrawnCard]) -> str:
 
 
 class TarotTellerApp:
-    """Tkinter application shell for the TarotTeller GUI."""
-
     def __init__(self) -> None:
         self.root = tk.Tk()
         self.root.title(BRAND_NAME)
         self.root.configure(bg="#f6f4fb")
-        self.root.option_add("*tearOff", False)
+        self.root.option_add("*Menu.tearOff", 0)
 
         self.deck = TarotDeck()
         self._help_window: Optional[tk.Toplevel] = None
@@ -252,25 +248,18 @@ class TarotTellerApp:
             justify=tk.LEFT,
         ).grid(row=4, column=0, columnspan=5, sticky=tk.W, pady=(12, 0))
 
-        # Action buttons
         actions = ttk.Frame(container, style="App.TFrame")
         actions.pack(fill=tk.X, pady=(0, 16))
-        draw_button = ttk.Button(
+        ttk.Button(
             actions, text="Draw Reading", style="Accent.TButton", command=self.draw_reading
-        )
-        draw_button.pack(side=tk.LEFT)
-
-        reset_button = ttk.Button(
+        ).pack(side=tk.LEFT)
+        ttk.Button(
             actions, text="Reset Deck", style="Secondary.TButton", command=self.reset_deck
-        )
-        reset_button.pack(side=tk.LEFT, padx=(12, 0))
-
-        help_button = ttk.Button(
+        ).pack(side=tk.LEFT, padx=(12, 0))
+        ttk.Button(
             actions, text="Help", style="Secondary.TButton", command=self._show_help
-        )
-        help_button.pack(side=tk.LEFT, padx=(12, 0))
+        ).pack(side=tk.LEFT, padx=(12, 0))
 
-        # Output area
         output_frame = ttk.LabelFrame(
             container, text="Reading output", style="Card.TLabelframe", padding=12
         )
@@ -312,7 +301,7 @@ class TarotTellerApp:
         except tk.TclError:
             pass
 
-        self.root.option_add("*Font", "Segoe UI 10")
+        self.root.option_add("*Font", ("Segoe UI", 10))
 
         style.configure("TFrame", background="#f6f4fb")
         style.configure("TLabel", background="#f6f4fb", foreground="#2e1f4f")
@@ -394,6 +383,7 @@ class TarotTellerApp:
             foreground="#4b3c70",
         )
         style.configure("TCombobox", padding=6)
+
 
     def _build_menu(self) -> None:
         menubar = tk.Menu(self.root)
@@ -747,7 +737,6 @@ class TarotTellerApp:
 
 
 def launch() -> None:
-    """Convenience entry point for running the GUI."""
 
     app = TarotTellerApp()
     app.run()

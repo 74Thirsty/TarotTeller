@@ -1,0 +1,1969 @@
+[
+  {
+    "id": "the_fool",
+    "name": "The Fool",
+    "arcana": "major",
+    "suit": "major",
+    "number": 0,
+    "keywords_upright": [
+      "beginnings",
+      "adventure",
+      "innocence"
+    ],
+    "keywords_reversed": [
+      "hesitation",
+      "risk",
+      "recklessness"
+    ],
+    "meaning_upright_short": "Keywords: beginnings, adventure, innocence.",
+    "meaning_reversed_short": "Reversed themes: hesitation, risk, recklessness.",
+    "meaning_upright_long": "A leap of faith invites new experiences and personal growth when embraced with curiosity.",
+    "meaning_reversed_long": "Reversed The Fool suggests reviewing hesitation, risk, recklessness."
+  },
+  {
+    "id": "the_magician",
+    "name": "The Magician",
+    "arcana": "major",
+    "suit": "major",
+    "number": 1,
+    "keywords_upright": [
+      "manifestation",
+      "resourcefulness",
+      "power"
+    ],
+    "keywords_reversed": [
+      "untapped potential",
+      "manipulation",
+      "distraction"
+    ],
+    "meaning_upright_short": "Keywords: manifestation, resourcefulness, power.",
+    "meaning_reversed_short": "Reversed themes: untapped potential, manipulation, distraction.",
+    "meaning_upright_long": "Focused intention turns ideas into reality; align your skills with your will to create change.",
+    "meaning_reversed_long": "Reversed The Magician suggests reviewing untapped potential, manipulation, distraction."
+  },
+  {
+    "id": "the_high_priestess",
+    "name": "The High Priestess",
+    "arcana": "major",
+    "suit": "major",
+    "number": 2,
+    "keywords_upright": [
+      "intuition",
+      "mystery",
+      "stillness"
+    ],
+    "keywords_reversed": [
+      "secrets",
+      "disconnection",
+      "doubt"
+    ],
+    "meaning_upright_short": "Keywords: intuition, mystery, stillness.",
+    "meaning_reversed_short": "Reversed themes: secrets, disconnection, doubt.",
+    "meaning_upright_long": "Quiet reflection reveals hidden knowledge and invites trust in your inner wisdom.",
+    "meaning_reversed_long": "Reversed The High Priestess suggests reviewing secrets, disconnection, doubt."
+  },
+  {
+    "id": "the_empress",
+    "name": "The Empress",
+    "arcana": "major",
+    "suit": "major",
+    "number": 3,
+    "keywords_upright": [
+      "abundance",
+      "nurturing",
+      "fertility"
+    ],
+    "keywords_reversed": [
+      "creative block",
+      "dependence",
+      "neglect"
+    ],
+    "meaning_upright_short": "Keywords: abundance, nurturing, fertility.",
+    "meaning_reversed_short": "Reversed themes: creative block, dependence, neglect.",
+    "meaning_upright_long": "A season of growth rewards compassion, creativity, and tending to what you cherish most.",
+    "meaning_reversed_long": "Reversed The Empress suggests reviewing creative block, dependence, neglect."
+  },
+  {
+    "id": "the_emperor",
+    "name": "The Emperor",
+    "arcana": "major",
+    "suit": "major",
+    "number": 4,
+    "keywords_upright": [
+      "structure",
+      "authority",
+      "stability"
+    ],
+    "keywords_reversed": [
+      "control",
+      "rigidity",
+      "power struggles"
+    ],
+    "meaning_upright_short": "Keywords: structure, authority, stability.",
+    "meaning_reversed_short": "Reversed themes: control, rigidity, power struggles.",
+    "meaning_upright_long": "Clear boundaries and deliberate leadership bring lasting security when used responsibly.",
+    "meaning_reversed_long": "Reversed The Emperor suggests reviewing control, rigidity, power struggles."
+  },
+  {
+    "id": "the_hierophant",
+    "name": "The Hierophant",
+    "arcana": "major",
+    "suit": "major",
+    "number": 5,
+    "keywords_upright": [
+      "tradition",
+      "wisdom",
+      "mentorship"
+    ],
+    "keywords_reversed": [
+      "rebellion",
+      "dogma",
+      "restriction"
+    ],
+    "meaning_upright_short": "Keywords: tradition, wisdom, mentorship.",
+    "meaning_reversed_short": "Reversed themes: rebellion, dogma, restriction.",
+    "meaning_upright_long": "Seek guidance in shared knowledge and rituals, while remembering to keep them meaningful to you.",
+    "meaning_reversed_long": "Reversed The Hierophant suggests reviewing rebellion, dogma, restriction."
+  },
+  {
+    "id": "the_lovers",
+    "name": "The Lovers",
+    "arcana": "major",
+    "suit": "major",
+    "number": 6,
+    "keywords_upright": [
+      "connection",
+      "values",
+      "choice"
+    ],
+    "keywords_reversed": [
+      "misalignment",
+      "imbalance",
+      "temptation"
+    ],
+    "meaning_upright_short": "Keywords: connection, values, choice.",
+    "meaning_reversed_short": "Reversed themes: misalignment, imbalance, temptation.",
+    "meaning_upright_long": "Relationships mirror your ideals; choose with integrity and honour your heart's truth.",
+    "meaning_reversed_long": "Reversed The Lovers suggests reviewing misalignment, imbalance, temptation."
+  },
+  {
+    "id": "the_chariot",
+    "name": "The Chariot",
+    "arcana": "major",
+    "suit": "major",
+    "number": 7,
+    "keywords_upright": [
+      "determination",
+      "willpower",
+      "momentum"
+    ],
+    "keywords_reversed": [
+      "scattered energy",
+      "aggression",
+      "lack of direction"
+    ],
+    "meaning_upright_short": "Keywords: determination, willpower, momentum.",
+    "meaning_reversed_short": "Reversed themes: scattered energy, aggression, lack of direction.",
+    "meaning_upright_long": "Harness discipline to steer conflicting forces toward a shared destination and triumph.",
+    "meaning_reversed_long": "Reversed The Chariot suggests reviewing scattered energy, aggression, lack of direction."
+  },
+  {
+    "id": "strength",
+    "name": "Strength",
+    "arcana": "major",
+    "suit": "major",
+    "number": 8,
+    "keywords_upright": [
+      "courage",
+      "compassion",
+      "resilience"
+    ],
+    "keywords_reversed": [
+      "self-doubt",
+      "fear",
+      "raw emotion"
+    ],
+    "meaning_upright_short": "Keywords: courage, compassion, resilience.",
+    "meaning_reversed_short": "Reversed themes: self-doubt, fear, raw emotion.",
+    "meaning_upright_long": "Gentle persistence and empathy tame fears more effectively than force alone ever could.",
+    "meaning_reversed_long": "Reversed Strength suggests reviewing self-doubt, fear, raw emotion."
+  },
+  {
+    "id": "the_hermit",
+    "name": "The Hermit",
+    "arcana": "major",
+    "suit": "major",
+    "number": 9,
+    "keywords_upright": [
+      "introspection",
+      "solitude",
+      "wisdom"
+    ],
+    "keywords_reversed": [
+      "withdrawal",
+      "loneliness",
+      "isolation"
+    ],
+    "meaning_upright_short": "Keywords: introspection, solitude, wisdom.",
+    "meaning_reversed_short": "Reversed themes: withdrawal, loneliness, isolation.",
+    "meaning_upright_long": "Retreat to listen to your own voice and carry its lantern back to light the path forward.",
+    "meaning_reversed_long": "Reversed The Hermit suggests reviewing withdrawal, loneliness, isolation."
+  },
+  {
+    "id": "wheel_of_fortune",
+    "name": "Wheel of Fortune",
+    "arcana": "major",
+    "suit": "major",
+    "number": 10,
+    "keywords_upright": [
+      "cycles",
+      "destiny",
+      "turning point"
+    ],
+    "keywords_reversed": [
+      "resistance",
+      "unexpected setbacks",
+      "control"
+    ],
+    "meaning_upright_short": "Keywords: cycles, destiny, turning point.",
+    "meaning_reversed_short": "Reversed themes: resistance, unexpected setbacks, control.",
+    "meaning_upright_long": "Life turns in constant motion; adapt with grace and you can ride the wave of change.",
+    "meaning_reversed_long": "Reversed Wheel of Fortune suggests reviewing resistance, unexpected setbacks, control."
+  },
+  {
+    "id": "justice",
+    "name": "Justice",
+    "arcana": "major",
+    "suit": "major",
+    "number": 11,
+    "keywords_upright": [
+      "fairness",
+      "truth",
+      "accountability"
+    ],
+    "keywords_reversed": [
+      "bias",
+      "dishonesty",
+      "avoidance"
+    ],
+    "meaning_upright_short": "Keywords: fairness, truth, accountability.",
+    "meaning_reversed_short": "Reversed themes: bias, dishonesty, avoidance.",
+    "meaning_upright_long": "Decisions carry consequence\u2014act with honesty and weigh all sides before moving ahead.",
+    "meaning_reversed_long": "Reversed Justice suggests reviewing bias, dishonesty, avoidance."
+  },
+  {
+    "id": "the_hanged_man",
+    "name": "The Hanged Man",
+    "arcana": "major",
+    "suit": "major",
+    "number": 12,
+    "keywords_upright": [
+      "surrender",
+      "new perspective",
+      "pause"
+    ],
+    "keywords_reversed": [
+      "stalling",
+      "resistance",
+      "martyrdom"
+    ],
+    "meaning_upright_short": "Keywords: surrender, new perspective, pause.",
+    "meaning_reversed_short": "Reversed themes: stalling, resistance, martyrdom.",
+    "meaning_upright_long": "Letting go of control clears space for insight and transforms limbo into awakening.",
+    "meaning_reversed_long": "Reversed The Hanged Man suggests reviewing stalling, resistance, martyrdom."
+  },
+  {
+    "id": "death",
+    "name": "Death",
+    "arcana": "major",
+    "suit": "major",
+    "number": 13,
+    "keywords_upright": [
+      "transformation",
+      "endings",
+      "renewal"
+    ],
+    "keywords_reversed": [
+      "stagnation",
+      "fear of change",
+      "clinging"
+    ],
+    "meaning_upright_short": "Keywords: transformation, endings, renewal.",
+    "meaning_reversed_short": "Reversed themes: stagnation, fear of change, clinging.",
+    "meaning_upright_long": "Release what has reached its conclusion to welcome a revitalising chapter.",
+    "meaning_reversed_long": "Reversed Death suggests reviewing stagnation, fear of change, clinging."
+  },
+  {
+    "id": "temperance",
+    "name": "Temperance",
+    "arcana": "major",
+    "suit": "major",
+    "number": 14,
+    "keywords_upright": [
+      "balance",
+      "moderation",
+      "alchemy"
+    ],
+    "keywords_reversed": [
+      "excess",
+      "imbalance",
+      "restlessness"
+    ],
+    "meaning_upright_short": "Keywords: balance, moderation, alchemy.",
+    "meaning_reversed_short": "Reversed themes: excess, imbalance, restlessness.",
+    "meaning_upright_long": "Blend opposing elements thoughtfully to craft a harmonious and sustainable rhythm.",
+    "meaning_reversed_long": "Reversed Temperance suggests reviewing excess, imbalance, restlessness."
+  },
+  {
+    "id": "the_devil",
+    "name": "The Devil",
+    "arcana": "major",
+    "suit": "major",
+    "number": 15,
+    "keywords_upright": [
+      "shadow",
+      "bondage",
+      "materialism"
+    ],
+    "keywords_reversed": [
+      "liberation",
+      "awareness",
+      "detachment"
+    ],
+    "meaning_upright_short": "Keywords: shadow, bondage, materialism.",
+    "meaning_reversed_short": "Reversed themes: liberation, awareness, detachment.",
+    "meaning_upright_long": "Notice the chains you accept; conscious choice can dissolve limiting patterns.",
+    "meaning_reversed_long": "Reversed The Devil suggests reviewing liberation, awareness, detachment."
+  },
+  {
+    "id": "the_tower",
+    "name": "The Tower",
+    "arcana": "major",
+    "suit": "major",
+    "number": 16,
+    "keywords_upright": [
+      "upheaval",
+      "revelation",
+      "breakthrough"
+    ],
+    "keywords_reversed": [
+      "averted disaster",
+      "denial",
+      "fear of change"
+    ],
+    "meaning_upright_short": "Keywords: upheaval, revelation, breakthrough.",
+    "meaning_reversed_short": "Reversed themes: averted disaster, denial, fear of change.",
+    "meaning_upright_long": "Sudden clarity dismantles unstable foundations so that stronger truth can emerge.",
+    "meaning_reversed_long": "Reversed The Tower suggests reviewing averted disaster, denial, fear of change."
+  },
+  {
+    "id": "the_star",
+    "name": "The Star",
+    "arcana": "major",
+    "suit": "major",
+    "number": 17,
+    "keywords_upright": [
+      "hope",
+      "healing",
+      "guidance"
+    ],
+    "keywords_reversed": [
+      "discouragement",
+      "doubt",
+      "over-giving"
+    ],
+    "meaning_upright_short": "Keywords: hope, healing, guidance.",
+    "meaning_reversed_short": "Reversed themes: discouragement, doubt, over-giving.",
+    "meaning_upright_long": "A calm beacon reminds you to replenish your spirit and trust that renewal is near.",
+    "meaning_reversed_long": "Reversed The Star suggests reviewing discouragement, doubt, over-giving."
+  },
+  {
+    "id": "the_moon",
+    "name": "The Moon",
+    "arcana": "major",
+    "suit": "major",
+    "number": 18,
+    "keywords_upright": [
+      "intuition",
+      "dreams",
+      "subconscious"
+    ],
+    "keywords_reversed": [
+      "confusion",
+      "anxiety",
+      "revelation"
+    ],
+    "meaning_upright_short": "Keywords: intuition, dreams, subconscious.",
+    "meaning_reversed_short": "Reversed themes: confusion, anxiety, revelation.",
+    "meaning_upright_long": "Shadows distort the path\u2014listen to subtle cues and move slowly until truth surfaces.",
+    "meaning_reversed_long": "Reversed The Moon suggests reviewing confusion, anxiety, revelation."
+  },
+  {
+    "id": "the_sun",
+    "name": "The Sun",
+    "arcana": "major",
+    "suit": "major",
+    "number": 19,
+    "keywords_upright": [
+      "vitality",
+      "success",
+      "joy"
+    ],
+    "keywords_reversed": [
+      "delayed gratification",
+      "overconfidence",
+      "temporary cloudiness"
+    ],
+    "meaning_upright_short": "Keywords: vitality, success, joy.",
+    "meaning_reversed_short": "Reversed themes: delayed gratification, overconfidence, temporary cloudiness.",
+    "meaning_upright_long": "Warmth, clarity, and celebration radiate outward when you act from authentic confidence.",
+    "meaning_reversed_long": "Reversed The Sun suggests reviewing delayed gratification, overconfidence, temporary cloudiness."
+  },
+  {
+    "id": "judgement",
+    "name": "Judgement",
+    "arcana": "major",
+    "suit": "major",
+    "number": 20,
+    "keywords_upright": [
+      "rebirth",
+      "reckoning",
+      "awakening"
+    ],
+    "keywords_reversed": [
+      "self-doubt",
+      "avoidance",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: rebirth, reckoning, awakening.",
+    "meaning_reversed_short": "Reversed themes: self-doubt, avoidance, stagnation.",
+    "meaning_upright_long": "Answer the call to evolve; honest reflection frees you to step into purpose.",
+    "meaning_reversed_long": "Reversed Judgement suggests reviewing self-doubt, avoidance, stagnation."
+  },
+  {
+    "id": "the_world",
+    "name": "The World",
+    "arcana": "major",
+    "suit": "major",
+    "number": 21,
+    "keywords_upright": [
+      "completion",
+      "integration",
+      "wholeness"
+    ],
+    "keywords_reversed": [
+      "loose ends",
+      "incompletion",
+      "delays"
+    ],
+    "meaning_upright_short": "Keywords: completion, integration, wholeness.",
+    "meaning_reversed_short": "Reversed themes: loose ends, incompletion, delays.",
+    "meaning_upright_long": "Celebrate milestones and recognise the mastery earned through the journey's cycle.",
+    "meaning_reversed_long": "Reversed The World suggests reviewing loose ends, incompletion, delays."
+  },
+  {
+    "id": "ace_of_wands",
+    "name": "Ace of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 1,
+    "keywords_upright": [
+      "ambition",
+      "beginnings",
+      "creativity",
+      "potential",
+      "spark",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "blocked start",
+      "burnout",
+      "frustration",
+      "impulsiveness",
+      "misuse",
+      "uncertainty"
+    ],
+    "meaning_upright_short": "Keywords: ambition, beginnings, creativity.",
+    "meaning_reversed_short": "Reversed themes: blocked start, burnout, frustration.",
+    "meaning_upright_long": "A seed of opportunity arrives, eager to grow if nurtured with intention. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Ace of Wands suggests reviewing blocked start, burnout, frustration, impulsiveness, misuse, uncertainty."
+  },
+  {
+    "id": "two_of_wands",
+    "name": "Two of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 2,
+    "keywords_upright": [
+      "ambition",
+      "balance",
+      "choice",
+      "creativity",
+      "duality",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "burnout",
+      "frustration",
+      "imbalance",
+      "impulsiveness",
+      "indecision",
+      "stalemate"
+    ],
+    "meaning_upright_short": "Keywords: ambition, balance, choice.",
+    "meaning_reversed_short": "Reversed themes: burnout, frustration, imbalance.",
+    "meaning_upright_long": "Two forces seek harmony, calling for cooperation and mindful decision making. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Two of Wands suggests reviewing burnout, frustration, imbalance, impulsiveness, indecision, stalemate."
+  },
+  {
+    "id": "three_of_wands",
+    "name": "Three of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 3,
+    "keywords_upright": [
+      "ambition",
+      "collaboration",
+      "creativity",
+      "expansion",
+      "growth",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "burnout",
+      "delay",
+      "frustration",
+      "impulsiveness",
+      "misalignment"
+    ],
+    "meaning_upright_short": "Keywords: ambition, collaboration, creativity.",
+    "meaning_reversed_short": "Reversed themes: burnout, delay, frustration.",
+    "meaning_upright_long": "Community and planning turn early efforts into meaningful progress. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Three of Wands suggests reviewing burnout, delay, frustration, impulsiveness, misalignment."
+  },
+  {
+    "id": "four_of_wands",
+    "name": "Four of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 4,
+    "keywords_upright": [
+      "ambition",
+      "containment",
+      "creativity",
+      "foundation",
+      "stability",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "burnout",
+      "frustration",
+      "impulsiveness",
+      "restlessness",
+      "rigidity",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: ambition, containment, creativity.",
+    "meaning_reversed_short": "Reversed themes: burnout, frustration, impulsiveness.",
+    "meaning_upright_long": "Structures provide security, yet must be refreshed to avoid complacency. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Four of Wands suggests reviewing burnout, frustration, impulsiveness, restlessness, rigidity, stagnation."
+  },
+  {
+    "id": "five_of_wands",
+    "name": "Five of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 5,
+    "keywords_upright": [
+      "ambition",
+      "challenge",
+      "creativity",
+      "disruption",
+      "growth",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "avoidance",
+      "burnout",
+      "frustration",
+      "impulsiveness",
+      "lingering conflict",
+      "recovery"
+    ],
+    "meaning_upright_short": "Keywords: ambition, challenge, creativity.",
+    "meaning_reversed_short": "Reversed themes: avoidance, burnout, frustration.",
+    "meaning_upright_long": "Tension invites adaptation, forging resilience through discomfort. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Five of Wands suggests reviewing avoidance, burnout, frustration, impulsiveness, lingering conflict, recovery."
+  },
+  {
+    "id": "six_of_wands",
+    "name": "Six of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 6,
+    "keywords_upright": [
+      "ambition",
+      "creativity",
+      "harmony",
+      "reconciliation",
+      "support",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "burnout",
+      "frustration",
+      "impulsiveness",
+      "nostalgia",
+      "one-sidedness",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: ambition, creativity, harmony.",
+    "meaning_reversed_short": "Reversed themes: burnout, frustration, impulsiveness.",
+    "meaning_upright_long": "Cooperation and shared care restore balance and goodwill. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Six of Wands suggests reviewing burnout, frustration, impulsiveness, nostalgia, one-sidedness, stagnation."
+  },
+  {
+    "id": "seven_of_wands",
+    "name": "Seven of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 7,
+    "keywords_upright": [
+      "ambition",
+      "assessment",
+      "creativity",
+      "faith",
+      "strategy",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "avoidance",
+      "burnout",
+      "doubt",
+      "frustration",
+      "impulsiveness"
+    ],
+    "meaning_upright_short": "Keywords: ambition, assessment, creativity.",
+    "meaning_reversed_short": "Reversed themes: avoidance, burnout, doubt.",
+    "meaning_upright_long": "Patience and evaluation clarify the next stage of effort. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Seven of Wands suggests reviewing avoidance, burnout, doubt, frustration, impulsiveness."
+  },
+  {
+    "id": "eight_of_wands",
+    "name": "Eight of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 8,
+    "keywords_upright": [
+      "ambition",
+      "creativity",
+      "dedication",
+      "mastery",
+      "movement",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "burnout",
+      "distraction",
+      "frustration",
+      "impulsiveness",
+      "perfectionism",
+      "stalling"
+    ],
+    "meaning_upright_short": "Keywords: ambition, creativity, dedication.",
+    "meaning_reversed_short": "Reversed themes: burnout, distraction, frustration.",
+    "meaning_upright_long": "Momentum builds through focused commitment and steady practice. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Eight of Wands suggests reviewing burnout, distraction, frustration, impulsiveness, perfectionism, stalling."
+  },
+  {
+    "id": "nine_of_wands",
+    "name": "Nine of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 9,
+    "keywords_upright": [
+      "ambition",
+      "creativity",
+      "culmination",
+      "integration",
+      "self-reliance",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "burnout",
+      "frustration",
+      "impatience",
+      "impulsiveness",
+      "isolation",
+      "overwhelm"
+    ],
+    "meaning_upright_short": "Keywords: ambition, creativity, culmination.",
+    "meaning_reversed_short": "Reversed themes: burnout, frustration, impatience.",
+    "meaning_upright_long": "Self-awareness and discipline prepare you for the final stretch. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Nine of Wands suggests reviewing burnout, frustration, impatience, impulsiveness, isolation, overwhelm."
+  },
+  {
+    "id": "ten_of_wands",
+    "name": "Ten of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 10,
+    "keywords_upright": [
+      "ambition",
+      "completion",
+      "creativity",
+      "legacy",
+      "transition",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "burden",
+      "burnout",
+      "frustration",
+      "impulsiveness",
+      "instability",
+      "overextension"
+    ],
+    "meaning_upright_short": "Keywords: ambition, completion, creativity.",
+    "meaning_reversed_short": "Reversed themes: burden, burnout, frustration.",
+    "meaning_upright_long": "A chapter resolves, offering perspective on what was gained and what comes next. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Ten of Wands suggests reviewing burden, burnout, frustration, impulsiveness, instability, overextension."
+  },
+  {
+    "id": "page_of_wands",
+    "name": "Page of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 11,
+    "keywords_upright": [
+      "ambition",
+      "creativity",
+      "curiosity",
+      "playfulness",
+      "study",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "burnout",
+      "frustration",
+      "immaturity",
+      "impulsiveness",
+      "inconsistency",
+      "naivety"
+    ],
+    "meaning_upright_short": "Keywords: ambition, creativity, curiosity.",
+    "meaning_reversed_short": "Reversed themes: burnout, frustration, immaturity.",
+    "meaning_upright_long": "Messenger energy arrives\u2014stay open to learning and exploring without judgment. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Page of Wands suggests reviewing burnout, frustration, immaturity, impulsiveness, inconsistency, naivety."
+  },
+  {
+    "id": "knight_of_wands",
+    "name": "Knight of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 12,
+    "keywords_upright": [
+      "ambition",
+      "creativity",
+      "mission",
+      "momentum",
+      "pursuit",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "burnout",
+      "frustration",
+      "impulsiveness",
+      "recklessness",
+      "scattered focus"
+    ],
+    "meaning_upright_short": "Keywords: ambition, creativity, mission.",
+    "meaning_reversed_short": "Reversed themes: burnout, frustration, impulsiveness.",
+    "meaning_upright_long": "Bold action advances your goals when tempered with awareness of the impact. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Knight of Wands suggests reviewing burnout, frustration, impulsiveness, recklessness, scattered focus."
+  },
+  {
+    "id": "queen_of_wands",
+    "name": "Queen of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 13,
+    "keywords_upright": [
+      "ambition",
+      "creativity",
+      "magnetism",
+      "maturity",
+      "nurturing",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "burnout",
+      "frustration",
+      "impulsiveness",
+      "insecurity",
+      "smothering",
+      "withdrawal"
+    ],
+    "meaning_upright_short": "Keywords: ambition, creativity, magnetism.",
+    "meaning_reversed_short": "Reversed themes: burnout, frustration, impulsiveness.",
+    "meaning_upright_long": "Power softens into generosity, tending to others while upholding healthy boundaries. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed Queen of Wands suggests reviewing burnout, frustration, impulsiveness, insecurity, smothering, withdrawal."
+  },
+  {
+    "id": "king_of_wands",
+    "name": "King of Wands",
+    "arcana": "minor",
+    "suit": "Wands",
+    "number": 14,
+    "keywords_upright": [
+      "ambition",
+      "command",
+      "creativity",
+      "responsibility",
+      "vision",
+      "willpower"
+    ],
+    "keywords_reversed": [
+      "burnout",
+      "domination",
+      "frustration",
+      "impulsiveness",
+      "overbearing",
+      "rigidity"
+    ],
+    "meaning_upright_short": "Keywords: ambition, command, creativity.",
+    "meaning_reversed_short": "Reversed themes: burnout, domination, frustration.",
+    "meaning_upright_long": "Leadership is proven through integrity and consistent stewardship of resources. Expressed through the realm of wands, it highlights passion, invention, and the spark that propels ideas into action.",
+    "meaning_reversed_long": "Reversed King of Wands suggests reviewing burnout, domination, frustration, impulsiveness, overbearing, rigidity."
+  },
+  {
+    "id": "ace_of_cups",
+    "name": "Ace of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 1,
+    "keywords_upright": [
+      "beginnings",
+      "emotion",
+      "intuition",
+      "potential",
+      "relationships",
+      "spark"
+    ],
+    "keywords_reversed": [
+      "blocked start",
+      "codependence",
+      "emotional drain",
+      "misuse",
+      "suppression",
+      "uncertainty"
+    ],
+    "meaning_upright_short": "Keywords: beginnings, emotion, intuition.",
+    "meaning_reversed_short": "Reversed themes: blocked start, codependence, emotional drain.",
+    "meaning_upright_long": "A seed of opportunity arrives, eager to grow if nurtured with intention. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Ace of Cups suggests reviewing blocked start, codependence, emotional drain, misuse, suppression, uncertainty."
+  },
+  {
+    "id": "two_of_cups",
+    "name": "Two of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 2,
+    "keywords_upright": [
+      "balance",
+      "choice",
+      "duality",
+      "emotion",
+      "intuition",
+      "relationships"
+    ],
+    "keywords_reversed": [
+      "codependence",
+      "emotional drain",
+      "imbalance",
+      "indecision",
+      "stalemate",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: balance, choice, duality.",
+    "meaning_reversed_short": "Reversed themes: codependence, emotional drain, imbalance.",
+    "meaning_upright_long": "Two forces seek harmony, calling for cooperation and mindful decision making. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Two of Cups suggests reviewing codependence, emotional drain, imbalance, indecision, stalemate, suppression."
+  },
+  {
+    "id": "three_of_cups",
+    "name": "Three of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 3,
+    "keywords_upright": [
+      "collaboration",
+      "emotion",
+      "expansion",
+      "growth",
+      "intuition",
+      "relationships"
+    ],
+    "keywords_reversed": [
+      "codependence",
+      "delay",
+      "emotional drain",
+      "frustration",
+      "misalignment",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: collaboration, emotion, expansion.",
+    "meaning_reversed_short": "Reversed themes: codependence, delay, emotional drain.",
+    "meaning_upright_long": "Community and planning turn early efforts into meaningful progress. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Three of Cups suggests reviewing codependence, delay, emotional drain, frustration, misalignment, suppression."
+  },
+  {
+    "id": "four_of_cups",
+    "name": "Four of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 4,
+    "keywords_upright": [
+      "containment",
+      "emotion",
+      "foundation",
+      "intuition",
+      "relationships",
+      "stability"
+    ],
+    "keywords_reversed": [
+      "codependence",
+      "emotional drain",
+      "restlessness",
+      "rigidity",
+      "stagnation",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: containment, emotion, foundation.",
+    "meaning_reversed_short": "Reversed themes: codependence, emotional drain, restlessness.",
+    "meaning_upright_long": "Structures provide security, yet must be refreshed to avoid complacency. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Four of Cups suggests reviewing codependence, emotional drain, restlessness, rigidity, stagnation, suppression."
+  },
+  {
+    "id": "five_of_cups",
+    "name": "Five of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 5,
+    "keywords_upright": [
+      "challenge",
+      "disruption",
+      "emotion",
+      "growth",
+      "intuition",
+      "relationships"
+    ],
+    "keywords_reversed": [
+      "avoidance",
+      "codependence",
+      "emotional drain",
+      "lingering conflict",
+      "recovery",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: challenge, disruption, emotion.",
+    "meaning_reversed_short": "Reversed themes: avoidance, codependence, emotional drain.",
+    "meaning_upright_long": "Tension invites adaptation, forging resilience through discomfort. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Five of Cups suggests reviewing avoidance, codependence, emotional drain, lingering conflict, recovery, suppression."
+  },
+  {
+    "id": "six_of_cups",
+    "name": "Six of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 6,
+    "keywords_upright": [
+      "emotion",
+      "harmony",
+      "intuition",
+      "reconciliation",
+      "relationships",
+      "support"
+    ],
+    "keywords_reversed": [
+      "codependence",
+      "emotional drain",
+      "nostalgia",
+      "one-sidedness",
+      "stagnation",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: emotion, harmony, intuition.",
+    "meaning_reversed_short": "Reversed themes: codependence, emotional drain, nostalgia.",
+    "meaning_upright_long": "Cooperation and shared care restore balance and goodwill. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Six of Cups suggests reviewing codependence, emotional drain, nostalgia, one-sidedness, stagnation, suppression."
+  },
+  {
+    "id": "seven_of_cups",
+    "name": "Seven of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 7,
+    "keywords_upright": [
+      "assessment",
+      "emotion",
+      "faith",
+      "intuition",
+      "relationships",
+      "strategy"
+    ],
+    "keywords_reversed": [
+      "avoidance",
+      "codependence",
+      "doubt",
+      "emotional drain",
+      "impulsiveness",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: assessment, emotion, faith.",
+    "meaning_reversed_short": "Reversed themes: avoidance, codependence, doubt.",
+    "meaning_upright_long": "Patience and evaluation clarify the next stage of effort. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Seven of Cups suggests reviewing avoidance, codependence, doubt, emotional drain, impulsiveness, suppression."
+  },
+  {
+    "id": "eight_of_cups",
+    "name": "Eight of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 8,
+    "keywords_upright": [
+      "dedication",
+      "emotion",
+      "intuition",
+      "mastery",
+      "movement",
+      "relationships"
+    ],
+    "keywords_reversed": [
+      "codependence",
+      "distraction",
+      "emotional drain",
+      "perfectionism",
+      "stalling",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: dedication, emotion, intuition.",
+    "meaning_reversed_short": "Reversed themes: codependence, distraction, emotional drain.",
+    "meaning_upright_long": "Momentum builds through focused commitment and steady practice. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Eight of Cups suggests reviewing codependence, distraction, emotional drain, perfectionism, stalling, suppression."
+  },
+  {
+    "id": "nine_of_cups",
+    "name": "Nine of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 9,
+    "keywords_upright": [
+      "culmination",
+      "emotion",
+      "integration",
+      "intuition",
+      "relationships",
+      "self-reliance"
+    ],
+    "keywords_reversed": [
+      "codependence",
+      "emotional drain",
+      "impatience",
+      "isolation",
+      "overwhelm",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: culmination, emotion, integration.",
+    "meaning_reversed_short": "Reversed themes: codependence, emotional drain, impatience.",
+    "meaning_upright_long": "Self-awareness and discipline prepare you for the final stretch. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Nine of Cups suggests reviewing codependence, emotional drain, impatience, isolation, overwhelm, suppression."
+  },
+  {
+    "id": "ten_of_cups",
+    "name": "Ten of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 10,
+    "keywords_upright": [
+      "completion",
+      "emotion",
+      "intuition",
+      "legacy",
+      "relationships",
+      "transition"
+    ],
+    "keywords_reversed": [
+      "burden",
+      "codependence",
+      "emotional drain",
+      "instability",
+      "overextension",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: completion, emotion, intuition.",
+    "meaning_reversed_short": "Reversed themes: burden, codependence, emotional drain.",
+    "meaning_upright_long": "A chapter resolves, offering perspective on what was gained and what comes next. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Ten of Cups suggests reviewing burden, codependence, emotional drain, instability, overextension, suppression."
+  },
+  {
+    "id": "page_of_cups",
+    "name": "Page of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 11,
+    "keywords_upright": [
+      "curiosity",
+      "emotion",
+      "intuition",
+      "playfulness",
+      "relationships",
+      "study"
+    ],
+    "keywords_reversed": [
+      "codependence",
+      "emotional drain",
+      "immaturity",
+      "inconsistency",
+      "naivety",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: curiosity, emotion, intuition.",
+    "meaning_reversed_short": "Reversed themes: codependence, emotional drain, immaturity.",
+    "meaning_upright_long": "Messenger energy arrives\u2014stay open to learning and exploring without judgment. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Page of Cups suggests reviewing codependence, emotional drain, immaturity, inconsistency, naivety, suppression."
+  },
+  {
+    "id": "knight_of_cups",
+    "name": "Knight of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 12,
+    "keywords_upright": [
+      "emotion",
+      "intuition",
+      "mission",
+      "momentum",
+      "pursuit",
+      "relationships"
+    ],
+    "keywords_reversed": [
+      "codependence",
+      "emotional drain",
+      "frustration",
+      "recklessness",
+      "scattered focus",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: emotion, intuition, mission.",
+    "meaning_reversed_short": "Reversed themes: codependence, emotional drain, frustration.",
+    "meaning_upright_long": "Bold action advances your goals when tempered with awareness of the impact. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Knight of Cups suggests reviewing codependence, emotional drain, frustration, recklessness, scattered focus, suppression."
+  },
+  {
+    "id": "queen_of_cups",
+    "name": "Queen of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 13,
+    "keywords_upright": [
+      "emotion",
+      "intuition",
+      "magnetism",
+      "maturity",
+      "nurturing",
+      "relationships"
+    ],
+    "keywords_reversed": [
+      "codependence",
+      "emotional drain",
+      "insecurity",
+      "smothering",
+      "suppression",
+      "withdrawal"
+    ],
+    "meaning_upright_short": "Keywords: emotion, intuition, magnetism.",
+    "meaning_reversed_short": "Reversed themes: codependence, emotional drain, insecurity.",
+    "meaning_upright_long": "Power softens into generosity, tending to others while upholding healthy boundaries. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed Queen of Cups suggests reviewing codependence, emotional drain, insecurity, smothering, suppression, withdrawal."
+  },
+  {
+    "id": "king_of_cups",
+    "name": "King of Cups",
+    "arcana": "minor",
+    "suit": "Cups",
+    "number": 14,
+    "keywords_upright": [
+      "command",
+      "emotion",
+      "intuition",
+      "relationships",
+      "responsibility",
+      "vision"
+    ],
+    "keywords_reversed": [
+      "codependence",
+      "domination",
+      "emotional drain",
+      "overbearing",
+      "rigidity",
+      "suppression"
+    ],
+    "meaning_upright_short": "Keywords: command, emotion, intuition.",
+    "meaning_reversed_short": "Reversed themes: codependence, domination, emotional drain.",
+    "meaning_upright_long": "Leadership is proven through integrity and consistent stewardship of resources. Expressed through the realm of cups, it highlights feelings, empathy, spiritual connection, and the flow between hearts.",
+    "meaning_reversed_long": "Reversed King of Cups suggests reviewing codependence, domination, emotional drain, overbearing, rigidity, suppression."
+  },
+  {
+    "id": "ace_of_swords",
+    "name": "Ace of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 1,
+    "keywords_upright": [
+      "beginnings",
+      "clarity",
+      "communication",
+      "potential",
+      "spark",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "blocked start",
+      "conflict",
+      "misuse",
+      "overthinking",
+      "uncertainty"
+    ],
+    "meaning_upright_short": "Keywords: beginnings, clarity, communication.",
+    "meaning_reversed_short": "Reversed themes: anxiety, blocked start, conflict.",
+    "meaning_upright_long": "A seed of opportunity arrives, eager to grow if nurtured with intention. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Ace of Swords suggests reviewing anxiety, blocked start, conflict, misuse, overthinking, uncertainty."
+  },
+  {
+    "id": "two_of_swords",
+    "name": "Two of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 2,
+    "keywords_upright": [
+      "balance",
+      "choice",
+      "clarity",
+      "communication",
+      "duality",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "conflict",
+      "imbalance",
+      "indecision",
+      "overthinking",
+      "stalemate"
+    ],
+    "meaning_upright_short": "Keywords: balance, choice, clarity.",
+    "meaning_reversed_short": "Reversed themes: anxiety, conflict, imbalance.",
+    "meaning_upright_long": "Two forces seek harmony, calling for cooperation and mindful decision making. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Two of Swords suggests reviewing anxiety, conflict, imbalance, indecision, overthinking, stalemate."
+  },
+  {
+    "id": "three_of_swords",
+    "name": "Three of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 3,
+    "keywords_upright": [
+      "clarity",
+      "collaboration",
+      "communication",
+      "expansion",
+      "growth",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "conflict",
+      "delay",
+      "frustration",
+      "misalignment",
+      "overthinking"
+    ],
+    "meaning_upright_short": "Keywords: clarity, collaboration, communication.",
+    "meaning_reversed_short": "Reversed themes: anxiety, conflict, delay.",
+    "meaning_upright_long": "Community and planning turn early efforts into meaningful progress. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Three of Swords suggests reviewing anxiety, conflict, delay, frustration, misalignment, overthinking."
+  },
+  {
+    "id": "four_of_swords",
+    "name": "Four of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 4,
+    "keywords_upright": [
+      "clarity",
+      "communication",
+      "containment",
+      "foundation",
+      "stability",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "conflict",
+      "overthinking",
+      "restlessness",
+      "rigidity",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: clarity, communication, containment.",
+    "meaning_reversed_short": "Reversed themes: anxiety, conflict, overthinking.",
+    "meaning_upright_long": "Structures provide security, yet must be refreshed to avoid complacency. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Four of Swords suggests reviewing anxiety, conflict, overthinking, restlessness, rigidity, stagnation."
+  },
+  {
+    "id": "five_of_swords",
+    "name": "Five of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 5,
+    "keywords_upright": [
+      "challenge",
+      "clarity",
+      "communication",
+      "disruption",
+      "growth",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "avoidance",
+      "conflict",
+      "lingering conflict",
+      "overthinking",
+      "recovery"
+    ],
+    "meaning_upright_short": "Keywords: challenge, clarity, communication.",
+    "meaning_reversed_short": "Reversed themes: anxiety, avoidance, conflict.",
+    "meaning_upright_long": "Tension invites adaptation, forging resilience through discomfort. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Five of Swords suggests reviewing anxiety, avoidance, conflict, lingering conflict, overthinking, recovery."
+  },
+  {
+    "id": "six_of_swords",
+    "name": "Six of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 6,
+    "keywords_upright": [
+      "clarity",
+      "communication",
+      "harmony",
+      "reconciliation",
+      "support",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "conflict",
+      "nostalgia",
+      "one-sidedness",
+      "overthinking",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: clarity, communication, harmony.",
+    "meaning_reversed_short": "Reversed themes: anxiety, conflict, nostalgia.",
+    "meaning_upright_long": "Cooperation and shared care restore balance and goodwill. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Six of Swords suggests reviewing anxiety, conflict, nostalgia, one-sidedness, overthinking, stagnation."
+  },
+  {
+    "id": "seven_of_swords",
+    "name": "Seven of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 7,
+    "keywords_upright": [
+      "assessment",
+      "clarity",
+      "communication",
+      "faith",
+      "strategy",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "avoidance",
+      "conflict",
+      "doubt",
+      "impulsiveness",
+      "overthinking"
+    ],
+    "meaning_upright_short": "Keywords: assessment, clarity, communication.",
+    "meaning_reversed_short": "Reversed themes: anxiety, avoidance, conflict.",
+    "meaning_upright_long": "Patience and evaluation clarify the next stage of effort. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Seven of Swords suggests reviewing anxiety, avoidance, conflict, doubt, impulsiveness, overthinking."
+  },
+  {
+    "id": "eight_of_swords",
+    "name": "Eight of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 8,
+    "keywords_upright": [
+      "clarity",
+      "communication",
+      "dedication",
+      "mastery",
+      "movement",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "conflict",
+      "distraction",
+      "overthinking",
+      "perfectionism",
+      "stalling"
+    ],
+    "meaning_upright_short": "Keywords: clarity, communication, dedication.",
+    "meaning_reversed_short": "Reversed themes: anxiety, conflict, distraction.",
+    "meaning_upright_long": "Momentum builds through focused commitment and steady practice. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Eight of Swords suggests reviewing anxiety, conflict, distraction, overthinking, perfectionism, stalling."
+  },
+  {
+    "id": "nine_of_swords",
+    "name": "Nine of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 9,
+    "keywords_upright": [
+      "clarity",
+      "communication",
+      "culmination",
+      "integration",
+      "self-reliance",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "conflict",
+      "impatience",
+      "isolation",
+      "overthinking",
+      "overwhelm"
+    ],
+    "meaning_upright_short": "Keywords: clarity, communication, culmination.",
+    "meaning_reversed_short": "Reversed themes: anxiety, conflict, impatience.",
+    "meaning_upright_long": "Self-awareness and discipline prepare you for the final stretch. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Nine of Swords suggests reviewing anxiety, conflict, impatience, isolation, overthinking, overwhelm."
+  },
+  {
+    "id": "ten_of_swords",
+    "name": "Ten of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 10,
+    "keywords_upright": [
+      "clarity",
+      "communication",
+      "completion",
+      "legacy",
+      "thought",
+      "transition"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "burden",
+      "conflict",
+      "instability",
+      "overextension",
+      "overthinking"
+    ],
+    "meaning_upright_short": "Keywords: clarity, communication, completion.",
+    "meaning_reversed_short": "Reversed themes: anxiety, burden, conflict.",
+    "meaning_upright_long": "A chapter resolves, offering perspective on what was gained and what comes next. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Ten of Swords suggests reviewing anxiety, burden, conflict, instability, overextension, overthinking."
+  },
+  {
+    "id": "page_of_swords",
+    "name": "Page of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 11,
+    "keywords_upright": [
+      "clarity",
+      "communication",
+      "curiosity",
+      "playfulness",
+      "study",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "conflict",
+      "immaturity",
+      "inconsistency",
+      "naivety",
+      "overthinking"
+    ],
+    "meaning_upright_short": "Keywords: clarity, communication, curiosity.",
+    "meaning_reversed_short": "Reversed themes: anxiety, conflict, immaturity.",
+    "meaning_upright_long": "Messenger energy arrives\u2014stay open to learning and exploring without judgment. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Page of Swords suggests reviewing anxiety, conflict, immaturity, inconsistency, naivety, overthinking."
+  },
+  {
+    "id": "knight_of_swords",
+    "name": "Knight of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 12,
+    "keywords_upright": [
+      "clarity",
+      "communication",
+      "mission",
+      "momentum",
+      "pursuit",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "conflict",
+      "frustration",
+      "overthinking",
+      "recklessness",
+      "scattered focus"
+    ],
+    "meaning_upright_short": "Keywords: clarity, communication, mission.",
+    "meaning_reversed_short": "Reversed themes: anxiety, conflict, frustration.",
+    "meaning_upright_long": "Bold action advances your goals when tempered with awareness of the impact. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Knight of Swords suggests reviewing anxiety, conflict, frustration, overthinking, recklessness, scattered focus."
+  },
+  {
+    "id": "queen_of_swords",
+    "name": "Queen of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 13,
+    "keywords_upright": [
+      "clarity",
+      "communication",
+      "magnetism",
+      "maturity",
+      "nurturing",
+      "thought"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "conflict",
+      "insecurity",
+      "overthinking",
+      "smothering",
+      "withdrawal"
+    ],
+    "meaning_upright_short": "Keywords: clarity, communication, magnetism.",
+    "meaning_reversed_short": "Reversed themes: anxiety, conflict, insecurity.",
+    "meaning_upright_long": "Power softens into generosity, tending to others while upholding healthy boundaries. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed Queen of Swords suggests reviewing anxiety, conflict, insecurity, overthinking, smothering, withdrawal."
+  },
+  {
+    "id": "king_of_swords",
+    "name": "King of Swords",
+    "arcana": "minor",
+    "suit": "Swords",
+    "number": 14,
+    "keywords_upright": [
+      "clarity",
+      "command",
+      "communication",
+      "responsibility",
+      "thought",
+      "vision"
+    ],
+    "keywords_reversed": [
+      "anxiety",
+      "conflict",
+      "domination",
+      "overbearing",
+      "overthinking",
+      "rigidity"
+    ],
+    "meaning_upright_short": "Keywords: clarity, command, communication.",
+    "meaning_reversed_short": "Reversed themes: anxiety, conflict, domination.",
+    "meaning_upright_long": "Leadership is proven through integrity and consistent stewardship of resources. Expressed through the realm of swords, it highlights intellect, conflict, analysis, and the pursuit of clear truth.",
+    "meaning_reversed_long": "Reversed King of Swords suggests reviewing anxiety, conflict, domination, overbearing, overthinking, rigidity."
+  },
+  {
+    "id": "ace_of_pentacles",
+    "name": "Ace of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 1,
+    "keywords_upright": [
+      "beginnings",
+      "potential",
+      "practicality",
+      "resources",
+      "spark",
+      "stability"
+    ],
+    "keywords_reversed": [
+      "blocked start",
+      "insecurity",
+      "materialism",
+      "misuse",
+      "stagnation",
+      "uncertainty"
+    ],
+    "meaning_upright_short": "Keywords: beginnings, potential, practicality.",
+    "meaning_reversed_short": "Reversed themes: blocked start, insecurity, materialism.",
+    "meaning_upright_long": "A seed of opportunity arrives, eager to grow if nurtured with intention. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Ace of Pentacles suggests reviewing blocked start, insecurity, materialism, misuse, stagnation, uncertainty."
+  },
+  {
+    "id": "two_of_pentacles",
+    "name": "Two of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 2,
+    "keywords_upright": [
+      "balance",
+      "choice",
+      "duality",
+      "practicality",
+      "resources",
+      "stability"
+    ],
+    "keywords_reversed": [
+      "imbalance",
+      "indecision",
+      "insecurity",
+      "materialism",
+      "stagnation",
+      "stalemate"
+    ],
+    "meaning_upright_short": "Keywords: balance, choice, duality.",
+    "meaning_reversed_short": "Reversed themes: imbalance, indecision, insecurity.",
+    "meaning_upright_long": "Two forces seek harmony, calling for cooperation and mindful decision making. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Two of Pentacles suggests reviewing imbalance, indecision, insecurity, materialism, stagnation, stalemate."
+  },
+  {
+    "id": "three_of_pentacles",
+    "name": "Three of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 3,
+    "keywords_upright": [
+      "collaboration",
+      "expansion",
+      "growth",
+      "practicality",
+      "resources",
+      "stability"
+    ],
+    "keywords_reversed": [
+      "delay",
+      "frustration",
+      "insecurity",
+      "materialism",
+      "misalignment",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: collaboration, expansion, growth.",
+    "meaning_reversed_short": "Reversed themes: delay, frustration, insecurity.",
+    "meaning_upright_long": "Community and planning turn early efforts into meaningful progress. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Three of Pentacles suggests reviewing delay, frustration, insecurity, materialism, misalignment, stagnation."
+  },
+  {
+    "id": "four_of_pentacles",
+    "name": "Four of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 4,
+    "keywords_upright": [
+      "containment",
+      "foundation",
+      "practicality",
+      "resources",
+      "stability"
+    ],
+    "keywords_reversed": [
+      "insecurity",
+      "materialism",
+      "restlessness",
+      "rigidity",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: containment, foundation, practicality.",
+    "meaning_reversed_short": "Reversed themes: insecurity, materialism, restlessness.",
+    "meaning_upright_long": "Structures provide security, yet must be refreshed to avoid complacency. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Four of Pentacles suggests reviewing insecurity, materialism, restlessness, rigidity, stagnation."
+  },
+  {
+    "id": "five_of_pentacles",
+    "name": "Five of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 5,
+    "keywords_upright": [
+      "challenge",
+      "disruption",
+      "growth",
+      "practicality",
+      "resources",
+      "stability"
+    ],
+    "keywords_reversed": [
+      "avoidance",
+      "insecurity",
+      "lingering conflict",
+      "materialism",
+      "recovery",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: challenge, disruption, growth.",
+    "meaning_reversed_short": "Reversed themes: avoidance, insecurity, lingering conflict.",
+    "meaning_upright_long": "Tension invites adaptation, forging resilience through discomfort. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Five of Pentacles suggests reviewing avoidance, insecurity, lingering conflict, materialism, recovery, stagnation."
+  },
+  {
+    "id": "six_of_pentacles",
+    "name": "Six of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 6,
+    "keywords_upright": [
+      "harmony",
+      "practicality",
+      "reconciliation",
+      "resources",
+      "stability",
+      "support"
+    ],
+    "keywords_reversed": [
+      "insecurity",
+      "materialism",
+      "nostalgia",
+      "one-sidedness",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: harmony, practicality, reconciliation.",
+    "meaning_reversed_short": "Reversed themes: insecurity, materialism, nostalgia.",
+    "meaning_upright_long": "Cooperation and shared care restore balance and goodwill. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Six of Pentacles suggests reviewing insecurity, materialism, nostalgia, one-sidedness, stagnation."
+  },
+  {
+    "id": "seven_of_pentacles",
+    "name": "Seven of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 7,
+    "keywords_upright": [
+      "assessment",
+      "faith",
+      "practicality",
+      "resources",
+      "stability",
+      "strategy"
+    ],
+    "keywords_reversed": [
+      "avoidance",
+      "doubt",
+      "impulsiveness",
+      "insecurity",
+      "materialism",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: assessment, faith, practicality.",
+    "meaning_reversed_short": "Reversed themes: avoidance, doubt, impulsiveness.",
+    "meaning_upright_long": "Patience and evaluation clarify the next stage of effort. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Seven of Pentacles suggests reviewing avoidance, doubt, impulsiveness, insecurity, materialism, stagnation."
+  },
+  {
+    "id": "eight_of_pentacles",
+    "name": "Eight of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 8,
+    "keywords_upright": [
+      "dedication",
+      "mastery",
+      "movement",
+      "practicality",
+      "resources",
+      "stability"
+    ],
+    "keywords_reversed": [
+      "distraction",
+      "insecurity",
+      "materialism",
+      "perfectionism",
+      "stagnation",
+      "stalling"
+    ],
+    "meaning_upright_short": "Keywords: dedication, mastery, movement.",
+    "meaning_reversed_short": "Reversed themes: distraction, insecurity, materialism.",
+    "meaning_upright_long": "Momentum builds through focused commitment and steady practice. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Eight of Pentacles suggests reviewing distraction, insecurity, materialism, perfectionism, stagnation, stalling."
+  },
+  {
+    "id": "nine_of_pentacles",
+    "name": "Nine of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 9,
+    "keywords_upright": [
+      "culmination",
+      "integration",
+      "practicality",
+      "resources",
+      "self-reliance",
+      "stability"
+    ],
+    "keywords_reversed": [
+      "impatience",
+      "insecurity",
+      "isolation",
+      "materialism",
+      "overwhelm",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: culmination, integration, practicality.",
+    "meaning_reversed_short": "Reversed themes: impatience, insecurity, isolation.",
+    "meaning_upright_long": "Self-awareness and discipline prepare you for the final stretch. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Nine of Pentacles suggests reviewing impatience, insecurity, isolation, materialism, overwhelm, stagnation."
+  },
+  {
+    "id": "ten_of_pentacles",
+    "name": "Ten of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 10,
+    "keywords_upright": [
+      "completion",
+      "legacy",
+      "practicality",
+      "resources",
+      "stability",
+      "transition"
+    ],
+    "keywords_reversed": [
+      "burden",
+      "insecurity",
+      "instability",
+      "materialism",
+      "overextension",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: completion, legacy, practicality.",
+    "meaning_reversed_short": "Reversed themes: burden, insecurity, instability.",
+    "meaning_upright_long": "A chapter resolves, offering perspective on what was gained and what comes next. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Ten of Pentacles suggests reviewing burden, insecurity, instability, materialism, overextension, stagnation."
+  },
+  {
+    "id": "page_of_pentacles",
+    "name": "Page of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 11,
+    "keywords_upright": [
+      "curiosity",
+      "playfulness",
+      "practicality",
+      "resources",
+      "stability",
+      "study"
+    ],
+    "keywords_reversed": [
+      "immaturity",
+      "inconsistency",
+      "insecurity",
+      "materialism",
+      "naivety",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: curiosity, playfulness, practicality.",
+    "meaning_reversed_short": "Reversed themes: immaturity, inconsistency, insecurity.",
+    "meaning_upright_long": "Messenger energy arrives\u2014stay open to learning and exploring without judgment. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Page of Pentacles suggests reviewing immaturity, inconsistency, insecurity, materialism, naivety, stagnation."
+  },
+  {
+    "id": "knight_of_pentacles",
+    "name": "Knight of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 12,
+    "keywords_upright": [
+      "mission",
+      "momentum",
+      "practicality",
+      "pursuit",
+      "resources",
+      "stability"
+    ],
+    "keywords_reversed": [
+      "frustration",
+      "insecurity",
+      "materialism",
+      "recklessness",
+      "scattered focus",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: mission, momentum, practicality.",
+    "meaning_reversed_short": "Reversed themes: frustration, insecurity, materialism.",
+    "meaning_upright_long": "Bold action advances your goals when tempered with awareness of the impact. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Knight of Pentacles suggests reviewing frustration, insecurity, materialism, recklessness, scattered focus, stagnation."
+  },
+  {
+    "id": "queen_of_pentacles",
+    "name": "Queen of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 13,
+    "keywords_upright": [
+      "magnetism",
+      "maturity",
+      "nurturing",
+      "practicality",
+      "resources",
+      "stability"
+    ],
+    "keywords_reversed": [
+      "insecurity",
+      "materialism",
+      "smothering",
+      "stagnation",
+      "withdrawal"
+    ],
+    "meaning_upright_short": "Keywords: magnetism, maturity, nurturing.",
+    "meaning_reversed_short": "Reversed themes: insecurity, materialism, smothering.",
+    "meaning_upright_long": "Power softens into generosity, tending to others while upholding healthy boundaries. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed Queen of Pentacles suggests reviewing insecurity, materialism, smothering, stagnation, withdrawal."
+  },
+  {
+    "id": "king_of_pentacles",
+    "name": "King of Pentacles",
+    "arcana": "minor",
+    "suit": "Pentacles",
+    "number": 14,
+    "keywords_upright": [
+      "command",
+      "practicality",
+      "resources",
+      "responsibility",
+      "stability",
+      "vision"
+    ],
+    "keywords_reversed": [
+      "domination",
+      "insecurity",
+      "materialism",
+      "overbearing",
+      "rigidity",
+      "stagnation"
+    ],
+    "meaning_upright_short": "Keywords: command, practicality, resources.",
+    "meaning_reversed_short": "Reversed themes: domination, insecurity, materialism.",
+    "meaning_upright_long": "Leadership is proven through integrity and consistent stewardship of resources. Expressed through the realm of pentacles, it highlights work, health, and the tangible results of long-term stewardship.",
+    "meaning_reversed_long": "Reversed King of Pentacles suggests reviewing domination, insecurity, materialism, overbearing, rigidity, stagnation."
+  }
+]
