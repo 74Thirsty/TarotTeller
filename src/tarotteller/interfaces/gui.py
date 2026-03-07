@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import math
 import textwrap
 import tkinter as tk
+from pathlib import Path
 from pathlib import Path
 from datetime import datetime
 from tkinter import filedialog, messagebox, ttk
@@ -9,6 +11,7 @@ from typing import Iterable, List, Optional
 
 from importlib.metadata import PackageNotFoundError, version
 
+from ..core.card_images import resolve_card_image
 from ..core.card_images import resolve_card_image
 from ..core.card_images import resolve_card_image
 from ..core.context import analyze_question
@@ -21,6 +24,19 @@ from ..narrative.immersive import build_immersive_companion
 
 
 _TEXT_WRAP_WIDTH = 72
+_PREVIEW_MAX_WIDTH = 220
+_PREVIEW_MAX_HEIGHT = 320
+
+
+def _preview_subsample_factor(width: int, height: int) -> int:
+    """Return PhotoImage subsample factor needed to fit preview bounds."""
+
+    if width <= 0 or height <= 0:
+        return 1
+
+    width_factor = math.ceil(width / _PREVIEW_MAX_WIDTH)
+    height_factor = math.ceil(height / _PREVIEW_MAX_HEIGHT)
+    return max(1, width_factor, height_factor)
 
 try:
     APP_VERSION = version("tarotteller")
@@ -85,6 +101,7 @@ class TarotTellerApp:
 
         self.deck = TarotDeck()
         self._help_window: Optional[tk.Toplevel] = None
+        self._preview_image: Optional[tk.PhotoImage] = None
         self._preview_image: Optional[tk.PhotoImage] = None
 
         self.spread_var = tk.StringVar(value="single")
@@ -274,6 +291,13 @@ class TarotTellerApp:
         self.preview_label = ttk.Label(preview_frame, text="Card preview", style="Card.TLabel")
         self.preview_label.pack(anchor=tk.N)
         self.preview_image_label = ttk.Label(preview_frame, style="Card.TLabel")
+        self.preview_image_label.pack(anchor=tk.N, pady=(8, 0))
+
+        preview_frame = ttk.Frame(output_frame, style="Card.TFrame")
+        preview_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=(12, 0))
+        self.preview_label = ttk.Label(preview_frame, text="Card preview", style="Card.TLabel")
+        self.preview_label.pack(anchor=tk.N)
+        self.preview_image_label = ttk.Label(preview_frame, style="Card.TLabel", width=32)
         self.preview_image_label.pack(anchor=tk.N, pady=(8, 0))
 
         self.output = tk.Text(output_frame, wrap=tk.WORD, font=("TkDefaultFont", 11))
@@ -552,6 +576,7 @@ class TarotTellerApp:
                     )
                 self._render_output("\n\n".join(section.strip() for section in sections if section))
                 self._update_image_preview(drawn[0].card.name if drawn else None)
+                self._update_image_preview(drawn[0].card.name if drawn else None)
                 self._set_status("Direct draw ready.")
                 return
 
@@ -599,6 +624,8 @@ class TarotTellerApp:
         self._render_output("\n\n".join(section.strip() for section in sections if section))
         first_card_name = reading.placements[0].card.card.name if reading.placements else None
         self._update_image_preview(first_card_name)
+        first_card_name = reading.placements[0].card.name if reading.placements else None
+        self._update_image_preview(first_card_name)
         self._set_status("Reading ready.")
 
     def _render_output(self, text: str) -> None:
@@ -607,7 +634,31 @@ class TarotTellerApp:
         self.output.see("1.0")
         if not text.strip():
             self._update_image_preview(None)
+            self._update_image_preview(None)
             self._set_status("Output cleared.")
+
+    def _update_image_preview(self, card_name: Optional[str]) -> None:
+        if not card_name:
+            self._preview_image = None
+            self.preview_image_label.configure(image="", text="No card selected")
+            return
+
+        image_path = resolve_card_image(card_name)
+        if image_path is None:
+            self._preview_image = None
+            self.preview_image_label.configure(image="", text=f"Image unavailable for {card_name}")
+            return
+
+        try:
+            image = tk.PhotoImage(file=str(Path(image_path)))
+        except tk.TclError:
+            self._preview_image = None
+            self.preview_image_label.configure(image="", text=f"Image unreadable for {card_name}")
+            return
+
+        factor = _preview_subsample_factor(image.width(), image.height())
+        self._preview_image = image.subsample(factor, factor) if factor > 1 else image
+        self.preview_image_label.configure(image=self._preview_image, text="")
 
     def _update_image_preview(self, card_name: Optional[str]) -> None:
         if not card_name:

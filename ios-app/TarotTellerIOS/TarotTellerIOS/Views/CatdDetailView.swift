@@ -57,3 +57,22 @@ private struct TarotDetailArtwork: View {
 #Preview {
     CardDetailView(card: TarotDeck.sample[0])
 }
+
+private struct TarotDetailArtwork: View {
+    let imageName: String
+
+    var body: some View {
+        if UIImage(named: imageName) != nil {
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: .infinity, maxHeight: 320)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        } else {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(.ultraThinMaterial)
+                .frame(height: 240)
+                .overlay(Image(systemName: "photo").font(.largeTitle))
+        }
+    }
+}

@@ -16,6 +16,7 @@ struct LibraryView: View {
                         Text(card.keywords.joined(separator: ", "))
                             .font(.caption)
                             .foregroundStyle(.secondary)
+                        }
                     }
                 }
             }
@@ -49,4 +50,24 @@ private struct TarotThumbnail: View {
 
 #Preview {
     LibraryView(cards: TarotDeck.sample)
+}
+
+private struct TarotThumbnail: View {
+    let imageName: String
+
+    var body: some View {
+        if UIImage(named: imageName) != nil {
+            Image(imageName)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 44, height: 68)
+                .clipped()
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+        } else {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(.ultraThinMaterial)
+                .frame(width: 44, height: 68)
+                .overlay(Image(systemName: "photo"))
+        }
+    }
 }
