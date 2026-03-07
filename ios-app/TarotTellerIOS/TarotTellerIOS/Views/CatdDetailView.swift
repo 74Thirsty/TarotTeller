@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct CardDetailView: View {
     let card: TarotCard
@@ -6,6 +7,7 @@ struct CardDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
+                TarotDetailArtwork(imageName: card.imageName)
                 Text(card.name)
                     .font(.largeTitle.bold())
 
@@ -31,6 +33,24 @@ struct CardDetailView: View {
         }
         .navigationTitle(card.name)
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private struct TarotDetailArtwork: View {
+    let imageName: String
+
+    var body: some View {
+        if UIImage(named: imageName) != nil {
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        } else {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(.ultraThinMaterial)
+                .frame(height: 240)
+                .overlay(Image(systemName: "photo").font(.largeTitle))
+        }
     }
 }
 

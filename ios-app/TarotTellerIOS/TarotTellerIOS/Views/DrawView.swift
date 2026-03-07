@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct DrawView: View {
     @State private var currentCard = TarotDeck.sample.randomElement()
@@ -11,6 +12,8 @@ struct DrawView: View {
 
                 if let card = currentCard {
                     VStack(spacing: 12) {
+                        TarotCardArtwork(imageName: card.imageName)
+                            .frame(height: 220)
                         Text(card.name)
                             .font(.title2.bold())
                         Text(card.keywords.joined(separator: " • "))
@@ -44,6 +47,23 @@ struct DrawView: View {
 
     private func drawCard() {
         currentCard = TarotDeck.sample.randomElement()
+    }
+}
+
+private struct TarotCardArtwork: View {
+    let imageName: String
+
+    var body: some View {
+        if UIImage(named: imageName) != nil {
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        } else {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(.ultraThinMaterial)
+                .overlay(Image(systemName: "photo").font(.largeTitle))
+        }
     }
 }
 

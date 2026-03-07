@@ -2,12 +2,15 @@ from __future__ import annotations
 
 import textwrap
 import tkinter as tk
+from pathlib import Path
 from datetime import datetime
 from tkinter import filedialog, messagebox, ttk
 from typing import Iterable, List, Optional
 
 from importlib.metadata import PackageNotFoundError, version
 
+from ..core.card_images import resolve_card_image
+from ..core.card_images import resolve_card_image
 from ..core.context import analyze_question
 from ..core.correspondences import describe_card_correspondences
 from ..core.deck import DrawnCard, TarotDeck
@@ -82,6 +85,7 @@ class TarotTellerApp:
 
         self.deck = TarotDeck()
         self._help_window: Optional[tk.Toplevel] = None
+        self._preview_image: Optional[tk.PhotoImage] = None
 
         self.spread_var = tk.StringVar(value="single")
         self.card_count = tk.StringVar(value="")
@@ -264,6 +268,13 @@ class TarotTellerApp:
             container, text="Reading output", style="Card.TLabelframe", padding=12
         )
         output_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 16))
+
+        preview_frame = ttk.Frame(output_frame, style="Card.TFrame")
+        preview_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=(12, 0))
+        self.preview_label = ttk.Label(preview_frame, text="Card preview", style="Card.TLabel")
+        self.preview_label.pack(anchor=tk.N)
+        self.preview_image_label = ttk.Label(preview_frame, style="Card.TLabel")
+        self.preview_image_label.pack(anchor=tk.N, pady=(8, 0))
 
         self.output = tk.Text(output_frame, wrap=tk.WORD, font=("TkDefaultFont", 11))
         self.output.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -540,6 +551,7 @@ class TarotTellerApp:
                         )
                     )
                 self._render_output("\n\n".join(section.strip() for section in sections if section))
+                self._update_image_preview(drawn[0].card.name if drawn else None)
                 self._set_status("Direct draw ready.")
                 return
 
@@ -563,15 +575,15 @@ class TarotTellerApp:
         )
         sections = [rendered]
         if engine and profile:
-            insights = engine.insights_for_reading(reading, profile)
+            reading_insights: list = engine.insights_for_reading(reading, profile)
             response = engine.render_question_response(
-                insights, profile, spread_title=reading.spread.name
+                reading_insights, profile, spread_title=reading.spread.name
             )
             if response:
                 sections.insert(0, response)
             sections.append(
                 engine.render_personalised_summary(
-                    reading, profile, insights=insights
+                    reading, profile, insights=reading_insights
                 )
             )
 
@@ -585,6 +597,8 @@ class TarotTellerApp:
             )
 
         self._render_output("\n\n".join(section.strip() for section in sections if section))
+        first_card_name = reading.placements[0].card.card.name if reading.placements else None
+        self._update_image_preview(first_card_name)
         self._set_status("Reading ready.")
 
     def _render_output(self, text: str) -> None:
@@ -592,7 +606,30 @@ class TarotTellerApp:
         self.output.insert(tk.END, text.strip())
         self.output.see("1.0")
         if not text.strip():
+            self._update_image_preview(None)
             self._set_status("Output cleared.")
+
+    def _update_image_preview(self, card_name: Optional[str]) -> None:
+        if not card_name:
+            self._preview_image = None
+            self.preview_image_label.configure(image="", text="No card selected")
+            return
+
+        image_path = resolve_card_image(card_name)
+        if image_path is None:
+            self._preview_image = None
+            self.preview_image_label.configure(image="", text=f"Image unavailable for {card_name}")
+            return
+
+        try:
+            image = tk.PhotoImage(file=str(Path(image_path)))
+        except tk.TclError:
+            self._preview_image = None
+            self.preview_image_label.configure(image="", text=f"Image unreadable for {card_name}")
+            return
+
+        self._preview_image = image
+        self.preview_image_label.configure(image=self._preview_image, text="")
 
     def _show_help(self, event: Optional[tk.Event] = None) -> None:
         if self._help_window and self._help_window.winfo_exists():
@@ -735,6 +772,18 @@ class TarotTellerApp:
         self._show_help()
         return "break"
 
+
+def _format_simple_reading(reading: SpreadReading, knowledge_base: TarotKnowledgeBase) -> str:
+    """Render a concise summary of the spread reading."""
+    lines = []
+    for placement in reading.placements:
+        card = placement.card
+        meaning = card.meaning
+        lines.append(
+            f"{placement.position}: {card.card.name} ({card.orientation})\n"
+            f"   {meaning}"
+        )
+    return "\n\n".join(lines)
 
 def launch() -> None:
 

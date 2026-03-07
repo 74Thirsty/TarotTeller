@@ -66,7 +66,18 @@ Launch the Tkinter-powered desktop client after installation:
 tarotteller-gui
 ```
 
+
 The GUI lets you pick a spread (or override the card count), capture the querent's question, toggle reversed cards, and decide whether to show positional prompts or immersive extras. Results combine spread prompts, card meanings, correspondence layers, and optional personalised summaries generated from the question profile. A dedicated help dialog summarises controls and reading tips.
+
+### Shared card images across Android, iOS, and desktop
+
+Card images are normalized to card IDs (`the_fool.png`, `ace_of_cups.png`, etc.) and sourced from `tarot_teller_android/app/assets/deck/images`.
+
+- Desktop (`tarotteller-gui`) resolves previews directly from that shared folder.
+- iOS uses the same ID naming convention (`TarotCard.imageName`) so assets can be imported 1:1 into Xcode asset catalogs.
+- Android ships the same files from `app/assets/deck/images`.
+
+Run `python scripts/verify_card_assets.py` to verify all 78 deck IDs have image files before release.
 
 ## Python API
 Interact with the deck and spreads from your own scripts:

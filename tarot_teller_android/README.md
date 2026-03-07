@@ -26,5 +26,9 @@ See `README_RELEASE.md` for signing and release commands.
 
 ## Image assets
 
-This repo revision intentionally avoids committing binary image files.
-See `app/assets/deck/images/IMAGE_SPECS.md` and `../release/IMAGE_SPECS.md` for production asset requirements.
+`app/assets/deck/images` is the shared source of truth for card images across:
+- Android app packaging
+- iOS asset import pipeline (same card ID filenames)
+- Desktop/Tkinter preview rendering
+
+Run `python ../scripts/verify_card_assets.py` before releases to ensure all 78 IDs in `rider_waite.json` resolve to image files.

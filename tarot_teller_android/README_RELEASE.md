@@ -13,7 +13,7 @@ Add `keystore/` to `.gitignore` (already done).
 
 ## 2) Build environment
 
-Use Buildozer with a recent `python-for-android` (develop branch if needed for API 35 compatibility):
+Use Buildozer with a recent `python-for-android`:
 
 ```bash
 pip install --upgrade buildozer cython
@@ -29,23 +29,33 @@ export KEYSTORE_PASSWORD='***'
 export KEY_PASSWORD='***'
 ```
 
-Build command:
+## 4) Build release artifacts (APK + AAB)
 
 ```bash
 buildozer android release
 ```
 
-Expected artifact:
+Expected artifacts:
 
-`bin/TarotTeller-1.0.0-arm64-v8a-release.aab`
+- `bin/tarotteller-1.0.0-arm64-v8a-release.apk`
+- `bin/tarotteller-1.0.0-arm64-v8a-release.aab`
 
-## 4) Verify manifest targets API 35
+## 5) Verify target SDK and signing
 
 ```bash
-aapt dump badging bin/*.aab | rg targetSdkVersion
+aapt dump badging bin/*-release.apk | rg targetSdkVersion
+apksigner verify --print-certs bin/*-release.apk
 ```
 
-## 5) Play upload checklist
+## 6) Validate shared tarot image coverage
+
+```bash
+python ../scripts/verify_card_assets.py
+```
+
+This check fails if any card ID in `app/assets/deck/rider_waite.json` lacks a corresponding image.
+
+## 7) Play upload checklist
 
 - Target SDK: 35
 - Permissions: none declared

@@ -1,4 +1,38 @@
-import Foundation
+
+struct TarotCard: Identifiable, Hashable {
+    let id: String
+    let name: String
+    let arcana: String
+    let keywords: [String]
+    let meaning: String
+
+    init(
+        id: String? = nil,
+        name: String,
+        arcana: String,
+        keywords: [String],
+        meaning: String
+    ) {
+        self.name = name
+        self.arcana = arcana
+        self.keywords = keywords
+        self.meaning = meaning
+        self.id = id ?? TarotCard.imageIdentifier(from: name)
+    }
+
+    var imageName: String {
+        id
+    }
+
+    private static func imageIdentifier(from name: String) -> String {
+        name
+            .lowercased()
+            .replacingOccurrences(of: "-", with: " ")
+            .split(separator: " ")
+            .map(String.init)
+            .joined(separator: "_")
+    }
+}
 
 enum TarotDeck {
     static let sample: [TarotCard] = [

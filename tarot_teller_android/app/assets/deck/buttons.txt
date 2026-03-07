@@ -1,0 +1,77 @@
+# 🎴 Buttons for Every Tarot Card
+
+## Card Interaction
+
+```
+Reveal Meaning
+Show Reversed Meaning
+Full Interpretation
+```
+
+## Reading Controls
+
+```
+Shuffle Deck
+Draw Next Card
+Replace Card
+/Remove Card
+```
+
+## Spread Controls
+
+```
+Add To Spread
+Past / Present / Future
+Celtic Cross
+Three Card Spread
+```
+
+## Image / Asset Controls
+
+```
+Download Image
+Save Card
+Regenerate Artwork
+Fix Banner Text
+```
+
+## App Controls
+
+```
+Favorite Card
+Share Reading
+Reset Reading
+New Reading
+```
+
+---
+
+# Recommended Minimal Button Set
+
+If you want a **simple UI**, use just these:
+
+```
+Reveal Meaning
+Reversed Meaning
+Draw Next Card
+Shuffle Deck
+Download Image
+New Reading
+```
+
+---
+
+# Example UI Layout
+
+```
+[ Tarot Card Image ]
+
+Queen of Pentacles
+
+[ Reveal Meaning ]
+[ Reversed Meaning ]
+
+[ Draw Next Card ] [ Shuffle Deck ]
+
+[ Download Image ] [ New Reading ]
+```
