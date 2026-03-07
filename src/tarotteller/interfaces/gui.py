@@ -4,7 +4,10 @@ import math
 import textwrap
 import tkinter as tk
 from pathlib import Path
+<<<<<<< ours
 from pathlib import Path
+=======
+>>>>>>> theirs
 from datetime import datetime
 from tkinter import filedialog, messagebox, ttk
 from typing import Iterable, List, Optional
@@ -12,8 +15,11 @@ from typing import Iterable, List, Optional
 from importlib.metadata import PackageNotFoundError, version
 
 from ..core.card_images import resolve_card_image
+<<<<<<< ours
 from ..core.card_images import resolve_card_image
 from ..core.card_images import resolve_card_image
+=======
+>>>>>>> theirs
 from ..core.context import analyze_question
 from ..core.correspondences import describe_card_correspondences
 from ..core.deck import DrawnCard, TarotDeck
@@ -102,7 +108,10 @@ class TarotTellerApp:
         self.deck = TarotDeck()
         self._help_window: Optional[tk.Toplevel] = None
         self._preview_image: Optional[tk.PhotoImage] = None
+<<<<<<< ours
         self._preview_image: Optional[tk.PhotoImage] = None
+=======
+>>>>>>> theirs
 
         self.spread_var = tk.StringVar(value="single")
         self.card_count = tk.StringVar(value="")
@@ -290,6 +299,7 @@ class TarotTellerApp:
         preview_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=(12, 0))
         self.preview_label = ttk.Label(preview_frame, text="Card preview", style="Card.TLabel")
         self.preview_label.pack(anchor=tk.N)
+<<<<<<< ours
         self.preview_image_label = ttk.Label(preview_frame, style="Card.TLabel")
         self.preview_image_label.pack(anchor=tk.N, pady=(8, 0))
 
@@ -297,6 +307,8 @@ class TarotTellerApp:
         preview_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=(12, 0))
         self.preview_label = ttk.Label(preview_frame, text="Card preview", style="Card.TLabel")
         self.preview_label.pack(anchor=tk.N)
+=======
+>>>>>>> theirs
         self.preview_image_label = ttk.Label(preview_frame, style="Card.TLabel", width=32)
         self.preview_image_label.pack(anchor=tk.N, pady=(8, 0))
 
@@ -576,7 +588,10 @@ class TarotTellerApp:
                     )
                 self._render_output("\n\n".join(section.strip() for section in sections if section))
                 self._update_image_preview(drawn[0].card.name if drawn else None)
+<<<<<<< ours
                 self._update_image_preview(drawn[0].card.name if drawn else None)
+=======
+>>>>>>> theirs
                 self._set_status("Direct draw ready.")
                 return
 
@@ -622,8 +637,11 @@ class TarotTellerApp:
             )
 
         self._render_output("\n\n".join(section.strip() for section in sections if section))
+<<<<<<< ours
         first_card_name = reading.placements[0].card.card.name if reading.placements else None
         self._update_image_preview(first_card_name)
+=======
+>>>>>>> theirs
         first_card_name = reading.placements[0].card.name if reading.placements else None
         self._update_image_preview(first_card_name)
         self._set_status("Reading ready.")
@@ -634,7 +652,10 @@ class TarotTellerApp:
         self.output.see("1.0")
         if not text.strip():
             self._update_image_preview(None)
+<<<<<<< ours
             self._update_image_preview(None)
+=======
+>>>>>>> theirs
             self._set_status("Output cleared.")
 
     def _update_image_preview(self, card_name: Optional[str]) -> None:
@@ -660,6 +681,7 @@ class TarotTellerApp:
         self._preview_image = image.subsample(factor, factor) if factor > 1 else image
         self.preview_image_label.configure(image=self._preview_image, text="")
 
+<<<<<<< ours
     def _update_image_preview(self, card_name: Optional[str]) -> None:
         if not card_name:
             self._preview_image = None
@@ -682,6 +704,8 @@ class TarotTellerApp:
         self._preview_image = image
         self.preview_image_label.configure(image=self._preview_image, text="")
 
+=======
+>>>>>>> theirs
     def _show_help(self, event: Optional[tk.Event] = None) -> None:
         if self._help_window and self._help_window.winfo_exists():
             self._help_window.lift()
