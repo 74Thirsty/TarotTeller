@@ -9,6 +9,7 @@ src/tarotteller.egg-info/entry_points.txt
 src/tarotteller.egg-info/top_level.txt
 src/tarotteller/core/__init__.py
 src/tarotteller/core/ai_engine.py
+src/tarotteller/core/card_images.py
 src/tarotteller/core/context.py
 src/tarotteller/core/correspondences.py
 src/tarotteller/core/data.py
@@ -22,6 +23,7 @@ src/tarotteller/interfaces/gui.py
 src/tarotteller/narrative/__init__.py
 src/tarotteller/narrative/immersive.py
 tests/test_ai_engine.py
+tests/test_card_images.py
 tests/test_cli.py
 tests/test_context.py
 tests/test_deck.py
