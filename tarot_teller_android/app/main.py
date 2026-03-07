@@ -5,7 +5,7 @@ from pathlib import Path
 
 from kivy.core.clipboard import Clipboard
 from kivy.lang import Builder
-from kivy.properties import BooleanProperty, ListProperty, NumericProperty, ObjectProperty, StringProperty
+from kivy.properties import BooleanProperty, ListProperty, NumericProperty, NumericProperty, ObjectProperty, StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
 
@@ -31,8 +31,15 @@ class ResultScreen(Screen):
     current_card_message = StringProperty("")
     current_card_image = StringProperty("")
 
+    current_card_index = NumericProperty(0)
+    current_card_title = StringProperty("Draw a reading to view cards.")
+    current_card_orientation = StringProperty("")
+    current_card_message = StringProperty("Use Shuffle + Draw, then navigate with Previous/Next.")
+    current_card_image = StringProperty("")
+    current_card_counter = StringProperty("Card 0 of 0")
+
     def set_cards(self, cards: list[dict[str, str]]):
-        self.result_cards = cards
+        self.result_cards = list(cards)
         self.current_card_index = 0
         self._refresh_current_card()
 
@@ -52,8 +59,9 @@ class ResultScreen(Screen):
         if not self.result_cards:
             self.current_card_title = "Draw a reading to view cards."
             self.current_card_orientation = ""
-            self.current_card_message = ""
+            self.current_card_message = "Use Shuffle + Draw, then navigate with Previous/Next."
             self.current_card_image = ""
+            self.current_card_counter = "Card 0 of 0"
             return
 
         card = self.result_cards[self.current_card_index]
@@ -61,6 +69,7 @@ class ResultScreen(Screen):
         self.current_card_orientation = card["orientation"]
         self.current_card_message = card["message"]
         self.current_card_image = card["image"]
+        self.current_card_counter = f"Card {self.current_card_index + 1} of {len(self.result_cards)}"
 
 
 class HistoryScreen(Screen):
@@ -111,6 +120,14 @@ class TarotTellerApp(MDApp):
                 entry.card.meaning_reversed_long if entry.reversed else entry.card.meaning_upright_long
             )
             lines.append(f"{entry.position}: {entry.card.name} ({orientation})\n{short}\n{long_text}")
+            card_rows.append(
+                {
+                    "title": f"{entry.position}: {entry.card.name}",
+                    "orientation": orientation,
+                    "message": f"{short}\n\n{long_text}",
+                    "image": self._card_image_path(entry.card.id),
+                }
+            )
             card_rows.append(
                 {
                     "title": f"{entry.position}: {entry.card.name}",
