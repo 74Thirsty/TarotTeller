@@ -82,12 +82,36 @@ RootManager:
         orientation: "vertical"
         padding: dp(16)
         spacing: dp(8)
+        Label:
+            text: root.current_card_title
+            size_hint_y: None
+            height: dp(30)
+            bold: True
+        Label:
+            text: root.current_card_orientation
+            size_hint_y: None
+            height: dp(22)
+        AsyncImage:
+            source: root.current_card_image
+            allow_stretch: True
+            keep_ratio: True
+            size_hint_y: 0.45
         ScrollView:
             Label:
-                text: root.result_text
+                text: root.current_card_message
                 text_size: self.width, None
                 size_hint_y: None
                 height: self.texture_size[1]
+        BoxLayout:
+            size_hint_y: None
+            height: dp(42)
+            spacing: dp(8)
+            Button:
+                text: "Previous Card"
+                on_release: app.show_previous_card()
+            Button:
+                text: "Next Card"
+                on_release: app.show_next_card()
         Button:
             text: "Save to History"
             size_hint_y: None
