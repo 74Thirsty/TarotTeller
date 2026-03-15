@@ -1,5 +1,8 @@
 # TarotTeller iOS App
+
+<div align="center">
 [![tarot-teller-icon.png](https://i.postimg.cc/d0cjjY1M/tarot-teller-icon.png)](https://postimg.cc/ZWjNJXpj)
+</div>div>
 
 This folder contains a standalone SwiftUI iOS application scaffold for TarotTeller. Open the Xcode project and run on a simulator or device.
 
