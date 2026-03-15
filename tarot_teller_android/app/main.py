@@ -5,8 +5,8 @@ from pathlib import Path
 
 from kivy.core.clipboard import Clipboard
 from kivy.lang import Builder
-from kivy.properties import BooleanProperty, ListProperty, NumericProperty, NumericProperty, ObjectProperty, StringProperty
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.properties import BooleanProperty, ListProperty, NumericProperty, ObjectProperty, StringProperty
+from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.app import MDApp
 
 from engine.deck import DeckCache
@@ -28,34 +28,28 @@ class ResultScreen(Screen):
     current_card_index = NumericProperty(0)
     current_card_title = StringProperty("Draw a reading to view cards.")
     current_card_orientation = StringProperty("")
-    current_card_message = StringProperty("")
-    current_card_image = StringProperty("")
-
-    current_card_index = NumericProperty(0)
-    current_card_title = StringProperty("Draw a reading to view cards.")
-    current_card_orientation = StringProperty("")
     current_card_message = StringProperty("Use Shuffle + Draw, then navigate with Previous/Next.")
     current_card_image = StringProperty("")
     current_card_counter = StringProperty("Card 0 of 0")
 
-    def set_cards(self, cards: list[dict[str, str]]):
+    def set_cards(self, cards: list[dict[str, str]]) -> None:
         self.result_cards = list(cards)
         self.current_card_index = 0
         self._refresh_current_card()
 
-    def show_previous_card(self):
+    def show_previous_card(self) -> None:
         if not self.result_cards:
             return
         self.current_card_index = (self.current_card_index - 1) % len(self.result_cards)
         self._refresh_current_card()
 
-    def show_next_card(self):
+    def show_next_card(self) -> None:
         if not self.result_cards:
             return
         self.current_card_index = (self.current_card_index + 1) % len(self.result_cards)
         self._refresh_current_card()
 
-    def _refresh_current_card(self):
+    def _refresh_current_card(self) -> None:
         if not self.result_cards:
             self.current_card_title = "Draw a reading to view cards."
             self.current_card_orientation = ""
@@ -95,11 +89,11 @@ class TarotTellerApp(MDApp):
         self.engine = ReadingEngine(self.deck)
         return Builder.load_file(str(Path(__file__).parent / "ui" / "screens.kv"))
 
-    def new_reading(self, spread: str):
+    def new_reading(self, spread: str) -> None:
         self.root.get_screen("spread").spread = spread
         self.root.current = "spread"
 
-    def run_reading(self, spread: str, question: str, include_reversals: bool, seed_text: str):
+    def run_reading(self, spread: str, question: str, include_reversals: bool, seed_text: str) -> None:
         seed = seed_text.strip() or None
         result = self.engine.draw(
             spread,
@@ -109,25 +103,13 @@ class TarotTellerApp(MDApp):
         )
         self.current_result = result
 
-        lines = []
-        card_rows = []
+        lines: list[str] = []
+        card_rows: list[dict[str, str]] = []
         for entry in result.cards:
             orientation = "Reversed" if entry.reversed else "Upright"
-            short = (
-                entry.card.meaning_reversed_short if entry.reversed else entry.card.meaning_upright_short
-            )
-            long_text = (
-                entry.card.meaning_reversed_long if entry.reversed else entry.card.meaning_upright_long
-            )
+            short = entry.card.meaning_reversed_short if entry.reversed else entry.card.meaning_upright_short
+            long_text = entry.card.meaning_reversed_long if entry.reversed else entry.card.meaning_upright_long
             lines.append(f"{entry.position}: {entry.card.name} ({orientation})\n{short}\n{long_text}")
-            card_rows.append(
-                {
-                    "title": f"{entry.position}: {entry.card.name}",
-                    "orientation": orientation,
-                    "message": f"{short}\n\n{long_text}",
-                    "image": self._card_image_path(entry.card.id),
-                }
-            )
             card_rows.append(
                 {
                     "title": f"{entry.position}: {entry.card.name}",
@@ -142,12 +124,6 @@ class TarotTellerApp(MDApp):
         result_screen.result_text = "\n\n".join(lines)
         self.root.current = "result"
 
-    def show_previous_card(self):
-        self.root.get_screen("result").show_previous_card()
-
-    def show_next_card(self):
-        self.root.get_screen("result").show_next_card()
-
     def _card_image_path(self, card_id: str) -> str:
         image_path = Path(__file__).parent / "assets" / "deck" / "images" / f"{card_id}.png"
         return str(image_path) if image_path.exists() else ""
@@ -158,7 +134,7 @@ class TarotTellerApp(MDApp):
             Clipboard.copy(text)
         return text
 
-    def save_current_to_history(self):
+    def save_current_to_history(self) -> None:
         if not self.current_result:
             return
         self.storage.append_history(
@@ -179,11 +155,11 @@ class TarotTellerApp(MDApp):
             }
         )
 
-    def load_history_screen(self, query: str = ""):
+    def load_history_screen(self, query: str = "") -> None:
         self.root.get_screen("history").history_items = self.storage.search_history(query)
         self.root.current = "history"
 
-    def save_settings(self, reversals_default: bool):
+    def save_settings(self, reversals_default: bool) -> None:
         self.settings["reversals_default"] = reversals_default
         self.storage.save_settings(self.settings)
 

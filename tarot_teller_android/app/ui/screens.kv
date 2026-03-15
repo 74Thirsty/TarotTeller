@@ -93,11 +93,8 @@ RootManager:
             height: dp(22)
         AsyncImage:
             source: root.current_card_image
-<<<<<<< ours
             allow_stretch: True
             keep_ratio: True
-            size_hint_y: 0.45
-=======
             size_hint_y: 0.45
         BoxLayout:
             size_hint_y: None
@@ -111,7 +108,6 @@ RootManager:
             Button:
                 text: "Next Card"
                 on_release: root.show_next_card()
->>>>>>> theirs
         ScrollView:
             do_scroll_x: False
             Label:
@@ -120,30 +116,6 @@ RootManager:
                 size_hint_y: None
                 height: self.texture_size[1]
         BoxLayout:
-<<<<<<< ours
-            size_hint_y: None
-            height: dp(42)
-            spacing: dp(8)
-            Button:
-                text: "Previous Card"
-                on_release: app.show_previous_card()
-            Button:
-                text: "Next Card"
-                on_release: app.show_next_card()
-        Button:
-            text: "Save to History"
-            size_hint_y: None
-            height: dp(42)
-            on_release: app.save_current_to_history()
-        Button:
-            text: "Share text"
-            size_hint_y: None
-            height: dp(42)
-            on_release: app.share_current_text()
-        Button:
-            text: "Home"
-=======
->>>>>>> theirs
             size_hint_y: None
             height: dp(42)
             spacing: dp(8)
@@ -197,37 +169,12 @@ RootManager:
             height: dp(40)
         BoxLayout:
             size_hint_y: None
-                    ScrollView:
-                        do_scroll_x: False
-                        Label:
-                            text: root.current_card_message
-                            text_size: self.width, None
-                            size_hint_y: None
-                            height: self.texture_size[1]
-                    Label:
-                        text: root.current_card_title
-                        size_hint_y: None
-                        height: dp(30)
-                        bold: True
-                    Label:
-                        text: root.current_card_orientation
-                        size_hint_y: None
-                        height: dp(22)
-                    AsyncImage:
-                        source: root.current_card_image
-                        size_hint_y: 0.45
-                    BoxLayout:
-                        size_hint_y: None
-                        height: dp(42)
-                        spacing: dp(8)
-                        Button:
-                            text: "Previous Card"
-                            on_release: root.show_previous_card()
-                        Label:
-                            text: root.current_card_counter
-                        Button:
-                            text: "Next Card"
-                            on_release: root.show_next_card()
+            height: dp(42)
+            Label:
+                text: "Default reversals"
+            Switch:
+                id: setting_reversals
+                active: app.settings.get("reversals_default", True)
         Button:
             text: "Save"
             on_release: app.save_settings(setting_reversals.active)

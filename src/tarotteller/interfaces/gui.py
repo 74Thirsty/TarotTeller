@@ -286,19 +286,8 @@ class TarotTellerApp:
         preview_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=(12, 0))
         self.preview_label = ttk.Label(preview_frame, text="Card preview", style="Card.TLabel")
         self.preview_label.pack(anchor=tk.N)
-        self.preview_image_label = ttk.Label(preview_frame, style="Card.TLabel")
-        self.preview_image_label.pack(anchor=tk.N, pady=(8, 0))
-
-        preview_frame = ttk.Frame(output_frame, style="Card.TFrame")
-        preview_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=(12, 0))
-        self.preview_label = ttk.Label(preview_frame, text="Card preview", style="Card.TLabel")
         self.preview_image_label = ttk.Label(preview_frame, style="Card.TLabel", width=32)
         self.preview_image_label.pack(anchor=tk.N, pady=(8, 0))
-
-        preview_frame = ttk.Frame(output_frame, style="Card.TFrame")
-        preview_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=(12, 0))
-        self.preview_label = ttk.Label(preview_frame, text="Card preview", style="Card.TLabel")
-        self.preview_label.pack(anchor=tk.N)
 
         self.output = tk.Text(output_frame, wrap=tk.WORD, font=("TkDefaultFont", 11))
         self.output.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)

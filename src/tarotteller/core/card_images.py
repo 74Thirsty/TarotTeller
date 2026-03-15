@@ -13,8 +13,29 @@ def card_image_id(card_name: str) -> str:
     return "_".join(part for part in normalized.split() if part)
 
 
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[3]
+def _image_dir_from_env() -> Path | None:
+    override = os.getenv("TAROTTELLER_CARD_IMAGE_DIR")
+    if not override:
+        return None
+
+    path = Path(override).expanduser().resolve()
+    return path if path.exists() else None
+
+
+def _candidate_repo_roots() -> list[Path]:
+    module_path = Path(__file__).resolve()
+    roots: list[Path] = [Path.cwd().resolve()]
+
+    roots.extend(module_path.parents)
+
+    unique_roots: list[Path] = []
+    seen: set[Path] = set()
+    for root in roots:
+        if root in seen:
+            continue
+        seen.add(root)
+        unique_roots.append(root)
+    return unique_roots
 
 
 def shared_image_dir() -> Path | None:
@@ -25,15 +46,14 @@ def shared_image_dir() -> Path | None:
     2) Android deck image folder in this monorepo
     """
 
-    override = os.getenv("TAROTTELLER_CARD_IMAGE_DIR")
-    if override:
-        path = Path(override).expanduser().resolve()
-        if path.exists():
-            return path
+    override = _image_dir_from_env()
+    if override is not None:
+        return override
 
-    candidate = _repo_root() / "tarot_teller_android" / "app" / "assets" / "deck" / "images"
-    if candidate.exists():
-        return candidate
+    for root in _candidate_repo_roots():
+        candidate = root / "tarot_teller_android" / "app" / "assets" / "deck" / "images"
+        if candidate.exists():
+            return candidate
 
     return None
 
