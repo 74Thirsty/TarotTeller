@@ -1,4 +1,4 @@
-# TarotTeller iOS App
+# TarotTeller iOS - Android - Linux - Windows
 
 <div align="center">
   <a href="https://postimg.cc/ZWjNJXpj">
