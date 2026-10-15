@@ -53,7 +53,39 @@ Drawing a Reading
 * Click **Draw Reading** to pull cards for the chosen spread.
 * Click **Reset Deck** to reshuffle using the current seed (if any).
 * The results panel shows each card with a short interpretation that blends the spread prompt with TarotTeller's knowledge base. When you provide a question, additional personalised insight appears below the reading.
-@@ -93,310 +103,499 @@ def _format_simple_reading(
+* Reset the deck between readings if you want a fresh shuffle.
+"""
+
+
+def _wrap_prompt(text: str) -> str:
+    wrapper = textwrap.TextWrapper(
+        width=_TEXT_WRAP_WIDTH, initial_indent="   ", subsequent_indent="   "
+    )
+    return wrapper.fill(text)
+
+
+def _format_simple_reading(
+    reading: SpreadReading, knowledge_base: TarotKnowledgeBase
+) -> str:
+    lines: List[str] = []
+    for placement in reading.placements:
+        card = placement.card
+        prompt = _wrap_prompt(
+            build_prompt_interpretation(placement, knowledge_base)
+        )
+        meaning = textwrap.indent(card.meaning, "   ")
+        correspondences = textwrap.indent(
+            describe_card_correspondences(card), "   "
+        )
+        sections = [prompt, meaning, correspondences]
+        formatted_sections = "\n\n".join(
+            section for section in sections if section
+        )
+        lines.append(
+            f"{placement.position.index}. {card.card.name} ({card.orientation})\n"
+            f"{formatted_sections}"
+        )
+    return "\n\n".join(lines)
 
 
 def _format_direct_draw(cards: Iterable[DrawnCard]) -> str:
@@ -102,19 +134,11 @@ class TarotTellerApp:
         self._set_status("Welcome to TarotTeller Studio.")
 
     def _build_layout(self) -> None:
-        self.root.geometry("880x640")
-        self.root.minsize(720, 520)
-
-        style = ttk.Style(self.root)
-        style.configure("Hint.TLabel", foreground="#444444")
-        self.root.geometry("960x680")
         self.root.minsize(760, 540)
 
-        container = ttk.Frame(self.root, padding=16)
         container = ttk.Frame(self.root, padding=20)
         container.pack(fill=tk.BOTH, expand=True)
 
-        controls = ttk.Frame(container)
         header = ttk.Frame(container)
         header.pack(fill=tk.X, pady=(0, 12))
 
@@ -163,8 +187,6 @@ class TarotTellerApp:
         ttk.Label(controls, text="Question:").grid(
             row=1, column=0, sticky=tk.NW, pady=(12, 0)
         )
-        self.question = tk.Text(controls, height=3, width=60)
-        self.question.grid(row=1, column=1, columnspan=4, sticky=tk.W, pady=(12, 0))
         self.question = tk.Text(
             controls,
             height=3,
@@ -241,31 +263,23 @@ class TarotTellerApp:
             justify=tk.LEFT,
         ).grid(row=4, column=0, columnspan=5, sticky=tk.W, pady=(12, 0))
 
-        # Action buttons
         actions = ttk.Frame(container)
-        actions.pack(fill=tk.X)
-        draw_button = ttk.Button(actions, text="Draw Reading", command=self.draw_reading)
         actions.pack(fill=tk.X, pady=(0, 12))
         draw_button = ttk.Button(
             actions, text="Draw Reading", style="Accent.TButton", command=self.draw_reading
         )
         draw_button.pack(side=tk.LEFT)
 
-        reset_button = ttk.Button(actions, text="Reset Deck", command=self.reset_deck)
         reset_button = ttk.Button(
             actions, text="Reset Deck", style="Accent.TButton", command=self.reset_deck
         )
         reset_button.pack(side=tk.LEFT, padx=(12, 0))
 
-        help_button = ttk.Button(actions, text="Help", command=self._show_help)
         help_button = ttk.Button(
             actions, text="Help", style="Accent.TButton", command=self._show_help
         )
         help_button.pack(side=tk.LEFT, padx=(12, 0))
 
-        # Output area
-        output_frame = ttk.Frame(container)
-        output_frame.pack(fill=tk.BOTH, expand=True, pady=(12, 0))
         output_frame = ttk.LabelFrame(container, text="Reading output", padding=12)
         output_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 12))
 
@@ -494,7 +508,6 @@ class TarotTellerApp:
         if not text.strip():
             self._set_status("Output cleared.")
 
-    def _show_help(self) -> None:
     def _show_help(self, event: Optional[tk.Event] = None) -> None:
         if self._help_window and self._help_window.winfo_exists():
             self._help_window.lift()
@@ -571,9 +584,5 @@ class TarotTellerApp:
 
 def launch() -> None:
     """Convenience entry point for running the GUI."""
-
     app = TarotTellerApp()
     app.run()
-
-
-__all__ = ["TarotTellerApp", "launch"]
